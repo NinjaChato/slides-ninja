@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teorias Científicas sobre a Origem da Vida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --color-text: #F0F0F0;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: var(--font-body);
+            background-color: #00010a;
+            color: var(--color-text);
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll; overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none; /* Allows clicking through the canvas */
+        }
+
+        .slide {
+            height: 100vh; width: 100vw;
+            scroll-snap-align: start;
+            display: flex; position: relative;
+            overflow: hidden;
+            padding: 0 8%;
+            box-sizing: border-box;
+            background-image: radial-gradient(circle, var(--accent, #555) 0%, #00010a 70%);
+        }
+
+        .background-video {
+            position: absolute; top: 50%; left: 50%;
+            width: 100%; height: 100%; object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 0; filter: brightness(0.35);
+        }
+        
+        .slide::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.2); z-index: 1;
+        }
+
+        .slide-content {
+            position: relative; z-index: 3;
+            width: 100%; max-width: 1100px; margin: 0;
+            padding: 40px; box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+        }
+        .slide-content::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            right: 0; bottom: 0; border-radius: 10px;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, var(--glow), var(--accent), var(--glow)) border-box;
+            background-size: 200% 200%;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: rotate-glow 4s linear infinite;
+        }
+        @keyframes rotate-glow { 
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .slide-content.is-visible { opacity: 1; transform: translateY(0); }
+
+        .layout-center { align-items: center; justify-content: center; text-align: center; }
+        .layout-left { align-items: center; justify-content: flex-start; text-align: left; }
+        .layout-right { align-items: center; justify-content: flex-end; text-align: right; }
+
+        h1, h2 {
+            font-family: var(--font-heading);
+            text-transform: uppercase; letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 0 0 8px black, 0 0 15px var(--glow, #fff);
+            text-wrap: balance;
+        }
+        
+        h1 { font-size: clamp(2.8rem, 8vw, 5.5rem); }
+        .authors {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 300; letter-spacing: 1px;
+            margin-top: 15px; color: #bbb;
+        }
+
+        h2 {
+            font-size: clamp(2.2rem, 7vw, 3.8rem);
+            margin-bottom: 25px; display: inline-block;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--glow, #fff);
+        }
+
+        p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 300; line-height: 1.8;
+            max-width: 850px; text-shadow: 0 0 8px rgba(0,0,0,0.8);
+            margin: 0 auto;
+        }
+        .layout-left p, .layout-left .limitation { margin-left: 0; margin-right: auto; }
+        .layout-right p, .layout-right .limitation { margin-right: 0; margin-left: auto; }
+
+        p strong { font-weight: 400; color: var(--accent, #fff); }
+        .limitation {
+            margin-top: 20px; font-style: italic; color: #ccc;
+            border-left: 3px solid var(--accent, #fff);
+            padding: 10px 0 10px 20px; background: rgba(0,0,0,0.2);
+        }
+        .layout-right .limitation {
+            border-left: none; border-right: 3px solid var(--accent, #fff);
+            padding-left: 0; padding-right: 20px;
+        }
+
+        .content-list { list-style: none; padding: 0; }
+        .content-list li { margin-bottom: 15px; display: flex; align-items: center; }
+        .summary-link {
+            font-family: var(--font-heading);
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            text-decoration: none; color: var(--color-text);
+            padding: 10px; border: 1px solid transparent;
+            transition: all 0.3s ease; flex-grow: 1;
+        }
+        .summary-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--glow, #fff);
+            color: #fff; transform: translateX(10px);
+        }
+        .summary-icon {
+            width: 24px; height: 24px; margin-right: 15px;
+            fill: var(--glow, #fff);
+        }
+        .sources-list li { font-size: clamp(0.9rem, 2vw, 1.1rem); line-height: 1.6; text-align: left; }
+        .sources-list a { color: var(--color-text); text-decoration: none; }
+        .sources-list a:hover { text-decoration: underline; color: var(--accent, #fff); }
+
+        /* --- UI Elements --- */
+        #progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 5px; background: var(--glow, #fff);
+            width: 0%; z-index: 101;
+            transition: width 0.4s ease, background-color 0.5s ease;
+            box-shadow: 0 0 10px var(--glow, #fff);
+        }
+        .ui-button {
+            position: fixed; z-index: 100;
+            cursor: pointer; opacity: 0.5;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            padding: 8px;
+        }
+        .ui-button:hover { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 10px #fff); }
+        .ui-icon { width: 28px; height: 28px; fill: white; }
+        
+        #fullscreen-btn { top: 20px; right: 20px; }
+        #back-to-top-btn { bottom: 20px; right: 20px; opacity: 0; visibility: hidden; }
+        #back-to-top-btn.visible { opacity: 0.5; visibility: visible; }
+
+        .nav-arrow {
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .nav-arrow .ui-icon { width: 32px; height: 32px; }
+
+        .nav-arrow {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            z-index: 100; opacity: 0; visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .nav-arrow.visible { opacity: 0.5; visibility: visible; }
+        .nav-arrow:hover { opacity: 1; transform: translateY(-50%) scale(1.1); filter: drop-shadow(0 0 10px #fff); }
+        #prev-slide-btn { left: 20px; }
+        #next-slide-btn { right: 20px; }
+        .nav-arrow .ui-icon { width: 48px; height: 48px; }
+
+
+        /* --- Slide Specific Styles --- */
+        #slide-title { --glow: #FFFFFF; --accent: #CCCCCC; }
+        #slide-intro { --glow: #00BFFF; --accent: #87CEEB; }
+        #slide-summary { --glow: #DAA520; --accent: #F0E68C; }
+        #slide-panspermia { --glow: #9370DB; --accent: #BA55D3; }
+        #slide-abiogenesis { --glow: #FF4500; --accent: #FFA500; }
+        #slide-rna-world { --glow: #32CD32; --accent: #98FB98; }
+        #slide-hydrothermal-vents { --glow: #1E90FF; --accent: #87CEFA; }
+        #slide-metabolism-first { --glow: #F4A460; --accent: #FFDAB9; }
+        #slide-endosymbiosis { --glow: #FFD700; --accent: #FFFACD; }
+        #slide-research-frontier { --glow: #00FA9A; --accent: #AFEEEE; }
+        #slide-conclusion { --glow: #FF69B4; --accent: #FFC0CB; }
+        #slide-sources { --glow: #C0C0C0; --accent: #FFFFFF; }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="progress-bar"></div>
+
+    <!-- UI Buttons -->
+    <button class="ui-button" id="fullscreen-btn" aria-label="Tela Cheia" title="Tela Cheia">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+    </button>
+    <button class="ui-button" id="back-to-top-btn" aria-label="Voltar ao Início" title="Voltar ao Início">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+    </button>
+    <button class="ui-button nav-arrow" id="prev-slide-btn" aria-label="Slide Anterior" title="Slide Anterior">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="ui-button nav-arrow" id="next-slide-btn" aria-label="Próximo Slide" title="Próximo Slide">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+
+    <!-- Slides -->
+    <section class="slide layout-center" id="slide-title">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-a-dazzling-nebula-5969-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h1>Teorias Científicas sobre a Origem da Vida</h1>
+            <p class="authors">Luis Guilherme, Yan, Miguel Motta, Cauã</p>
+        </div>
+    </section>
+
+    <section class="slide layout-left" id="slide-intro">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-the-stars-in-a-galaxy-of-the-universe-42289-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Introdução: A Grande Questão</h2>
+            <p>De onde viemos? Esta é uma das perguntas mais fundamentais e persistentes da humanidade. A busca por nossa origem é uma jornada épica que une <strong>biologia, química, geologia e astrofísica</strong>. Nesta apresentação, exploraremos as principais teorias científicas que buscam iluminar o misterioso processo que transformou um planeta inerte em um oásis de vida.</p>
+        </div>
+    </section>
+
+    <section class="slide layout-center" id="slide-summary">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-digital-plexus-of-glowing-lines-and-dots-4221-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Índice de Exploração</h2>
+            <ul class="content-list">
+                <li><a href="#slide-panspermia" class="summary-link">Panspermia Cósmica</a></li>
+                <li><a href="#slide-abiogenesis" class="summary-link">Abiogênese & Evolução Química</a></li>
+                <li><a href="#slide-rna-world" class="summary-link">O Mundo de RNA</a></li>
+                <li><a href="#slide-hydrothermal-vents" class="summary-link">Fontes Hidrotermais</a></li>
+                <li><a href="#slide-metabolism-first" class="summary-link">Metabolismo Primeiro</a></li>
+                <li><a href="#slide-endosymbiosis" class="summary-link">Endossimbiose (Evolução da Complexidade)</a></li>
+                <li><a href="#slide-research-frontier" class="summary-link">A Fronteira da Pesquisa</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="slide layout-right" id="slide-panspermia">
+         <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-asteroid-in-the-middle-of-a-star-field-42291-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Panspermia Cósmica</h2>
+            <p>A teoria da Panspermia postula que a vida é um fenômeno universal, e não exclusivo da Terra. "Sementes de vida", como <strong>microrganismos extremófilos ou moléculas orgânicas complexas</strong>, teriam chegado ao nosso planeta a bordo de <strong>cometas, meteoritos e poeira cósmica</strong>. Evidências como a descoberta de aminoácidos no <strong>meteorito Murchison</strong> dão suporte à ideia de que os blocos de construção da vida são abundantes no cosmos.</p>
+            <p class="limitation"><strong>Principal Desafio:</strong> A Panspermia não resolve a questão da origem primária da vida; ela apenas realoca o problema para outro ponto do universo e não explica como a vida teria sobrevivido à radiação e ao vácuo do espaço.</p>
+        </div>
+    </section>
+
+    <section class="slide layout-left" id="slide-abiogenesis">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-lightning-over-a-city-899-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Abiogênese & Evolução Química</h2>
+            <p>Esta é a hipótese central de que a vida surgiu de matéria inorgânica através de um processo gradual. Na Terra primitiva, uma "sopa primordial" de compostos químicos (<strong>metano, amônia, água</strong>) foi energizada por <strong>relâmpagos e intensa radiação UV</strong>. O famoso <strong>experimento de Miller-Urey (1952)</strong> demonstrou que, sob essas condições, aminoácidos e outras moléculas orgânicas poderiam se formar espontaneamente.</p>
+            <p class="limitation"><strong>Principal Desafio:</strong> O salto da química prebiótica para um sistema organizado, encapsulado e autorreplicante — a protocélula — é imenso e ainda não totalmente compreendido.</p>
+        </div>
+    </section>
+    
+    <section class="slide layout-center" id="slide-rna-world">
+         <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-digital-representation-of-a-dna-strand-4584-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>O Mundo de RNA</h2>
+            <p>Para resolver o paradoxo "ovo e galinha" (o que veio primeiro, DNA ou proteínas?), a hipótese do Mundo de RNA sugere que o <strong>RNA foi a molécula central da vida primitiva</strong>. O RNA é único por sua capacidade de <strong>armazenar informação genética</strong> (como o DNA) e de <strong>catalisar reações químicas</strong> (como as enzimas proteicas), na forma de ribozimas. A vida, portanto, pode ter começado com sistemas baseados em RNA que evoluíram para a complexidade que vemos hoje.</p>
+        </div>
+    </section>
+    
+    <section class="slide layout-left" id="slide-hydrothermal-vents">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-bubbles-of-air-rising-in-the-ocean-183-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Fontes Hidrotermais</h2>
+            <p>E se a vida não começou em uma "sopa morna", mas sim nas profundezas escuras do oceano? As fontes hidrotermais submarinas expelem um coquetel de <strong>minerais e compostos químicos aquecidos</strong>. Esses locais oferecem <strong>gradientes de energia e pH</strong> que poderiam ter alimentado as primeiras reações metabólicas. Os ecossistemas prósperos de <strong>organismos extremófilos</strong> encontrados hoje nesses locais mostram que a vida pode florescer sem luz solar.</p>
+            <p class="limitation"><strong>Principal Desafio:</strong> As altas temperaturas de algumas fontes poderiam destruir moléculas orgânicas, embora fontes alcalinas mais frias (como a "Cidade Perdida") sejam consideradas candidatas mais promissoras.</p>
+        </div>
+    </section>
+
+    <section class="slide layout-right" id="slide-metabolism-first">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-pumping-and-heating-up-a-hot-water-system-4113-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Metabolismo Primeiro</h2>
+            <p>Em vez de uma molécula replicadora como o RNA, essa hipótese sugere que as primeiras formas de vida foram <strong>ciclos de reações químicas autossustentáveis</strong>. A <strong>Teoria do Mundo Ferro-Enxofre</strong>, de Günter Wächtershäuser, propõe que o metabolismo primitivo ocorreu na superfície de minerais de sulfeto de ferro, usando a energia química das fontes hidrotermais. A genética e o encapsulamento em células teriam evoluído posteriormente para estabilizar esses ciclos.</p>
+            <p class="limitation"><strong>Principal Desafio:</strong> Demonstrar experimentalmente como esses ciclos metabólicos poderiam se tornar complexos e dar origem a sistemas genéticos e células ainda é um grande obstáculo.</p>
+        </div>
+    </section>
+
+    <section class="slide layout-left" id="slide-endosymbiosis">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-abstract-sphere-of-blue-particles-40sphere-of-blue-particles-4022-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Endossimbiose: Salto na Complexidade</h2>
+            <p>Esta teoria não explica a origem da vida em si, mas sim a <strong>origem da célula eucariótica complexa</strong>. Proposta por <strong>Lynn Margulis</strong>, ela postula que organelas como <strong>mitocôndrias e cloroplastos</strong> foram um dia bactérias de vida livre. Elas foram engolfadas por uma célula hospedeira maior, estabelecendo uma relação simbiótica que se tornou permanente. A evidência mais forte é que essas organelas possuem seu <strong>próprio DNA circular</strong> e se replicam de forma independente.</p>
+        </div>
+    </section>
+
+    <section class="slide layout-center" id="slide-research-frontier">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-hud-in-a-scifi-tunnel-42283-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>A Fronteira da Pesquisa</h2>
+            <p>Hoje, a busca continua em laboratórios e no campo. Cientistas em <strong>biologia sintética</strong> tentam criar "protocélulas" do zero para testar hipóteses. <strong>Astrobiólogos</strong> procuram por bioassinaturas em exoplanetas e luas do nosso sistema solar, como Europa e Encélado. Cada descoberta, seja em uma fonte termal ou em um meteorito, adiciona uma nova peça a este fascinante quebra-cabeça cósmico.</p>
+        </div>
+    </section>
+    
+    <section class="slide layout-right" id="slide-conclusion">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-rotating-earth-in-the-dark-3403-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Conclusão: Uma Síntese de Ideias</h2>
+            <p>A origem da vida provavelmente não tem uma única resposta, mas sim uma <strong>convergência de processos</strong>. Talvez moléculas orgânicas do espaço (Panspermia) tenham encontrado um ambiente energético favorável em fontes termais (Metabolismo Primeiro), onde um sistema baseado em RNA (Mundo de RNA) deu início à replicação. A busca por nossa origem é a busca por nós mesmos. <strong>A jornada é tão extraordinária quanto o destino.</strong></p>
+        </div>
+    </section>
+
+    <section class="slide layout-left" id="slide-sources">
+        <video class="background-video" src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-stars-in-a-nebula-42233-large.mp4" autoplay muted loop playsinline></video>
+        <div class="slide-content">
+            <h2>Fontes e Referências</h2>
+            <ul class="content-list sources-list">
+                <li><a href="https://www.nature.com/collections/fajgtsjyfs" target="_blank" rel="noopener noreferrer"><strong>Nature:</strong> "Origin of Life" Collection</a></li>
+                <li><a href="https://www.scientificamerican.com/article/a-new-physics-theory-of-life/" target="_blank" rel="noopener noreferrer"><strong>Scientific American:</strong> "A New Physics Theory of Life"</a></li>
+                <li><a href="https://www.nasa.gov/general/what-is-astrobiology/" target="_blank" rel="noopener noreferrer"><strong>NASA:</strong> "What is Astrobiology?"</a></li>
+                <li><a href="https://brasilescola.uol.com.br/biologia/origem-vida.htm" target="_blank" rel="noopener noreferrer"><strong>Brasil Escola:</strong> "Origem da Vida: conheça as principais teorias"</a></li>
+                <li><a href="https://mundoeducacao.uol.com.br/biologia/as-principais-teorias-sobre-origem-vida.htm" target="_blank" rel="noopener noreferrer"><strong>Mundo Educação:</strong> "As principais teorias sobre a origem da vida"</a></li>
+                <li><a href="https://revistapesquisa.fapesp.br/em-busca-das-primeiras-celulas/" target="_blank" rel="noopener noreferrer"><strong>Revista FAPESP:</strong> "Em busca das primeiras células"</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Particle Animation ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let currentGlowColor = '#FFFFFF';
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createParticles() {
+                particles = [];
+                const particleCount = window.innerWidth / 10;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.5,
+                        size: Math.random() * 1.5 + 0.5,
+                        opacity: Math.random() * 0.5 + 0.2,
+                    });
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${hexToRgb(currentGlowColor)}, ${p.opacity})`;
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateParticles);
+            }
+
+            function hexToRgb(hex) {
+                hex = hex.replace('#', '');
+                const r = parseInt(hex.substring(0, 2), 16);
+                const g = parseInt(hex.substring(2, 4), 16);
+                const b = parseInt(hex.substring(4, 6), 16);
+                return `${r}, ${g}, ${b}`;
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                createParticles();
+            });
+
+            resizeCanvas();
+            createParticles();
+            animateParticles();
+
+            // --- Slide Navigation & UI Logic ---
+            const slides = Array.from(document.querySelectorAll('.slide'));
+            const progressBar = document.getElementById('progress-bar');
+            const backToTopBtn = document.getElementById('back-to-top-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const prevBtn = document.getElementById('prev-slide-btn');
+            const nextBtn = document.getElementById('next-slide-btn');
+            
+            let currentIndex = 0;
+
+            function updateUI(index) {
+                currentIndex = index;
+                const totalSlides = slides.length - 1;
+                
+                const progress = totalSlides > 0 ? (index / totalSlides) * 100 : 0;
+                progressBar.style.width = `${progress}%`;
+                
+                const currentSlide = slides[index];
+                const glowColor = getComputedStyle(currentSlide).getPropertyValue('--glow').trim();
+                progressBar.style.backgroundColor = glowColor;
+                progressBar.style.boxShadow = `0 0 10px ${glowColor}`;
+                currentGlowColor = glowColor; // Update particle color
+
+                backToTopBtn.classList.toggle('visible', index > 0);
+                prevBtn.classList.toggle('visible', index > 0);
+                nextBtn.classList.toggle('visible', index < totalSlides);
+
+                const newHash = '#' + currentSlide.id;
+                if (history.replaceState && window.location.hash !== newHash) {
+                    history.replaceState(null, null, newHash);
+                }
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const content = entry.target.querySelector('.slide-content');
+                    if (entry.isIntersecting) {
+                        content.classList.add('is-visible');
+                        const intersectingIndex = slides.indexOf(entry.target);
+                        updateUI(intersectingIndex);
+                    } else {
+                        content.classList.remove('is-visible');
+                    }
+                });
+            }, { threshold: 0.6 });
+
+            slides.forEach(slide => observer.observe(slide));
+
+            function navigateTo(index) {
+                if (index >= 0 && index < slides.length) {
+                    slides[index].scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSlide = document.querySelector(targetId);
+                    if (targetSlide) {
+                        targetSlide.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', e => {
+                if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.code === 'Space') {
+                    e.preventDefault();
+                    navigateTo(currentIndex + 1);
+                }
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    navigateTo(currentIndex - 1);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => navigateTo(currentIndex - 1));
+            nextBtn.addEventListener('click', () => navigateTo(currentIndex + 1));
+            backToTopBtn.addEventListener('click', () => navigateTo(0));
+
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            const initialHash = window.location.hash;
+            const initialIndex = slides.findIndex(s => '#' + s.id === initialHash);
+            if (initialIndex !== -1) {
+                setTimeout(() => {
+                    slides[initialIndex].scrollIntoView();
+                    updateUI(initialIndex);
+                }, 100);
+            } else {
+                updateUI(0);
+            }
+        });
+    </script>
+</body>
+</html>
