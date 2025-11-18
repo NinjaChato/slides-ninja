@@ -3,581 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>História do Kanye West</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Sistema Respiratório | A Máquina Perfeita</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;700&display=swap');
+
         :root {
-            --bg-color: #050505;
-            --text-color: #f0f0f0;
-            --producer-1: #3a3a3a; --producer-2: #1a1a1a; --producer-accent: #d4af37;
-            --dropout-1: #6d3a23; --dropout-2: #1e120f; --dropout-accent: #e8c385;
-            --late-1: #4a2f2b; --late-2: #1c110f; --late-accent: #d4af37;
-            --grad-1: #7b42f5; --grad-2: #fd4f95; --grad-accent: #ffc857;
-            --heartbreak-1: #3d3d3d; --heartbreak-2: #1e1e1e; --heartbreak-accent: #f4cccc;
-            --mbdtf-1: #b20000; --mbdtf-2: #000000; --mbdtf-accent: #ffd700;
-            --wtt-1: #2c2921; --wtt-2: #000000; --wtt-accent: #c0b283;
-            --yeezus-1: #4a4a4a; --yeezus-2: #111111; --yeezus-accent: #ff4136;
-            --pablo-1: #f99362; --pablo-2: #d86a3d; --pablo-accent: #009dff;
-            --wyoming-1: #2d3a36; --wyoming-2: #0e1412; --wyoming-accent: #bfff00;
-            --jik-1: #4a90e2; --jik-2: #2a5282; --jik-accent: #ffffff;
-            --donda-1: #1a1a1a; --donda-2: #000000; --donda-accent: #e0e0e0;
-            --dissonance-1: #222; --dissonance-2: #000; --dissonance-accent: #fff;
-            --vultures-1: #1f1f1f; --vultures-2: #000; --vultures-accent: #cccccc;
-            --legacy-1: #252525; --legacy-2: #0a0a0a; --legacy-accent: #fff;
+            --main-red: #E53935;
+            --main-gold: #FFB300;
+            --background-color: #0A0A0A;
+            --text-color: #F5F5F5;
+            --card-bg-color: rgba(20, 20, 20, 0.8);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
-            overflow: hidden;
-        }
-
-        main {
+        body, html {
+            margin: 0;
+            padding: 0;
             width: 100%;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+        }
+
+        .presentation-container {
+            width: 100vw;
             height: 100vh;
-            scroll-behavior: smooth;
+            position: relative;
         }
 
         .slide {
+            width: 100%;
+            height: 100%;
             display: flex;
-            width: 100vw;
-            height: 100vh;
-            scroll-snap-align: center;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            padding: 5vw;
-            position: relative;
-            overflow: hidden;
-            transition: background 0.8s ease;
-        }
-        
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-size: cover;
-            opacity: 0.05;
-            z-index: 0;
-        }
-
-        .slide-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            width: 100%;
-            max-width: 1200px;
-            gap: 4vw;
             align-items: center;
-            z-index: 1;
+            padding: 50px;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            text-align: center;
         }
 
-        .left-panel { text-align: left; }
-        .right-panel { display: flex; align-items: center; justify-content: center; position: relative; gap: 2rem; }
-
-        .year { font-size: 1.1rem; font-weight: 400; letter-spacing: 2px; opacity: 0.8; }
-        .album-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.8rem, 8vw, 5.5rem);
-            line-height: 1;
-            margin: 0.5rem 0 1.5rem 0;
-            letter-spacing: 2px;
-            word-break: break-word;
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
         }
-        .description { font-size: 1rem; line-height: 1.8; max-width: 450px; }
-        .description strong {
-            display: block;
-            margin-top: 1rem;
-            font-weight: 700;
-        }
-        .description strong:first-child { margin-top: 0; }
 
-        .album-art, .studio-pic {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
-            object-fit: cover;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        .album-art:hover, .studio-pic:hover { transform: scale(1.05); }
-
-        /* --- ANIMATION SETUP --- */
-        .year, .album-title, .description, .album-art, .pablo-cover, .intro-image, .artist-grid, .credit, .studio-pic {
+        /* Animações de conteúdo */
+        .slide .animated {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-        .slide.visible .year { transition-delay: 0.1s; }
-        .slide.visible .album-title { transition-delay: 0.2s; }
-        .slide.visible .description { transition-delay: 0.3s; }
-        .slide.visible .album-art, .slide.visible .pablo-cover, .slide.visible .intro-image, .slide.visible .artist-grid, .slide.visible .studio-pic { transition-delay: 0.4s; }
-        .slide.visible .credit { transition-delay: 0.5s; }
-        .slide.visible .year, .slide.visible .album-title, .slide.visible .description, .slide.visible .album-art, .slide.visible .pablo-cover, .slide.visible .intro-image, .slide.visible .artist-grid, .slide.visible .credit, .slide.visible .studio-pic {
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* --- SLIDE SPECIFIC STYLING & GLOWS --- */
-        #slide0 { background: linear-gradient(330deg, #111, #000, #1a1a1a); }
-        #slide0 .slide-layout { grid-template-columns: 1.2fr 1fr; }
-        #slide0 .intro-image { max-width: 100%; height: auto; filter: drop-shadow(0 0 35px #000000); }
-        #slide0 .album-title { font-size: clamp(3.5rem, 12vw, 7rem); animation: title-glow 5s ease-in-out infinite; }
-        @keyframes title-glow { 0%, 100% { text-shadow: 0 0 10px #ffffff22; } 50% { text-shadow: 0 0 25px #ffffff55; } }
-        #slide0 .description { font-size: 1.2rem; }
-        .credit { font-size: 1rem; opacity: 0.7; margin-top: 2rem; }
+        .slide.active .animated.d-1 { animation-delay: 0.4s; }
+        .slide.active .animated.d-2 { animation-delay: 0.6s; }
+        .slide.active .animated.d-3 { animation-delay: 0.8s; }
+        .slide.active .animated.d-4 { animation-delay: 1.0s; }
+        .slide.active .animated.d-5 { animation-delay: 1.2s; }
 
-        #slide1 { background: linear-gradient(145deg, var(--producer-1), var(--producer-2)); }
-        #slide1 .album-title, #slide1 strong { color: var(--producer-accent); }
-        .studio-pic { max-width: 100%; border-radius: 10px; box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--producer-accent)44, 0 0 0 2px var(--producer-accent)88; }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        #slide2 { background: linear-gradient(145deg, var(--dropout-1), var(--dropout-2)); }
-        #slide2 .album-title, #slide2 strong { color: var(--dropout-accent); }
-        #slide2 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--dropout-accent)55, 0 0 0 2px var(--dropout-accent)88; }
+        /* Estilos de Texto */
+        .slide-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 7rem;
+            letter-spacing: 4px;
+            color: var(--text-color);
+            margin: 0;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
 
-        #slide3 { background: linear-gradient(145deg, var(--late-1), var(--late-2)); }
-        #slide3::before { background-image: url('https://www.transparenttextures.com/patterns/velvet.png'); opacity: 0.08; }
-        #slide3 .album-title, #slide3 strong { color: var(--late-accent); }
-        #slide3 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--late-accent)55, 0 0 0 2px var(--late-accent)88; }
+        .slide-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin: 10px 0 40px 0;
+            color: var(--main-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-        #slide4 { background: linear-gradient(145deg, var(--grad-1), var(--grad-2)); }
-        #slide4 .album-title, #slide4 strong { color: var(--grad-accent); }
-        #slide4 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--grad-2)77, 0 0 0 2px var(--grad-accent)88; }
-
-        #slide5 { background: linear-gradient(145deg, var(--heartbreak-1), var(--heartbreak-2)); }
-        #slide5 .album-title, #slide5 strong { color: var(--heartbreak-accent); }
-        #slide5 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--heartbreak-accent)55, 0 0 0 2px var(--heartbreak-accent)88; }
-
-        #slide6 { background: linear-gradient(145deg, var(--mbdtf-1), var(--mbdtf-2)); }
-        #slide6 .album-title { font-size: clamp(2.5rem, 7vw, 4.5rem); }
-        #slide6 .album-title, #slide6 strong { color: var(--mbdtf-accent); font-family: 'Playfair Display', serif; font-style: italic; }
-        #slide6 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--mbdtf-accent)55, 0 0 0 2px var(--mbdtf-accent); border: 4px solid var(--mbdtf-accent); }
-
-        #slide7 { background: linear-gradient(145deg, var(--wtt-1), var(--wtt-2)); }
-        #slide7 .album-title, #slide7 strong { color: var(--wtt-accent); animation: gold-shimmer 4s ease-in-out infinite; }
-        @keyframes gold-shimmer { 0%, 100% { text-shadow: 0 0 15px #c0b28366; } 50% { text-shadow: 0 0 30px #c0b283bb; } }
-        #slide7 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--wtt-accent)55, 0 0 0 2px var(--wtt-accent)88; }
+        .slide-content {
+            max-width: 900px;
+            text-align: left;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
         
-        #slide8 { background: linear-gradient(145deg, var(--yeezus-1), var(--yeezus-2)); }
-        #slide8::before { background-image: url('https://www.transparenttextures.com/patterns/noisy-grid.png'); opacity: 0.1; }
-        #slide8 .album-title { color: #ccc; }
-        #slide8 strong { color: var(--yeezus-accent); }
-        #slide8 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--yeezus-accent)66, 0 0 0 2px var(--yeezus-accent)88; max-width: 320px; }
+        .slide-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--main-red);
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
         
-        #slide9 { background: linear-gradient(145deg, var(--pablo-1), var(--pablo-2)); }
-        #slide9::before { background-image: url('https://www.transparenttextures.com/patterns/lined-paper.png'); opacity: 0.1; }
-        #slide9 .album-title, #slide9 strong { color: #fff; }
-        .pablo-cover {
-            width: 350px; height: 350px; background-color: var(--pablo-1);
-            font-family: 'Arial', sans-serif; font-weight: bold; font-size: 2.5rem;
-            line-height: 1; color: #000; text-align: left;
-            padding: 15px; position: relative;
-            box-shadow: inset 0 0 10px #0008, 0 0 35px 5px #00000077, 0 0 0 2px #fff88;
+        strong {
+            color: var(--main-gold);
+            font-weight: 700;
         }
-        .pablo-cover img { width: 60%; position: absolute; bottom: 15px; right: 15px; }
 
-        #slide10 { background: linear-gradient(145deg, var(--wyoming-1), var(--wyoming-2)); }
-        #slide10 .album-title, #slide10 strong { color: var(--wyoming-accent); }
-        #slide10 .album-art { max-width: 170px; box-shadow: inset 0 0 10px #0008, 0 0 30px 5px #000000bb, 0 0 0 2px var(--wyoming-accent)88; }
-
-        #slide11 { background: linear-gradient(145deg, var(--jik-1), var(--jik-2)); }
-        #slide11 .album-title, #slide11 strong { color: var(--jik-accent); }
-        #slide11 .album-art { box-shadow: inset 0 0 10px #0008, 0 0 35px 5px var(--jik-2)99, 0 0 0 2px var(--jik-accent)88; border-radius: 10px; }
-
-        #slide12 { background: linear-gradient(145deg, var(--donda-1), var(--donda-2)); }
-        #slide12 .album-title, #slide12 strong { color: var(--donda-accent); }
-        #slide12 .album-art { max-width: 170px; box-shadow: inset 0 0 10px #0008, 0 0 30px 5px #ffffff22, 0 0 0 2px var(--donda-accent)88; }
-
-        #slide13 { background: linear-gradient(145deg, var(--dissonance-1), var(--dissonance-2)); text-align: center; }
-        #slide13 .slide-layout { display: block; }
-        #slide13 .album-title, #slide13 strong { color: var(--dissonance-accent); }
-        #slide13 .album-title { animation: glitch 1s linear infinite; }
-        @keyframes glitch{ 2%,64%{ transform: translate(2px,0) skew(0deg); } 4%,60%{ transform: translate(-2px,0) skew(0deg); } 62%{ transform: translate(0,0) skew(5deg); } }
-        #slide13 .description { max-width: 700px; margin: 0 auto; }
-
-        #slide14 { background: linear-gradient(145deg, var(--vultures-1), var(--vultures-2)); }
-        #slide14::before { background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png'); opacity: 0.08; }
-        #slide14 .album-title, #slide14 strong { color: var(--vultures-accent); }
-        #slide14 .album-art { max-width: 170px; box-shadow: inset 0 0 10px #0008, 0 0 30px 5px #000000dd, 0 0 0 2px var(--vultures-accent)88; }
-
-        #slide15 { background: linear-gradient(145deg, var(--legacy-1), var(--legacy-2)); text-align: center; }
-        #slide15 .slide-layout { display: block; }
-        #slide15 .album-title, #slide15 strong { color: var(--legacy-accent); }
-        .artist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 2rem auto 0;
+        /* Layout de Cards */
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
         }
-        .artist-item { text-align: center; }
-        .artist-grid img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            filter: grayscale(1) contrast(1.2);
-            opacity: 0.6;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 10px #0008, 0 0 25px 5px #000000aa, 0 0 0 2px var(--legacy-accent)88;
+
+        .card {
+            background: var(--card-bg-color);
+            border-top: 3px solid var(--main-red);
+            padding: 25px;
+            border-radius: 8px;
+            flex: 1;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            min-width: 200px;
         }
-        .artist-grid img:hover {
-            filter: grayscale(0) contrast(1);
-            opacity: 1;
-            transform: scale(1.1);
+        
+        .card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--main-gold);
+            margin-top: 0;
+            letter-spacing: 1px;
         }
-        .artist-caption {
-            margin-top: 0.5rem;
+
+        /* Efeito Glitch para o título principal */
+        .glitch-effect {
+            position: relative;
+        }
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-color);
+            overflow: hidden;
+        }
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--main-red);
+            animation: glitch-anim-1 2.5s infinite linear reverse;
+        }
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--main-gold);
+            animation: glitch-anim-2 2.5s infinite linear reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0%, 100% { clip-path: inset(0 0 95% 0); } 20% { clip-path: inset(40% 0 15% 0); } 40% { clip-path: inset(60% 0 30% 0); } 60% { clip-path: inset(20% 0 75% 0); } 80% { clip-path: inset(80% 0 5% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0%, 100% { clip-path: inset(90% 0 5% 0); } 20% { clip-path: inset(15% 0 60% 0); } 40% { clip-path: inset(35% 0 40% 0); } 60% { clip-path: inset(70% 0 20% 0); } 80% { clip-path: inset(5% 0 85% 0); }
+        }
+
+        /* Navegação */
+        .nav-hint {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255,255,255,0.3);
             font-size: 0.9rem;
-            font-weight: 400;
-            opacity: 0.8;
+            letter-spacing: 1px;
+            z-index: 1000;
         }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 768px) {
-            .slide-layout { grid-template-columns: 1fr; text-align: center; }
-            .left-panel { text-align: center; order: 2; }
-            .right-panel { order: 1; margin-bottom: 2rem; flex-direction: column; }
-            .description { margin: 0 auto; }
-            .album-art, .pablo-cover { max-width: 250px; max-height: 250px; }
-            .pablo-cover { font-size: 2rem; width: 250px; height: 250px; }
-            #slide10 .album-art, #slide12 .album-art, #slide14 .album-art { max-width: 120px; }
-            #slide0 .slide-layout { grid-template-columns: 1fr; }
-            #slide0 .right-panel { order: 1; }
-            #slide0 .left-panel { order: 2; text-align: center; }
-            #slide0 .intro-image { max-height: 50vh; }
-        }
     </style>
 </head>
 <body>
 
-    <main id="main-container">
-        <section class="slide" id="slide0">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <h1 class="album-title">A CRONOLOGIA DE KANYE WEST</h1>
-                    <p class="description">Uma jornada imersiva através da genialidade, controvérsia e evolução de um dos artistas mais impactantes da história.</p>
-                    <p class="credit">Luis Guilherme (1ºB)</p>
-                </div>
-                <div class="right-panel">
-                    <img class="intro-image" src="https://purepng.com/public/uploads/large/kanye-west-vil.png" alt="Kanye West">
-                </div>
-            </div>
-        </section>
+    <div class="presentation-container">
 
-        <section class="slide" id="slide1">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">1996-2003</p>
-                    <h2 class="album-title">O Prodígio de Chicago</h2>
-                    <p class="description"><strong style="color: var(--producer-accent);">Contexto:</strong> Antes do microfone, Kanye West era um produtor faminto, criando batidas para artistas locais e eventualmente para a Roc-A-Fella Records de Jay-Z.
-                    <br><strong style="color: var(--producer-accent);">Estilo:</strong> Ele aperfeiçoou o "chipmunk soul", um som que definira o aclamado álbum 'The Blueprint' de Jay-Z. No entanto, a indústria o via apenas como um produtor, não um rapper.
-                    <br><strong style="color: var(--producer-accent);">Impacto:</strong> Essa luta para ser levado a sério como artista solo alimentou a urgência e a narrativa de sua estreia, transformando-o no azarão que todos queriam ver vencer.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="studio-pic" src="https://i.pinimg.com/736x/2e/02/c4/2e02c43d7178f2a2fa04ba5b1d612fc4.jpg" alt="Kanye West in the studio">
-                </div>
+        <!-- Slide 1: Título -->
+        <div class="slide active" id="slide-1">
+            <h1 class="slide-title glitch-effect" data-text="SISTEMA RESPIRATÓRIO">SISTEMA RESPIRATÓRIO</h1>
+            <p class="slide-subtitle animated d-1">A ARQUITETURA DA VIDA</p>
+            <div class="animated d-2">
+                <p><strong>Grupo 4:</strong> Cauã, Luis, Yan</p>
+                <p>Biologia - Aula 9</p>
             </div>
-        </section>
+        </div>
 
-        <section class="slide" id="slide2">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2004</p>
-                    <h2 class="album-title">The College Dropout</h2>
-                    <p class="description"><strong style="color: var(--dropout-accent);">Contexto:</strong> Sobrevivente de um acidente de carro quase fatal, Kanye gravou "Through the Wire" com a mandíbula amarrada, provando sua determinação. Em uma era de gangsta rap, ele trouxe uma mochila rosa e uma perspectiva de classe média.
-                    <br><strong style="color: var(--dropout-accent);">Estilo:</strong> Popularizou o "chipmunk soul", técnica de acelerar samples vocais de soul, criando uma sonoridade nostálgica, calorosa e instantaneamente reconhecível.
-                    <br><strong style="color: var(--dropout-accent);">Impacto:</strong> Trouxe vulnerabilidade, humor e consciência social para o mainstream, provando que havia um público massivo para histórias além das ruas.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/a/a3/Kanyewest_collegedropout.jpg" alt="The College Dropout">
-                </div>
+        <!-- Slide 2: Introdução -->
+        <div class="slide" id="slide-2">
+            <div class="slide-content">
+                <h2 class="animated">A MÁQUINA PERFEITA</h2>
+                <p class="animated d-1">A cada segundo, uma força invisível nos mantém vivos. O sistema respiratório é mais do que um conjunto de órgãos; é uma máquina de precisão que alimenta cada uma de nossas <strong>30 trilhões de células</strong>.</p>
+                <p class="animated d-2">Sua missão: capturar o <strong>oxigênio (O₂)</strong>, o combustível da vida, e expulsar o <strong>dióxido de carbono (CO₂)</strong>, o resíduo do nosso metabolismo. Uma troca incessante que define a fronteira entre a energia e a exaustão.</p>
             </div>
-        </section>
-
-        <section class="slide" id="slide3">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2005</p>
-                    <h2 class="album-title">Late Registration</h2>
-                    <p class="description"><strong style="color: var(--late-accent);">Contexto:</strong> Para evitar a "maldição do segundo álbum", Kanye buscou um som maior e mais rico, unindo-se ao compositor de filmes Jon Brion.
-                    <br><strong style="color: var(--late-accent);">Estilo:</strong> Uma fusão barroca de hip-hop com arranjos orquestrais cinematográficos. Cordas, metais, celesta e pianos complexos tornaram-se a base para hinos como "Gold Digger".
-                    <br><strong style="color: var(--late-accent);">Impacto:</strong> Elevou o hip-hop a um patamar de sofisticação sônica, provando que o gênero poderia ser tão grandioso e musicalmente complexo quanto qualquer outro.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/f/f4/Late_registration_cd_cover.jpg" alt="Late Registration">
-                </div>
-            </div>
-        </section>
+        </div>
         
-        <section class="slide" id="slide4">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2007</p>
-                    <h2 class="album-title">Graduation</h2>
-                    <p class="description"><strong style="color: var(--grad-accent);">Contexto:</strong> Uma batalha de vendas contra 50 Cent que se tornou um referendo para o futuro do hip-hop. Kanye apostou em um som mais ousado e global.
-                    <br><strong style="color: var(--grad-accent);">Estilo:</strong> Influenciado por turnês com U2 e Daft Punk, ele trocou os samples orgânicos por sintetizadores, batidas eletrônicas e hinos de arena.
-                    <br><strong style="color: var(--grad-accent);">Impacto:</strong> Kanye venceu a batalha e marcou a mudança do hip-hop para um som mais pop, eletrônico e global, abrindo as portas para a próxima geração de superstars.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/7/70/Graduation_%28album%29.jpg" alt="Graduation">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide5">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2008</p>
-                    <h2 class="album-title">808s & Heartbreak</h2>
-                    <p class="description"><strong style="color: var(--heartbreak-accent);">Contexto:</strong> Criado na esteira de dois eventos devastadores: a morte súbita de sua mãe, Donda, e o fim de seu noivado.
-                    <br><strong style="color: var(--heartbreak-accent);">Estilo:</strong> Um abandono chocante do rap. Usou a bateria eletrônica TR-808 e o Auto-Tune não como correção, mas como uma ferramenta para expressar uma dor fria, distante e robótica.
-                    <br><strong style="color: var(--heartbreak-accent);">Impacto:</strong> Incompreendido na época, o álbum criou o subgênero "emo rap" e se tornou a planta para artistas como Drake, The Weeknd e Juice WRLD.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/f/f1/808s_%26_Heartbreak.png" alt="808s & Heartbreak">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide6">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2010</p>
-                    <h2 class="album-title">My Beautiful Dark Twisted Fantasy</h2>
-                    <p class="description"><strong style="color: var(--mbdtf-accent);">Contexto:</strong> Após se tornar o vilão da cultura pop pelo incidente com Taylor Swift, Kanye se exilou no Havaí para criar sua redenção.
-                    <br><strong style="color: var(--mbdtf-accent);">Estilo:</strong> Maximalismo. Uma ópera hip-hop com produção em "superávit", camadas sobre camadas de instrumentos, vocais e samples. A campanha "G.O.O.D. Fridays" liberava uma música nova toda semana, criando um hype sem precedentes.
-                    <br><strong style="color: var(--mbdtf-accent);">Impacto:</strong> Aclamado universalmente como sua obra-prima e um dos maiores álbuns da história. Uma redenção artística que o transformou de vilão em gênio torturado.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/b/be/MBDTF_ALT.jpg" alt="My Beautiful Dark Twisted Fantasy">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide7">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2011</p>
-                    <h2 class="album-title">Watch The Throne</h2>
-                    <p class="description"><strong style="color: var(--wtt-accent);">Contexto:</strong> Uma colaboração monumental com seu mentor e "irmão mais velho", Jay-Z, no auge de seus respectivos poderes culturais.
-                    <br><strong style="color: var(--wtt-accent);">Estilo:</strong> Hip-hop de luxo. Uma celebração opulenta do "Black Excellence", com samples grandiosos, produção impecável e um senso de realeza cultural.
-                    <br><strong style="color: var(--wtt-accent);">Impacto:</strong> Definiu o padrão para álbuns colaborativos e se tornou a trilha sonora de uma era de poder e excesso no hip-hop.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/e/ee/Watch_The_Throne.jpg" alt="Watch The Throne">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide8">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2013</p>
-                    <h2 class="album-title">Yeezus</h2>
-                    <p class="description"><strong style="color: var(--yeezus-accent);">Contexto:</strong> Frustrado com as barreiras da indústria da moda, Kanye canalizou sua raiva em um som de protesto. O lendário produtor Rick Rubin foi chamado no último minuto para "despir" o álbum até seu núcleo mais cru.
-                    <br><strong style="color: var(--yeezus-accent);">Estilo:</strong> Minimalismo brutalista. Um ataque sônico industrial, distorcido e abrasivo, com influências do acid house de Chicago e do punk.
-                    <br><strong style="color: var(--yeezus-accent);">Impacto:</strong> Um "reset" cultural que solidificou sua imagem de artista que prefere destruir suas próprias estátuas a se repetir.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/0/03/Yeezus_album_cover.png" alt="Yeezus">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide9">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2016</p>
-                    <h2 class="album-title">The Life of Pablo</h2>
-                    <p class="description"><strong style="color: #fff;">Contexto:</strong> O auge de sua fama como magnata da moda e figura midiática, o álbum foi criado em um processo caótico e público.
-                    <br><strong style="color: #fff;">Estilo:</strong> Um "álbum vivo", lançado inacabado e alterado várias vezes após o lançamento. Uma colagem de samples de gospel, trap e beleza sublime, descrito por ele como "um álbum de gospel com um monte de palavrões".
-                    <br><strong style="color: #fff;">Impacto:</strong> Desafiou a própria definição de um álbum na era do streaming, tratando a obra como um software em constante atualização.</p>
-                </div>
-                <div class="right-panel">
-                    <div class="pablo-cover">
-                        WHICH / ONE
-                        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/The_life_of_pablo_alternate.jpg" alt="The Life of Pablo">
+        <!-- Slide 3: Arquitetos da Respiração -->
+        <div class="slide" id="slide-3">
+             <div class="slide-content">
+                <h2 class="animated">OS ARQUITETOS DA RESPIRAÇÃO</h2>
+                <div class="cards-container">
+                    <div class="card animated d-1">
+                        <h3>VIAS SUPERIORES</h3>
+                        <p><strong>Nariz, Faringe e Laringe.</strong> A linha de frente. Filtram, aquecem e umedecem o ar, preparando-o para a entrada nos pulmões. A laringe também abriga as cordas vocais.</p>
+                    </div>
+                    <div class="card animated d-2">
+                         <h3>VIAS INFERIORES</h3>
+                        <p><strong>Traqueia, Brônquios e Bronquíolos.</strong> Uma árvore invertida que canaliza o ar para as profundezas dos pulmões, ramificando-se em caminhos cada vez mais finos.</p>
+                    </div>
+                    <div class="card animated d-3">
+                        <h3>PULMÕES E ALVÉOLOS</h3>
+                        <p>Os protagonistas. Dois órgãos esponjosos que abrigam cerca de <strong>300 milhões de alvéolos</strong>, pequenos sacos de ar onde a mágica da troca gasosa acontece.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="slide" id="slide10">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2018</p>
-                    <h2 class="album-title">As Sessões de Wyoming</h2>
-                    <p class="description"><strong style="color: var(--wyoming-accent);">Contexto:</strong> Após um período de turbulência e o diagnóstico de transtorno bipolar, Kanye se refugia em um rancho em Wyoming.
-                    <br><strong style="color: var(--wyoming-accent);">Estilo:</strong> Produziu 5 álbuns de 7 faixas em 5 semanas. De terapia crua em 'ye' à dualidade psicodélica com Kid Cudi em 'KIDS SEE GHOSTS', foi uma explosão de criatividade focada e colaborativa.
-                    <br><strong style="color: var(--wyoming-accent);">Impacto:</strong> Uma demonstração de sua genialidade como produtor e curador, criando mundos sônicos distintos em tempo recorde.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/7/74/Ye_album_cover.jpg" alt="ye">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/4/44/Kids_See_Ghosts_Cover.png" alt="Kids See Ghosts">
-                </div>
+        <!-- Slide 4: O Maestro Invisível -->
+        <div class="slide" id="slide-4">
+            <div class="slide-content">
+                <h2 class="animated">O MAESTRO INVISÍVEL</h2>
+                <p class="animated d-1">Você não precisa pensar para respirar. Por quê? Porque existe um maestro controlando tudo no piloto automático: o <strong>Sistema Nervoso Central</strong>.</p>
+                <p class="animated d-2">No <strong>tronco encefálico</strong>, uma região chamada <strong>bulbo</strong> monitora constantemente os níveis de CO₂ no sangue. Se o CO₂ aumenta, o bulbo envia sinais imediatos para os músculos da respiração (diafragma e intercostais) para que você respire mais rápido e mais fundo. É um sistema de feedback perfeito e autônomo.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="slide" id="slide11">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2019</p>
-                    <h2 class="album-title">JESUS IS KING</h2>
-                    <p class="description"><strong style="color: var(--jik-accent);">Contexto:</strong> O abraço total à fé cristã, com a criação dos cultos musicais "Sunday Service" que se tornaram um fenômeno cultural.
-                    <br><strong style="color: var(--jik-accent);">Estilo:</strong> Um álbum de gospel digital. A produção grandiosa de Kanye aplicada ao Sunday Service Choir, com órgãos, corais e letras estritamente devocionais.
-                    <br><strong style="color: var(--jik-accent);">Impacto:</strong> Uma fase polarizadora que priorizou a mensagem sobre a inovação sônica, mas que representou um capítulo crucial em sua jornada pessoal e espiritual.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Kanye_West_-_Jesus_Is_King.png" alt="Jesus is King">
-                </div>
+        <!-- Slide 5: Hematose -->
+        <div class="slide" id="slide-5">
+            <div class="slide-content">
+                <h2 class="animated">HEMATOSE: O PONTO DE TROCA</h2>
+                <p class="animated d-1">Nos alvéolos, o ar e o sangue se encontram, separados por uma membrana mais fina que um fio de cabelo. É aqui que ocorre a <strong>hematose</strong>.</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li class="animated d-2"><strong>O₂ entra no sangue:</strong> O oxigênio atravessa a membrana alveolar e se liga à hemoglobina nas hemácias, transformando o sangue venoso (azulado) em arterial (vermelho vivo).</li>
+                    <li class="animated d-3"><strong>CO₂ sai do sangue:</strong> O dióxido de carbono, trazido de volta das células, faz o caminho inverso: deixa o sangue e entra nos alvéolos para ser exalado.</li>
+                </ul>
             </div>
-        </section>
-
-        <section class="slide" id="slide12">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2021-2022</p>
-                    <h2 class="album-title">A Saga Donda</h2>
-                    <p class="description"><strong style="color: var(--donda-accent);">Contexto:</strong> Em meio a um divórcio público e refletindo sobre o legado de sua mãe.
-                    <br><strong style="color: var(--donda-accent);">Estilo:</strong> O luto como espetáculo. De listening parties teatrais para 'Donda' a um lançamento exclusivo no Stem Player para 'Donda 2', a distribuição se tornou parte da arte.
-                    <br><strong style="color: var(--donda-accent);">Impacto:</strong> Um retorno à escala épica, usando o minimalismo sombrio para explorar temas de família, fé e mortalidade de uma forma grandiosa e comunal.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Almost_black_square_020305.svg/800px-Almost_black_square_020305.svg.png" alt="Donda">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg" alt="Donda 2">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide13">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2022-2023</p>
-                    <h2 class="album-title">Dissonância e Controvérsia</h2>
-                    <p class="description"><strong style="color: var(--dissonance-accent);">Contexto:</strong> Um período de intensa turbulência pública marcado por uma série de declarações antissemitas e teorias da conspiração em entrevistas e redes sociais.
-                    <br><strong style="color: var(--dissonance-accent);">Consequências:</strong> A perda de parcerias bilionárias com Adidas, Balenciaga e Gap, resultando em um colapso financeiro e um profundo isolamento da indústria da moda e do entretenimento.
-                    <br><strong style="color: var(--dissonance-accent);">Impacto:</strong> Este colapso forçou Ye a uma posição de total independência, estabelecendo o cenário para seu próximo capítulo como um artista operando fora do sistema que ele ajudou a construir.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide14">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">2024</p>
-                    <h2 class="album-title">VULTURES</h2>
-                    <p class="description"><strong style="color: var(--vultures-accent);">Contexto:</strong> O retorno como artista independente ao lado de Ty Dolla $ign, sob a alcunha ¥$.
-                    <br><strong style="color: var(--vultures-accent);">Estilo:</strong> Um som cru, sombrio e muitas vezes provocador, que aborda diretamente sua nova posição como um pária da indústria. A produção é minimalista, mas pesada, com um tom desafiador.
-                    <br><strong style="color: var(--vultures-accent);">Impacto:</strong> Um teste de sua relevância cultural. Lançado de forma independente, o projeto 'Vultures' busca provar que sua arte pode prosperar sem o apoio das grandes corporações, redefinindo seu legado em tempo real.</p>
-                </div>
-                <div class="right-panel">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Kanye_West_and_Ty_Dolla_Sign_-_Vultures_Vol._1_%28Cover%29.png/800px-Kanye_West_and_Ty_Dolla_Sign_-_Vultures_Vol._1_%28Cover%29.png" alt="Vultures 1">
-                    <img class="album-art" src="https://upload.wikimedia.org/wikipedia/en/6/66/%C2%A5%24_-_Vultures_2.png" alt="Vultures 2">
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" id="slide15">
-            <div class="slide-layout">
-                <div class="left-panel">
-                    <p class="year">LEGADO</p>
-                    <h2 class="album-title">O Efeito Ye</h2>
-                    <p class="description"><strong style="color: var(--legacy-accent);">Impacto Geracional:</strong> A influência de Kanye West transcende a música. Ele não apenas abriu portas para uma nova geração de artistas, mas forneceu a planta sônica e estética para muitos dos maiores nomes do século 21.
-                    <br><strong style="color: var(--legacy-accent);">Artistas Influenciados:</strong> De Drake e The Weeknd a Travis Scott e Tyler, the Creator, traços do DNA de Kanye podem ser encontrados em todo o espectro da cultura pop.</p>
-                </div>
-                <div class="right-panel">
-                    <div class="artist-grid">
-                        <div class="artist-item">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPzop5HnF0HDSjm9WwHU9Uwp0vmt5LpSxb3w&s" alt="Drake">
-                            <p class="artist-caption">Drake</p>
-                        </div>
-                        <div class="artist-item">
-                            <img src="https://i.scdn.co/image/ab6761610000e5eb9e528993a2820267b97f6aae" alt="The Weeknd">
-                            <p class="artist-caption">The Weeknd</p>
-                        </div>
-                        <div class="artist-item">
-                            <img src="https://imageio.forbes.com/specials-images/imageserve/5ed670179e384f0007b7db8f/0x0.jpg?format=jpg&crop=2610,2609,x1032,y186,safe&height=416&width=416&fit=bounds" alt="Travis Scott">
-                            <p class="artist-caption">Travis Scott</p>
-                        </div>
-                        <div class="artist-item">
-                            <img src="https://i.pinimg.com/474x/3a/41/e9/3a41e9ff00e5e79ed42554ddbaff579f.jpg" alt="Tyler, the Creator">
-                            <p class="artist-caption">Tyler, The Creator</p>
-                        </div>
-                        <div class="artist-item">
-                            <img src="https://hips.hearstapps.com/hmg-prod/images/chance_the_rapper_photo_by_matthew_eisman_getty_images_entertainment_getty_170863100.jpg" alt="Chance the Rapper">
-                            <p class="artist-caption">Chance The Rapper</p>
-                        </div>
-                        <div class="artist-item">
-                            <img src="https://i.scdn.co/image/ab6761610000e5eb23a60030944f7853c21565ef" alt="Juice WRLD">
-                            <p class="artist-caption">Juice WRLD</p>
-                        </div>
+        </div>
+        
+        <!-- Slide 6: Ameaças Modernas -->
+        <div class="slide" id="slide-6">
+            <div class="slide-content">
+                <h2 class="animated">AMEAÇAS MODERNAS</h2>
+                <div class="cards-container">
+                    <div class="card animated d-1">
+                        <h3>POLUIÇÃO & VAPING</h3>
+                        <p>Partículas finas da poluição e os químicos de cigarros eletrônicos podem causar inflamação crônica, danificar os alvéolos e reduzir a capacidade pulmonar.</p>
+                    </div>
+                    <div class="card animated d-2">
+                        <h3>ESTRESSE E ANSIEDADE</h3>
+                        <p>O estresse crônico leva a uma respiração curta e rápida, diminuindo a oxigenação do corpo e aumentando a tensão muscular, criando um ciclo vicioso.</p>
+                    </div>
+                    <div class="card animated d-3">
+                        <h3>SEDENTARISMO</h3>
+                        <p>A falta de exercício enfraquece os músculos respiratórios, tornando a respiração menos eficiente e diminuindo a resistência geral do organismo.</p>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <!-- Slide 7: Curiosidades -->
+        <div class="slide" id="slide-7">
+            <div class="slide-content">
+                <h2 class="animated">VOCÊ SABIA?</h2>
+                <ul style="list-style: none; padding: 0;">
+                    <li class="animated d-1">Respiramos cerca de <strong>20.000 vezes por dia</strong>, o que equivale a mais de 10.000 litros de ar.</li>
+                    <li class="animated d-2">Se a superfície de todos os alvéolos de seus pulmões fosse esticada, ela cobriria uma <strong>quadra de tênis</strong>.</li>
+                    <li class="animated d-3">Um espirro pode viajar a mais de <strong>160 km/h</strong>.</li>
+                    <li class="animated d-4">O pulmão direito é ligeiramente <strong>maior</strong> que o esquerdo para dar espaço ao coração.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Conclusão -->
+        <div class="slide" id="slide-8">
+            <div class="slide-content">
+                <h2 class="animated">O GUARDIÃO SILENCIOSO</h2>
+                <p class="animated d-1">O sistema respiratório é o nosso guardião silencioso. Ele trabalha sem pausa, nos conectando ao mundo exterior em um nível fundamental e nos dando a energia para criar, pensar e viver.</p>
+                <p class="animated d-2">Entendê-lo não é apenas biologia. É entender a essência da nossa própria vitalidade. Cuidar dele é o ato mais básico de autopreservação.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Final -->
+        <div class="slide" id="slide-9">
+            <h1 class="slide-title glitch-effect" data-text="OBRIGADO">OBRIGADO</h1>
+            <p class="slide-subtitle animated d-1">Perguntas?</p>
+            <div class="animated d-2">
+                <p><strong>Grupo 4:</strong> Cauã, Luis e Yan</p>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="nav-hint">
+        Use as setas ◄ e ► para navegar
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const mainContainer = document.getElementById('main-container');
-            const slides = document.querySelectorAll('.slide');
-            let currentSlideIndex = 0;
-            let isScrolling = false;
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        const intersectingIndex = Array.from(slides).indexOf(entry.target);
-                        if (intersectingIndex !== -1) {
-                            currentSlideIndex = intersectingIndex;
-                        }
-                    }
-                });
-            }, {
-                threshold: 0.5
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
             });
+            slides[index].classList.add('active');
+        }
 
-            slides.forEach(slide => {
-                observer.observe(slide);
-            });
+        function nextSlide() {
+            let next = (currentSlide + 1) % slides.length;
+            currentSlide = next;
+            showSlide(currentSlide);
+        }
 
-            const scrollToSlide = (index) => {
-                if (isScrolling) return;
-                if (index < 0 || index >= slides.length) return;
+        function prevSlide() {
+            let prev = (currentSlide - 1 + slides.length) % slides.length;
+            currentSlide = prev;
+            showSlide(currentSlide);
+        }
 
-                isScrolling = true;
-                slides[index].scrollIntoView({ behavior: 'smooth' });
-                
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 800); // Debounce to prevent rapid scrolling
-            };
-
-            document.addEventListener('keydown', (event) => {
-                switch (event.key) {
-                    case 'ArrowDown':
-                    case 'ArrowRight':
-                    case 'PageDown':
-                        event.preventDefault();
-                        scrollToSlide(currentSlideIndex + 1);
-                        break;
-                    case 'ArrowUp':
-                    case 'ArrowLeft':
-                    case 'PageUp':
-                        event.preventDefault();
-                        scrollToSlide(currentSlideIndex - 1);
-                        break;
-                }
-            });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { // Adicionado espaço para passar
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
         });
-    </script>
 
+        // Inicia a apresentação no primeiro slide
+        showSlide(currentSlide);
+    </script>
 </body>
 </html>
