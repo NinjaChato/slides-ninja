@@ -3,307 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Respiratório | A Máquina Perfeita</title>
+    <title>Sistema Respiratório | Edição Cinematográfica</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;700&display=swap');
 
         :root {
             --main-red: #E53935;
             --main-gold: #FFB300;
-            --background-color: #0A0A0A;
+            --background-color: #000000;
             --text-color: #F5F5F5;
-            --card-bg-color: rgba(20, 20, 20, 0.8);
         }
 
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             overflow: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
         }
-
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-
-        .slide {
+        
+        #particles-js {
+            position: absolute;
             width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 50px;
-            box-sizing: border-box;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transform: scale(0.9);
+            z-index: 1;
+        }
+
+        #progress-bar {
+            position: fixed; top: 0; left: 0; height: 5px;
+            background: linear-gradient(90deg, var(--main-red), var(--main-gold));
+            width: 0%; z-index: 1001;
+            transition: width 0.5s ease-out;
+            box-shadow: 0 0 15px var(--main-red);
+        }
+
+        .presentation-container { width: 100vw; height: 100vh; position: relative; z-index: 2; }
+
+        .slide {
+            width: 100%; height: 100%; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            padding: 50px; box-sizing: border-box; position: absolute;
+            top: 0; left: 0; opacity: 0;
+            transform: scale(0.98);
             transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
             text-align: center;
         }
 
-        .slide.active {
-            opacity: 1;
-            transform: scale(1);
-            z-index: 10;
-        }
+        .slide.active { opacity: 1; transform: scale(1); z-index: 10; }
 
-        /* Animações de conteúdo */
-        .slide .animated {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
+        .slide .animated { opacity: 0; transform: translateY(40px); animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+        .slide.active .animated.d-1 { animation-delay: 0.3s; }
+        .slide.active .animated.d-2 { animation-delay: 0.5s; }
+        .slide.active .animated.d-3 { animation-delay: 0.7s; }
+        .slide.active .animated.d-4 { animation-delay: 0.9s; }
 
-        .slide.active .animated.d-1 { animation-delay: 0.4s; }
-        .slide.active .animated.d-2 { animation-delay: 0.6s; }
-        .slide.active .animated.d-3 { animation-delay: 0.8s; }
-        .slide.active .animated.d-4 { animation-delay: 1.0s; }
-        .slide.active .animated.d-5 { animation-delay: 1.2s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Estilos de Texto */
         .slide-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 7rem;
-            letter-spacing: 4px;
-            color: var(--text-color);
-            margin: 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            font-family: 'Bebas Neue', sans-serif; font-size: 7rem; letter-spacing: 5px;
+            color: var(--text-color); margin: 0;
+            text-shadow: 0 0 10px var(--main-red), 0 0 20px var(--main-red), 0 0 40px rgba(229, 57, 53, 0.7);
         }
 
         .slide-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin: 10px 0 40px 0;
-            color: var(--main-red);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1.5rem; font-weight: 400; margin: 10px 0 40px 0;
+            color: var(--main-red); text-transform: uppercase; letter-spacing: 3px;
         }
 
-        .slide-content {
-            max-width: 900px;
-            text-align: left;
-            font-size: 1.2rem;
-            line-height: 1.7;
-        }
-        
+        .slide-content { max-width: 1000px; text-align: left; font-size: 1.25rem; line-height: 1.8; }
         .slide-content h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            color: var(--main-red);
-            text-align: center;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+            font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--main-red);
+            text-align: center; letter-spacing: 3px; margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.7);
         }
         
-        strong {
-            color: var(--main-gold);
-            font-weight: 700;
-        }
+        .slide-content strong { color: var(--main-gold); font-weight: 700; }
 
-        /* Layout de Cards */
-        .cards-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            width: 100%;
+        .slide-content ul { list-style: none; padding: 0; }
+        .slide-content li {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px; border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .card {
-            background: var(--card-bg-color);
-            border-top: 3px solid var(--main-red);
-            padding: 25px;
-            border-radius: 8px;
-            flex: 1;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            min-width: 200px;
+         .slide-content li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px var(--main-red);
         }
         
-        .card h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--main-gold);
-            margin-top: 0;
-            letter-spacing: 1px;
-        }
-
-        /* Efeito Glitch para o título principal */
-        .glitch-effect {
-            position: relative;
-        }
-        .glitch-effect::before,
-        .glitch-effect::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--background-color);
-            overflow: hidden;
-        }
-        .glitch-effect::before {
-            left: 2px;
-            text-shadow: -2px 0 var(--main-red);
-            animation: glitch-anim-1 2.5s infinite linear reverse;
-        }
-        .glitch-effect::after {
-            left: -2px;
-            text-shadow: -2px 0 var(--main-gold);
-            animation: glitch-anim-2 2.5s infinite linear reverse;
-        }
-
-        @keyframes glitch-anim-1 {
-            0%, 100% { clip-path: inset(0 0 95% 0); } 20% { clip-path: inset(40% 0 15% 0); } 40% { clip-path: inset(60% 0 30% 0); } 60% { clip-path: inset(20% 0 75% 0); } 80% { clip-path: inset(80% 0 5% 0); }
-        }
-        @keyframes glitch-anim-2 {
-            0%, 100% { clip-path: inset(90% 0 5% 0); } 20% { clip-path: inset(15% 0 60% 0); } 40% { clip-path: inset(35% 0 40% 0); } 60% { clip-path: inset(70% 0 20% 0); } 80% { clip-path: inset(5% 0 85% 0); }
-        }
-
-        /* Navegação */
         .nav-hint {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: rgba(255,255,255,0.3);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            z-index: 1000;
+            position: fixed; bottom: 20px; width: 100%; text-align: center;
+            color: rgba(255,255,255,0.4); font-size: 0.9rem; letter-spacing: 1px; z-index: 1000;
         }
-
     </style>
 </head>
 <body>
-
+    <div id="particles-js"></div>
+    <div id="progress-bar"></div>
     <div class="presentation-container">
 
         <!-- Slide 1: Título -->
-        <div class="slide active" id="slide-1">
-            <h1 class="slide-title glitch-effect" data-text="SISTEMA RESPIRATÓRIO">SISTEMA RESPIRATÓRIO</h1>
-            <p class="slide-subtitle animated d-1">A ARQUITETURA DA VIDA</p>
+        <div class="slide active">
+            <h1 class="slide-title animated">SISTEMA RESPIRATÓRIO</h1>
+            <p class="slide-subtitle animated d-1">A ENGENHARIA DA VIDA</p>
             <div class="animated d-2">
-                <p><strong>Grupo 4:</strong> Cauã, Luis, Yan</p>
-                <p>Biologia - Aula 9</p>
+                <p><strong>Grupo 4:</strong> Cauã, Luis e Yan | <strong>Biologia - Aula 9</strong></p>
             </div>
         </div>
 
-        <!-- Slide 2: Introdução -->
-        <div class="slide" id="slide-2">
+        <!-- Slide 2: Função Principal -->
+        <div class="slide">
             <div class="slide-content">
-                <h2 class="animated">A MÁQUINA PERFEITA</h2>
-                <p class="animated d-1">A cada segundo, uma força invisível nos mantém vivos. O sistema respiratório é mais do que um conjunto de órgãos; é uma máquina de precisão que alimenta cada uma de nossas <strong>30 trilhões de células</strong>.</p>
-                <p class="animated d-2">Sua missão: capturar o <strong>oxigênio (O₂)</strong>, o combustível da vida, e expulsar o <strong>dióxido de carbono (CO₂)</strong>, o resíduo do nosso metabolismo. Uma troca incessante que define a fronteira entre a energia e a exaustão.</p>
-            </div>
-        </div>
-        
-        <!-- Slide 3: Arquitetos da Respiração -->
-        <div class="slide" id="slide-3">
-             <div class="slide-content">
-                <h2 class="animated">OS ARQUITETOS DA RESPIRAÇÃO</h2>
-                <div class="cards-container">
-                    <div class="card animated d-1">
-                        <h3>VIAS SUPERIORES</h3>
-                        <p><strong>Nariz, Faringe e Laringe.</strong> A linha de frente. Filtram, aquecem e umedecem o ar, preparando-o para a entrada nos pulmões. A laringe também abriga as cordas vocais.</p>
-                    </div>
-                    <div class="card animated d-2">
-                         <h3>VIAS INFERIORES</h3>
-                        <p><strong>Traqueia, Brônquios e Bronquíolos.</strong> Uma árvore invertida que canaliza o ar para as profundezas dos pulmões, ramificando-se em caminhos cada vez mais finos.</p>
-                    </div>
-                    <div class="card animated d-3">
-                        <h3>PULMÕES E ALVÉOLOS</h3>
-                        <p>Os protagonistas. Dois órgãos esponjosos que abrigam cerca de <strong>300 milhões de alvéolos</strong>, pequenos sacos de ar onde a mágica da troca gasosa acontece.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: O Maestro Invisível -->
-        <div class="slide" id="slide-4">
-            <div class="slide-content">
-                <h2 class="animated">O MAESTRO INVISÍVEL</h2>
-                <p class="animated d-1">Você não precisa pensar para respirar. Por quê? Porque existe um maestro controlando tudo no piloto automático: o <strong>Sistema Nervoso Central</strong>.</p>
-                <p class="animated d-2">No <strong>tronco encefálico</strong>, uma região chamada <strong>bulbo</strong> monitora constantemente os níveis de CO₂ no sangue. Se o CO₂ aumenta, o bulbo envia sinais imediatos para os músculos da respiração (diafragma e intercostais) para que você respire mais rápido e mais fundo. É um sistema de feedback perfeito e autônomo.</p>
-            </div>
-        </div>
-
-        <!-- Slide 5: Hematose -->
-        <div class="slide" id="slide-5">
-            <div class="slide-content">
-                <h2 class="animated">HEMATOSE: O PONTO DE TROCA</h2>
-                <p class="animated d-1">Nos alvéolos, o ar e o sangue se encontram, separados por uma membrana mais fina que um fio de cabelo. É aqui que ocorre a <strong>hematose</strong>.</p>
-                <ul style="list-style: none; padding: 0;">
-                    <li class="animated d-2"><strong>O₂ entra no sangue:</strong> O oxigênio atravessa a membrana alveolar e se liga à hemoglobina nas hemácias, transformando o sangue venoso (azulado) em arterial (vermelho vivo).</li>
-                    <li class="animated d-3"><strong>CO₂ sai do sangue:</strong> O dióxido de carbono, trazido de volta das células, faz o caminho inverso: deixa o sangue e entra nos alvéolos para ser exalado.</li>
+                <h2 class="animated">A MISSÃO PRINCIPAL</h2>
+                <ul>
+                    <li class="animated d-1"><div><strong>Abastecer o Corpo:</strong> Capturar o <strong>Oxigênio (O₂)</strong> do ar, que é o combustível essencial para nossas células produzirem a energia que usamos para tudo.</div></li>
+                    <li class="animated d-2"><div><strong>Limpar o Corpo:</strong> Eliminar o <strong>Gás Carbônico (CO₂)</strong>, que é um resíduo da produção de energia. Se ele acumular, o sangue fica ácido e prejudica nosso organismo.</div></li>
                 </ul>
             </div>
         </div>
         
-        <!-- Slide 6: Ameaças Modernas -->
-        <div class="slide" id="slide-6">
-            <div class="slide-content">
-                <h2 class="animated">AMEAÇAS MODERNAS</h2>
-                <div class="cards-container">
-                    <div class="card animated d-1">
-                        <h3>POLUIÇÃO & VAPING</h3>
-                        <p>Partículas finas da poluição e os químicos de cigarros eletrônicos podem causar inflamação crônica, danificar os alvéolos e reduzir a capacidade pulmonar.</p>
-                    </div>
-                    <div class="card animated d-2">
-                        <h3>ESTRESSE E ANSIEDADE</h3>
-                        <p>O estresse crônico leva a uma respiração curta e rápida, diminuindo a oxigenação do corpo e aumentando a tensão muscular, criando um ciclo vicioso.</p>
-                    </div>
-                    <div class="card animated d-3">
-                        <h3>SEDENTARISMO</h3>
-                        <p>A falta de exercício enfraquece os músculos respiratórios, tornando a respiração menos eficiente e diminuindo a resistência geral do organismo.</p>
-                    </div>
-                </div>
+        <!-- Slide 3: O Caminho do Ar -->
+        <div class="slide">
+             <div class="slide-content">
+                <h2 class="animated">O CAMINHO DO AR: PASSO A PASSO</h2>
+                <ul>
+                    <li class="animated d-1"><div><strong>1. Vias Aéreas Superiores:</strong> O ar entra pelo <strong>nariz</strong>, onde é filtrado, aquecido e umedecido. Depois, passa pela <strong>faringe</strong> e <strong>laringe</strong> (onde fica a voz).</div></li>
+                    <li class="animated d-2"><div><strong>2. A Árvore Respiratória:</strong> O ar desce pela <strong>traqueia</strong> (tubo principal) e se divide pelos <strong>brônquios</strong>, que se ramificam como uma árvore dentro dos pulmões.</div></li>
+                    <li class="animated d-3"><div><strong>3. Destino Final:</strong> As menores ramificações terminam nos <strong>alvéolos</strong>, milhões de pequenas bolsas de ar onde a troca de gases realmente acontece.</div></li>
+                </ul>
             </div>
         </div>
 
-        <!-- Slide 7: Curiosidades -->
-        <div class="slide" id="slide-7">
+        <!-- Slide 4: Movimentos da Respiração -->
+        <div class="slide">
             <div class="slide-content">
-                <h2 class="animated">VOCÊ SABIA?</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li class="animated d-1">Respiramos cerca de <strong>20.000 vezes por dia</strong>, o que equivale a mais de 10.000 litros de ar.</li>
-                    <li class="animated d-2">Se a superfície de todos os alvéolos de seus pulmões fosse esticada, ela cobriria uma <strong>quadra de tênis</strong>.</li>
-                    <li class="animated d-3">Um espirro pode viajar a mais de <strong>160 km/h</strong>.</li>
-                    <li class="animated d-4">O pulmão direito é ligeiramente <strong>maior</strong> que o esquerdo para dar espaço ao coração.</li>
+                <h2 class="animated">A MECÂNICA DA RESPIRAÇÃO</h2>
+                <ul>
+                    <li class="animated d-1"><div><strong>Inspiração (Puxar o Ar):</strong> É um ato <strong>ativo</strong>. O <strong>diafragma</strong> e os <strong>músculos intercostais</strong> contraem, aumentando o volume da caixa torácica e "sugando" o ar para dentro dos pulmões.</div></li>
+                    <li class="animated d-2"><div><strong>Expiração (Soltar o Ar):</strong> Geralmente é um ato <strong>passivo</strong>. Os músculos relaxam, a caixa torácica diminui e a elasticidade dos pulmões empurra o ar para fora, sem esforço.</div></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: Troca de Gases -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="animated">A GRANDE TROCA (HEMATOSE)</h2>
+                 <ul>
+                    <li class="animated d-1"><div>O <strong>Oxigênio</strong>, que está concentrado no ar dentro dos alvéolos, passa para o sangue e pega uma carona na <strong>hemoglobina</strong> para ser entregue às células.</div></li>
+                    <li class="animated d-2"><div>O <strong>Gás Carbônico</strong>, que está concentrado no sangue, faz o caminho inverso: ele sai do sangue e entra nos alvéolos para ser eliminado na expiração.</div></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: Controle Cerebral -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="animated">O CÉREBRO NO COMANDO</h2>
+                <ul>
+                    <li class="animated d-1"><div><strong>Piloto Automático:</strong> Nós não precisamos pensar para respirar. O <strong>bulbo</strong>, na base do cérebro, controla o ritmo da respiração automaticamente.</div></li>
+                    <li class="animated d-2"><div><strong>O Gatilho Principal:</strong> O cérebro é muito sensível ao aumento de <strong>Gás Carbônico</strong> no sangue. Quando o CO₂ sobe, ele manda o comando para respirar mais rápido e fundo para "limpar" o excesso.</div></li>
+                    <li class="animated d-3"><div><strong>Fato Interessante:</strong> O que nos dá a sensação de "falta de ar" não é a falta de oxigênio, mas sim o acúmulo de gás carbônico no corpo!</div></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Saúde Respiratória -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2 class="animated">SAÚDE RESPIRATÓRIA</h2>
+                <ul>
+                    <li class="animated d-1"><div><strong>Doenças Comuns:</strong> Asma, bronquite, rinite e sinusite são inflamações que dificultam a respiração e podem ser agravadas por alergias e poluição.</div></li>
+                    <li class="animated d-2"><div><strong>Principais Ameaças:</strong> O <strong>cigarro</strong> e o <strong>vaping</strong> são os maiores inimigos dos pulmões, pois danificam diretamente os alvéolos e podem causar doenças graves como o câncer.</div></li>
+                    <li class="animated d-3"><div><strong>Prevenção:</strong> Ter uma vida ativa com <strong>exercícios físicos</strong> e evitar ambientes com fumaça e poluição são as melhores formas de manter o sistema respiratório forte e saudável.</div></li>
                 </ul>
             </div>
         </div>
 
         <!-- Slide 8: Conclusão -->
-        <div class="slide" id="slide-8">
+        <div class="slide">
             <div class="slide-content">
-                <h2 class="animated">O GUARDIÃO SILENCIOSO</h2>
-                <p class="animated d-1">O sistema respiratório é o nosso guardião silencioso. Ele trabalha sem pausa, nos conectando ao mundo exterior em um nível fundamental e nos dando a energia para criar, pensar e viver.</p>
-                <p class="animated d-2">Entendê-lo não é apenas biologia. É entender a essência da nossa própria vitalidade. Cuidar dele é o ato mais básico de autopreservação.</p>
+                <h2 class="animated">A PONTE PARA A VIDA</h2>
+                <p class="animated d-1" style="text-align: center;">O sistema respiratório é a ponte entre o mundo exterior e a nossa energia interior. Cada respiração é uma troca fundamental que nos mantém vivos, ativos e em equilíbrio.</p>
+                <p class="animated d-2" style="text-align: center; font-size: 1.1rem; color: #ccc;">Cuidar da saúde dos nossos pulmões é o ato mais básico de cuidar de nós mesmos.</p>
             </div>
         </div>
         
         <!-- Slide 9: Final -->
-        <div class="slide" id="slide-9">
-            <h1 class="slide-title glitch-effect" data-text="OBRIGADO">OBRIGADO</h1>
-            <p class="slide-subtitle animated d-1">Perguntas?</p>
-            <div class="animated d-2">
+        <div class="slide">
+            <h1 class="slide-title animated">OBRIGADO!</h1>
+            <div class="animated d-1" style="margin-top: 20px;">
                 <p><strong>Grupo 4:</strong> Cauã, Luis e Yan</p>
             </div>
         </div>
@@ -314,40 +207,51 @@
         Use as setas ◄ e ► para navegar
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
+        // Configuração do Particles.js para o fundo
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#e53935" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
+            "retina_detect": true
+        });
+
+        // Controle dos Slides
         const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress-bar');
         let currentSlide = 0;
 
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
         function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-            });
+            slides.forEach(slide => slide.classList.remove('active'));
             slides[index].classList.add('active');
-        }
-
-        function nextSlide() {
-            let next = (currentSlide + 1) % slides.length;
-            currentSlide = next;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            let prev = (currentSlide - 1 + slides.length) % slides.length;
-            currentSlide = prev;
-            showSlide(currentSlide);
+            updateProgressBar();
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') { // Adicionado espaço para passar
+            if (e.key === 'ArrowRight' || e.key === ' ') {
                 e.preventDefault();
-                nextSlide();
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
             } else if (e.key === 'ArrowLeft') {
                 e.preventDefault();
-                prevSlide();
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
             }
         });
 
-        // Inicia a apresentação no primeiro slide
         showSlide(currentSlide);
     </script>
 </body>
