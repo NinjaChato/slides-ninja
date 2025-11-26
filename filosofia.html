@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sueli Carneiro - Apresentação TV (Final)</title>
+    <style>
+      /* Fontes otimizadas para leitura em telas grandes */
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+
+      :root {
+        --bg-color: #050505;
+        --slide-bg: #121212;
+        --gold: #FFD700;
+        --gold-dim: #B8860B;
+        --text-main: #FFFFFF;
+        --text-muted: #CCCCCC;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Manrope', sans-serif;
+      }
+
+      /* Container Proporção Cinema (16:9) */
+      .tv-container {
+        width: 100vw;
+        aspect-ratio: 16/9;
+        max-height: 100vh;
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 120%);
+        overflow: hidden;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Slide */
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 6vh 8vw;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.8s cubic-bezier(0.2, 1, 0.3, 1), transform 0.8s;
+        transform: scale(1.05);
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        /* Texto esq / Imagem dir */
+        gap: 5vw;
+        align-items: center;
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        z-index: 10;
+      }
+
+      /* Variações de Layout */
+      .slide.full-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .slide.reversed {
+        grid-template-columns: 0.8fr 1.2fr;
+        /* Imagem esq / Texto dir */
+      }
+
+      /* Tipografia Escalonável (VH) */
+      h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 8vh;
+        line-height: 1;
+        color: var(--gold);
+        margin-bottom: 2vh;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+      }
+
+      h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 5vh;
+        color: #fff;
+        margin-bottom: 3vh;
+        border-left: 0.8vh solid var(--gold);
+        padding-left: 2vh;
+        display: inline-block;
+      }
+
+      h3 {
+        font-size: 2vh;
+        text-transform: uppercase;
+        letter-spacing: 0.3vw;
+        color: var(--gold-dim);
+        margin-bottom: 2vh;
+        font-weight: 800;
+      }
+
+      p,
+      li {
+        font-size: 2.6vh;
+        line-height: 1.5;
+        margin-bottom: 2vh;
+        color: var(--text-muted);
+        font-weight: 300;
+      }
+
+      strong {
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .highlight {
+        color: var(--gold);
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      ul li {
+        position: relative;
+        padding-left: 3vh;
+      }
+
+      ul li::before {
+        content: "•";
+        color: var(--gold);
+        font-size: 4vh;
+        position: absolute;
+        left: 0;
+        top: -0.5vh;
+      }
+
+      /* Imagens */
+      .image-frame {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-frame img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 75vh;
+        object-fit: contain;
+        border-radius: 1vh;
+        box-shadow: 0 2vh 5vh rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(255, 215, 0, 0.15);
+      }
+
+      /* Grid para o Slide de Impacto */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3vh;
+        width: 100%;
+        margin-top: 2vh;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 3vh;
+        border-radius: 1.5vh;
+        border-left: 0.5vh solid var(--gold-dim);
+        text-align: left;
+      }
+
+      .card h4 {
+        font-size: 2.5vh;
+        color: var(--gold);
+        margin-bottom: 1vh;
+        font-family: 'Playfair Display', serif;
+      }
+
+      .card p {
+        font-size: 2.2vh;
+        margin: 0;
+        color: #ddd;
+      }
+
+      /* Rodapé */
+      .footer-info {
+        position: absolute;
+        bottom: 4vh;
+        left: 8vw;
+        font-size: 1.8vh;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+        z-index: 20;
+      }
+
+      .progress-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 0.8vh;
+        width: 0%;
+        background: var(--gold);
+        transition: width 0.5s;
+        z-index: 20;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tv-container">
+      <!-- SLIDE 1: CAPA -->
+      <div class="slide active">
+        <div class="content">
+          <h3>Sociologia & Filosofia • 1ºB</h3>
+          <h1>Sueli <br>Carneiro </h1>
+          <p style="font-size: 3vh; border-top: 1px solid #333; padding-top: 3vh; color: #fff;"> A intelectual que redefiniu o feminismo e a luta antirracista no Brasil. </p>
+          <div style="margin-top: 6vh;">
+            <p style="font-size: 2vh; color: #888; margin-bottom: 0.5vh;">Grupo:</p>
+            <p style="font-size: 2.2vh;">
+              <strong class="highlight">Luis Guilherme, Cauã, Lívia e Polyana</strong>
+            </p>
+          </div>
+        </div>
+        <div class="image-frame">
+          <!-- IMAGEM: Sueli Capa -->
+          <img src="https://www.blogs.unicamp.br/mulheresnafilosofia/wp-content/uploads/sites/178/2023/03/Sueli-Carneiro-500x500.png" alt="Sueli Carneiro">
+        </div>
+      </div>
+      <!-- SLIDE 2: INTRODUÇÃO -->
+      <div class="slide reversed">
+        <div class="image-frame">
+          <!-- IMAGEM: Sueli Palestra/Geledés -->
+          <img src="https://noticias.ufal.br/servidor/noticias/2025/11/sueli-carneiro-e-ovacionada-durante-palestra-no-teatro-gustavo-leite/@@images/image-768-5963c8205ce539a81367823c403d2865.jpeg" alt="Sueli Palestra">
+        </div>
+        <div class="content">
+          <h2>Quem é Sueli Carneiro?</h2>
+          <p>Uma das maiores pensadoras vivas do país. Sueli une a <strong>teoria acadêmica</strong> com a <strong>prática política</strong> das ruas. </p>
+          <ul>
+            <li>
+              <strong>Fundadora do Geledés:</strong> Instituto da Mulher Negra (1988), essencial na defesa de direitos humanos.
+            </li>
+            <li>
+              <strong>Acadêmica:</strong> Doutora em Educação pela USP, rompendo barreiras em espaços de elite.
+            </li>
+            <li>
+              <strong>Visão:</strong> Defende que a democracia brasileira é incompleta enquanto houver racismo.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- SLIDE 3: TRAJETÓRIA -->
+      <div class="slide">
+        <div class="content">
+          <h2>Trajetória e Resistência</h2>
+          <p>Nascida em 1950, na Lapa (SP). Filha de operários, usou a educação pública como ferramenta de revolta.</p>
+          <ul>
+            <li>
+              <strong>Ditadura Militar:</strong> Iniciou a militância nos anos 70. Percebeu que a esquerda lutava contra a ditadura, mas esquecia do racismo.
+            </li>
+            <li>
+              <strong>Pioneirismo:</strong> Fundou o Coletivo de Mulheres Negras de SP e ajudou a organizar o movimento feminista negro.
+            </li>
+            <li>
+              <strong>Influências:</strong> Dialoga com Lélia Gonzalez e a luta anti-apartheid.
+            </li>
+          </ul>
+        </div>
+        <div class="image-frame">
+          <!-- IMAGEM: Sueli Jovem -->
+          <img src="https://images.squarespace-cdn.com/content/v1/625e0a7f20bb3a13976a8f50/75bb0f9c-cc76-4504-b2f5-adbfd3fa6d67/sueli-carneiro-com-24-anos-aproximadamente-amp-ocupacao-itau-cultural-1630090276813_v2_1x1.jpg" alt="Sueli Jovem" style="border-radius: 50%; max-height: 60vh;">
+        </div>
+      </div>
+      <!-- SLIDE 4: CONCEITOS -->
+      <div class="slide">
+        <div class="content">
+          <h2>Conceitos Chave</h2>
+          <p>Termos fundamentais da obra de Sueli:</p>
+          <div style="background: rgba(255,255,255,0.05); padding: 2vh; border-radius: 1vh; margin-bottom: 2vh;">
+            <strong class="highlight">Enegrecer o Feminismo:</strong>
+            <br> Crítica ao feminismo branco que ignora a realidade das mulheres pobres e negras.
+          </div>
+          <div style="background: rgba(255,255,255,0.05); padding: 2vh; border-radius: 1vh; margin-bottom: 2vh;">
+            <strong class="highlight">Epistemicídio:</strong>
+            <br> O "assassinato do conhecimento". Como a sociedade mata e anula os saberes produzidos por negros.
+          </div>
+          <div style="background: rgba(255,255,255,0.05); padding: 2vh; border-radius: 1vh;">
+            <strong class="highlight">Interseccionalidade:</strong>
+            <br> A soma inseparável das opressões: Raça + Gênero + Classe.
+          </div>
+        </div>
+        <div class="image-frame">
+          <!-- IMAGEM: Capa do Livro -->
+          <img src="https://m.media-amazon.com/images/I/81o468ZdZHL.jpg" alt="Livro Racismo e Sexismo">
+        </div>
+      </div>
+      <!-- SLIDE 5: IMPACTO (Cards Full Screen) -->
+      <div class="slide full-content">
+        <h2 style="border:none; border-bottom: 0.5vh solid var(--gold); margin-bottom: 4vh;">Impacto na Sociedade</h2>
+        <p style="font-size: 2.5vh; margin-bottom: 4vh;">O trabalho de Sueli gerou mudanças diretas na legislação brasileira:</p>
+        <div class="cards-grid">
+          <div class="card">
+            <h4>Cotas Raciais (STF)</h4>
+            <p>Foi uma das vozes decisivas na audiência do STF que garantiu a constitucionalidade das cotas nas universidades públicas.</p>
+          </div>
+          <div class="card">
+            <h4>Saúde da Mulher</h4>
+            <p>Denunciou a violência obstétrica e criou programas de saúde mental específicos para mulheres negras.</p>
+          </div>
+          <div class="card">
+            <h4>Lei 10.639/03</h4>
+            <p>Luta histórica pela obrigatoriedade do ensino de História e Cultura Africana em todas as escolas do país.</p>
+          </div>
+          <div class="card">
+            <h4>Projeto Rappers</h4>
+            <p>Nos anos 90, uniu o movimento negro ao Hip Hop (Racionais MC's), politizando a juventude da periferia.</p>
+          </div>
+        </div>
+      </div>
+      <!-- SLIDE 6: OBRAS E PREMIOS -->
+      <div class="slide reversed">
+        <div class="image-frame">
+          <!-- IMAGEM: Honoris Causa -->
+          <img src="https://i0.wp.com/almapreta.com.br/images/2023/09/sueli-carneiro-doutora-honoris-causa-unb.jpeg?fit=600%2C450&ssl=1" alt="Sueli Honoris Causa">
+        </div>
+        <div class="content">
+          <h2>Obras e Reconhecimento</h2>
+          <div style="border-left: 0.5vh solid var(--gold); padding-left: 3vh; margin-bottom: 4vh;">
+            <p style="font-size: 3vh; font-style: italic; color: #fff;">"O racismo estrutura as desigualdades no Brasil."</p>
+          </div>
+          <ul>
+            <li>
+              <strong>Livro Essencial:</strong>
+              <em>Racismo, Sexismo e Desigualdade no Brasil</em> (2011).
+            </li>
+            <li>
+              <strong>Tese:</strong>
+              <em>A construção do outro como não-ser</em> (2005).
+            </li>
+            <li>
+              <strong>Prêmios:</strong> Vladimir Herzog, Itaú Cultural e Bertha Lutz.
+            </li>
+            <li>
+              <strong>Honraria:</strong> 1ª mulher negra Doutora Honoris Causa pela UnB.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- SLIDE 7: FINAL -->
+      <div class="slide full-content" style="display: flex; flex-direction: column; justify-content: center;">
+        <h1 style="font-size: 10vh;">Obrigado</h1>
+        <p style="font-size: 3vh; color: var(--gold);">Pela atenção de todos.</p>
+        <div style="margin-top: 6vh; padding: 4vh; background: rgba(255,255,255,0.05); border-radius: 2vh; display: inline-block;">
+          <p style="color: #fff; font-weight: bold; margin-bottom: 2vh;">Fontes de Pesquisa:</p>
+          <ul style="text-align: left; font-size: 2vh; color: #aaa;">
+            <li>CARNEIRO, Sueli. <em>Racismo, Sexismo e Desigualdade no Brasil</em>. </li>
+            <li>Geledés - Instituto da Mulher Negra (geledes.org.br)</li>
+            <li>Enciclopédia Itaú Cultural</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Navegação -->
+    <div class="footer-info">
+      <span id="slide-count" style="color: var(--gold); font-weight: bold;">01 / 07</span>
+      <span>Use as setas ⬅ ➡</span>
+    </div>
+    <div class="progress-line" id="progress"></div>
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const progressBar = document.getElementById('progress');
+      const slideCount = document.getElementById('slide-count');
+
+      function update() {
+        slides.forEach((slide, index) => {
+          slide.classList.remove('active');
+          if (index === currentSlide) slide.classList.add('active');
+        });
+        // Barra de progresso
+        progressBar.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+        // Contador
+        slideCount.innerText = `0${currentSlide + 1} / 0${slides.length}`;
+      }
+
+      function next() {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          update();
+        }
+      }
+
+      function prev() {
+        if (currentSlide > 0) {
+          currentSlide--;
+          update();
+        }
+      }
+      // Teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+      // Inicia
+      update();
+    </script>
+  </body>
+</html>
