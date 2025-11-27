@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho de História - 1ºB</title>
+    
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <style>
+        /* --- DESIGN SYSTEM FINAL --- */
+        :root {
+            --gold-main: #FFD700;
+            --gold-dim: #C5A000;
+            --bg-deep: #080808;
+            --glass-panel: rgba(22, 22, 22, 0.95);
+            --border-style: 2px solid rgba(255, 215, 0, 0.25);
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.08), transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 100, 255, 0.05), transparent 40%);
+            color: #f0f0f0;
+        }
+
+        /* Títulos */
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            color: var(--gold-main);
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.8);
+            margin: 0 0 25px 0;
+        }
+
+        .reveal h1 { font-size: 3.5em; border-bottom: 4px solid var(--gold-dim); display: inline-block; padding-bottom: 15px; }
+        .reveal h2 { font-size: 2.4em; text-align: left; border-left: 8px solid var(--gold-main); padding-left: 25px; background: linear-gradient(90deg, rgba(255,215,0,0.1), transparent); }
+
+        /* Texto */
+        .reveal p, .reveal li {
+            font-family: 'Jost', sans-serif;
+            font-size: 38px;
+            line-height: 1.4;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        strong { color: var(--gold-main); font-weight: 700; }
+
+        /* Layout Flexível */
+        .container-fill {
+            display: flex;
+            gap: 30px;
+            height: 650px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        .glass-box {
+            background: var(--glass-panel);
+            border: var(--border-style);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Tabela Perfeita */
+        table.comparison {
+            width: 100%;
+            height: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 2px solid var(--gold-dim);
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: 'Jost', sans-serif;
+            table-layout: fixed;
+        }
+        
+        table.comparison th, table.comparison td {
+            padding: 20px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #444;
+            border-right: 1px solid #444;
+            font-size: 0.8em;
+        }
+
+        table.comparison th {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--gold-main);
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gold-main);
+        }
+
+        table.comparison tr:last-child td { border-bottom: none; }
+        table.comparison th:last-child, table.comparison td:last-child { border-right: none; }
+
+        /* Estilo para os Nomes na Capa */
+        .group-names {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.8em;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: CAPA COM NOMES -->
+            <section>
+                <div class="glass-box" style="align-items: center; border: 4px double var(--gold-main);">
+                    <h3 style="letter-spacing: 8px; font-size: 1.2em; opacity: 0.8; margin-bottom: 10px;">HISTÓRIA DA AMÉRICA</h3>
+                    <h1>CIVILIZAÇÕES<br>PRÉ-COLOMBIANAS</h1>
+                    
+                    <p style="font-size: 1.4em; color: white; margin-top: 20px;">Maias • Astecas • Incas</p>
+
+                    <!-- NOMES AQUI -->
+                    <div class="group-names">
+                        Quézia, Hellen, Sofia, Luis Guilherme • <strong style="color: var(--gold-main); font-size: 1.2em;">1ºB</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: LOCALIZAÇÃO -->
+            <section>
+                <h2>Contexto Geográfico</h2>
+                <div class="container-fill">
+                    <div class="glass-box">
+                        <h3 style="font-size: 1.4em;">Mesoamérica</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8;">(México e América Central)</p>
+                        <hr style="border-color: #333; margin: 20px 0;">
+                        <ul>
+                            <li><strong>Maias:</strong> Península de Yucatán (Florestas).</li>
+                            <li><strong>Astecas:</strong> Planalto do México (Lagos e Vulcões).</li>
+                            <li>Base: Cultivo do Milho.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-box">
+                        <h3 style="font-size: 1.4em;">Andes</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8;">(América do Sul)</p>
+                        <hr style="border-color: #333; margin: 20px 0;">
+                        <ul>
+                            <li><strong>Incas:</strong> Cordilheira dos Andes (Peru, Chile).</li>
+                            <li>Viviam nas <strong>altas montanhas</strong>.</li>
+                            <li>Isolados dos povos do norte.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: MAIAS -->
+            <section>
+                <h2>Maias: Intelectuais</h2>
+                <div class="container-fill">
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">Cidades-Estado</h3>
+                        <p>Eles <strong>NÃO eram um império</strong> unificado.</p>
+                        <ul>
+                            <li>Eram cidades independentes e rivais (Ex: Tikal).</li>
+                            <li>Cada uma tinha seu próprio Rei.</li>
+                        </ul>
+                    </div>
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">Ciência</h3>
+                        <ul>
+                            <li><strong>Matemática:</strong> Inventaram o <strong>Zero</strong>.</li>
+                            <li><strong>Escrita:</strong> Glifos complexos (única escrita completa da América).</li>
+                            <li><strong>Astronomia:</strong> Calendários mais precisos que o europeu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: ASTECAS -->
+            <section>
+                <h2>Astecas: Guerreiros</h2>
+                <div class="container-fill">
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">Tenochtitlán</h3>
+                        <p>Capital construída sobre um lago.</p>
+                        <ul>
+                            <li><strong>Chinampas:</strong> Ilhas artificiais para plantar na água.</li>
+                            <li>Cidade gigante e organizada (aquedutos e pontes).</li>
+                        </ul>
+                    </div>
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">Império e Religião</h3>
+                        <ul>
+                            <li>Conquistavam vizinhos para cobrar impostos.</li>
+                            <li>Acreditavam que o Sol precisava de sangue.</li>
+                            <li>Faziam <strong>sacrifícios humanos</strong> para manter o mundo girando.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: INCAS -->
+            <section>
+                <h2>Incas: Engenheiros</h2>
+                <div class="container-fill">
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">O Grande Império</h3>
+                        <ul>
+                            <li>Império centralizado no Imperador (Sapa Inca).</li>
+                            <li><strong>Mita:</strong> Imposto pago com <strong>trabalho</strong> nas obras do governo.</li>
+                            <li>Não tinham escrita (usavam <strong>Quipus</strong> para contar).</li>
+                        </ul>
+                    </div>
+                    <div class="glass-box">
+                        <h3 style="color: var(--gold-main);">Tecnologia Andina</h3>
+                        <ul>
+                            <li><strong>Estradas:</strong> 30.000 km conectando as montanhas.</li>
+                            <li><strong>Terraços:</strong> Plantações em forma de "degraus" nas encostas.</li>
+                            <li>Arquitetura de pedra perfeita (Machu Picchu).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: A CONQUISTA -->
+            <section>
+                <h2>O Fim (Séc. XVI)</h2>
+                <div class="glass-box" style="display: block;">
+                    <p style="margin-top: 20px;">Como impérios gigantes caíram para poucos espanhóis?</p>
+                    <div style="display: flex; margin-top: 40px; gap: 40px; text-align: center;">
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 1.2em; color: white;">1. Doenças</h3>
+                            <p style="font-size: 0.8em;">A <strong>Varíola</strong> matou milhões de nativos que não tinham defesa biológica.</p>
+                        </div>
+                        <div style="flex: 1; border-left: 1px solid #555; border-right: 1px solid #555; padding: 0 20px;">
+                            <h3 style="font-size: 1.2em; color: white;">2. Tecnologia</h3>
+                            <p style="font-size: 0.8em;">Armas de fogo, aço e <strong>cavalos</strong> (que não existiam aqui).</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <h3 style="font-size: 1.2em; color: white;">3. Política</h3>
+                            <p style="font-size: 0.8em;">Espanhóis se aliaram aos inimigos locais dos Astecas e Incas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: TABELA COMPARATIVA -->
+            <section>
+                <h2>Quadro Comparativo</h2>
+                <div class="glass-box" style="padding: 0;"> 
+                    <table class="comparison">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>MAIAS</th>
+                                <th>ASTECAS</th>
+                                <th>INCAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Política</strong></td>
+                                <td>Cidades Livres<br>(Descentralizado)</td>
+                                <td>Império<br>Guerreiro</td>
+                                <td>Império<br>Totalitário</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Local</strong></td>
+                                <td>América Central<br>(Floresta)</td>
+                                <td>México<br>(Lago)</td>
+                                <td>Andes<br>(Montanha)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Escrita</strong></td>
+                                <td>Sim<br>(Glifos)</td>
+                                <td>Sim<br>(Ideogramas)</td>
+                                <td>Não<br>(Quipus)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tecnologia</strong></td>
+                                <td>Matemática / Zero</td>
+                                <td>Chinampas</td>
+                                <td>Estradas / Terraços</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: OBRIGADO E FONTES -->
+            <section>
+                <div class="glass-box" style="text-align: center; border: none; background: transparent;">
+                    <h1 style="font-size: 4em; margin-bottom: 30px;">OBRIGADO!</h1>
+                    
+                    <div style="margin-bottom: 40px; font-size: 0.8em; opacity: 0.8;">
+                        <p>Quézia • Hellen • Sofia • Luis Guilherme • <strong style="color: var(--gold-main);">1ºB</strong></p>
+                    </div>
+
+                    <!-- Fontes -->
+                    <div style="border-top: 1px solid #444; padding-top: 20px; text-align: left; max-width: 900px; margin: 0 auto;">
+                        <h5 style="font-family: 'Jost', sans-serif; color: #888; margin-bottom: 10px; font-size: 0.7em; text-transform: uppercase;">Fontes de Pesquisa:</h5>
+                        <ul style="font-size: 0.6em; color: #888; line-height: 1.5; columns: 2;">
+                            <li>BETHELL, Leslie. <em>História da América Latina</em>. Vol 1. Edusp.</li>
+                            <li>CARDOSO, Ciro Flamarion. <em>América Pré-Colombiana</em>. Brasiliense.</li>
+                            <li>SOUSTELLE, Jacques. <em>A Civilização Asteca</em>. Jorge Zahar.</li>
+                            <li>National Geographic: "The Maya / Inca / Aztec Empire".</li>
+                            <li>Brasil Escola e InfoEscola (História Geral).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.05,
+            minScale: 0.2,
+            maxScale: 2.0,
+            hash: true,
+            transition: 'slide',
+            controls: true,
+            progress: true,
+            center: true
+        });
+    </script>
+</body>
+</html>
