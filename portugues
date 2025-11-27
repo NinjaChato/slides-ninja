@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contos Africanos - 1ºB</title>
+    
+    <!-- Fontes Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&family=Urbanist:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <style>
+        /* --- DESIGN SYSTEM: TERRA & CULTURA --- */
+        :root {
+            --primary: #E65100;    /* Terracota */
+            --accent: #FFD54F;     /* Amarelo Ouro */
+            --dark-brown: #2E1A16; /* Marrom Café */
+            --text-light: #FFF8E1; /* Creme */
+            --glass: rgba(40, 25, 20, 0.90); /* Fundo dos cards */
+        }
+
+        /* FUNDO GARANTIDO (Degradê + Padrão Geométrico CSS Simples) */
+        body {
+            background-color: var(--dark-brown);
+            /* Degradê de fundo visível */
+            background: radial-gradient(circle at top right, #5D4037 0%, #1a100c 80%);
+            color: var(--text-light);
+        }
+
+        /* Elemento de fundo para o padrão (Funciona melhor que colocar no body) */
+        .reveal::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Padrão geométrico simples e visível */
+            background-image: repeating-linear-gradient(45deg, 
+                rgba(230, 81, 0, 0.05) 0px, 
+                rgba(230, 81, 0, 0.05) 2px, 
+                transparent 2px, 
+                transparent 20px
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Tipografia */
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-family: 'Philosopher', serif;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .reveal h1 { 
+            font-size: 3.8em; 
+            border-bottom: 5px solid var(--accent); 
+            display: inline-block; 
+            padding-bottom: 20px;
+        }
+        
+        .reveal h2 { 
+            font-size: 2.6em; 
+            text-align: left; 
+            border-left: 8px solid var(--primary); 
+            padding-left: 30px; 
+        }
+
+        /* Texto de Leitura */
+        .reveal p, .reveal li {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 40px; 
+            line-height: 1.4;
+            color: #eee;
+            margin-bottom: 20px;
+        }
+
+        strong { color: var(--accent); font-weight: 700; }
+
+        /* CARDS (Caixas de Conteúdo) */
+        .afro-card {
+            background: var(--glass);
+            border: 2px solid rgba(255, 213, 79, 0.2); /* Borda sutil dourada */
+            border-top: 6px solid var(--primary); /* Borda grossa no topo */
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1; 
+        }
+
+        /* Layout Flexível */
+        .container-flex {
+            display: flex;
+            gap: 40px;
+            height: 600px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* Listas Personalizadas */
+        ul.tribal-list { list-style: none; padding: 0; margin-left: 10px; }
+        ul.tribal-list li { margin-bottom: 25px; }
+        ul.tribal-list li::before {
+            content: "❖"; 
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        /* Faixa Decorativa (Estilo Kente) */
+        .pattern-strip {
+            height: 12px;
+            background: repeating-linear-gradient(90deg, 
+                var(--primary), var(--primary) 30px, 
+                var(--accent) 30px, var(--accent) 60px,
+                #8D6E63 60px, #8D6E63 90px
+            );
+            margin: 30px auto;
+            width: 100%;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- SLIDE 1: CAPA -->
+            <section>
+                <div class="afro-card" style="align-items: center; text-align: center; border: 3px solid var(--accent);">
+                    <div class="pattern-strip" style="width: 80%;"></div>
+                    <h3 style="font-size: 1.3em; opacity: 0.9; letter-spacing: 5px; color: #fff; margin-bottom: 10px;">LITERATURA & CULTURA</h3>
+                    <h1>CONTOS DE<br>ORIGEM AFRICANA</h1>
+                    <p style="font-size: 1.5em; margin-top: 20px; color: var(--accent);">Oralidade, Ancestralidade e Sabedoria</p>
+                    
+                    <!-- Nomes Integrados -->
+                    <div style="margin-top: 50px; font-size: 0.9em; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; width: 100%;">
+                        Quézia, Hellen, Sofia, Luis Guilherme • <strong style="color: var(--primary); font-size: 1.2em;">1ºB</strong>
+                    </div>
+                    <div class="pattern-strip" style="width: 80%;"></div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: INTRODUÇÃO -->
+            <section>
+                <h2>A Tradição Oral</h2>
+                <div class="container-flex">
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.4em; color: var(--accent);">A Palavra Viva</h3>
+                        <p>Na África antiga, os contos não eram escritos, eram <strong>falados</strong> e cantados.</p>
+                        <p>Serviam para educar as crianças, explicar a natureza e preservar a história da comunidade.</p>
+                    </div>
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.4em; color: var(--accent);">Os Griots</h3>
+                        <p>São os <strong>guardiões da memória</strong>.</p>
+                        <ul class="tribal-list">
+                            <li>Contadores de histórias, músicos e poetas.</li>
+                            <li>São "bibliotecas vivas" da comunidade.</li>
+                            <li>Missão: Garantir que o passado nunca morra.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: CARACTERÍSTICAS -->
+            <section>
+                <h2>Características Principais</h2>
+                <div class="container-flex">
+                    <div class="afro-card">
+                        <h3 style="color: var(--primary);">1. Personificação</h3>
+                        <p>Uso constante de <strong>animais que agem como humanos</strong>.</p>
+                        <p style="font-size: 0.8em; opacity: 0.8;">Exemplos: A Tartaruga (sábia e lenta), a Aranha (esperta), o Leão (forte mas vaidoso).</p>
+                    </div>
+                    <div class="afro-card">
+                        <h3 style="color: var(--primary);">2. Valores Morais</h3>
+                        <p>Toda história tem um objetivo ético.</p>
+                        <ul class="tribal-list">
+                            <li>O respeito absoluto aos mais velhos (ancestrais).</li>
+                            <li>A inteligência vale mais que a força bruta.</li>
+                            <li><strong>Ubuntu:</strong> "Eu sou porque nós somos" (União).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: EXEMPLO (ANANSI) -->
+            <section>
+                <h2>Anansi: O Trapaceiro</h2>
+                <div class="container-flex">
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.3em;">Quem é Anansi?</h3>
+                        <p>Uma aranha lendária do povo Ashanti (Gana). Ela é pequena e fraca fisicamente.</p>
+                        <p>Porém, Anansi usa sua <strong>astúcia e inteligência</strong> para enganar animais poderosos e até capturar histórias dos deuses.</p>
+                    </div>
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.3em;">O Legado</h3>
+                        <p>Anansi representa a <strong>resistência</strong>.</p>
+                        <p>Suas histórias viajaram com os escravizados e ensinaram que o oprimido pode vencer o opressor usando a mente.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: MITOS DE CRIAÇÃO -->
+            <section>
+                <h2>A Criação do Mundo</h2>
+                <div class="afro-card" style="height: auto; min-height: 500px;">
+                    <h3 style="color: var(--primary);">Visão Yorubá (Nigéria)</h3>
+                    <div style="display: flex; gap: 50px; margin-top: 30px; align-items: center;">
+                        <div style="flex: 1;">
+                            <p>O deus supremo (Olorum) enviou Orixás para criar o mundo.</p>
+                            <p><strong>O Mito:</strong> Oxalá deveria criar a terra, mas falhou. Quem terminou a tarefa foi <strong>Oduduwa</strong>, usando uma galinha para espalhar terra sobre o oceano.</p>
+                        </div>
+                        <div style="flex: 1; border-left: 3px dashed var(--accent); padding-left: 40px;">
+                            <strong style="font-size: 1.2em; display: block; margin-bottom: 20px;">Ensinamentos:</strong>
+                            <ul class="tribal-list">
+                                <li>A Terra é sagrada (Ilê Aiyê).</li>
+                                <li>Ninguém é perfeito, nem os deuses.</li>
+                                <li>Tudo na natureza tem axé (energia).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: HERANÇA BRASILEIRA -->
+            <section>
+                <h2>Influência no Brasil</h2>
+                <div class="container-flex">
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.3em; color: var(--accent);">Nossa Identidade</h3>
+                        <p>O Brasil tem a maior população negra fora da África.</p>
+                        <p>Contos infantis (Saci, Macaco e a Onça) são misturas de lendas africanas, indígenas e portuguesas.</p>
+                    </div>
+                    <div class="afro-card">
+                        <h3 style="font-size: 1.3em; color: var(--accent);">Resistência Cultural</h3>
+                        <p>Contar essas histórias hoje é um ato político.</p>
+                        <p>Ajuda a combater o racismo e a valorizar a sabedoria ancestral que construiu a cultura brasileira.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: OBRIGADO -->
+            <section>
+                <div class="afro-card" style="text-align: center; background: transparent; border: none; align-items: center;">
+                    <h1 style="font-size: 5em; color: var(--primary); margin-bottom: 30px;">OBRIGADO!</h1>
+                    <div class="pattern-strip" style="width: 60%;"></div>
+                    
+                    <div style="margin-top: 40px;">
+                        <p style="font-size: 1.3em;">Grupo: Quézia, Hellen, Sofia, Luis Guilherme</p>
+                        <p style="font-size: 1.6em; color: var(--accent); font-weight: bold;">Turma 1ºB</p>
+                    </div>
+
+                    <!-- Fontes -->
+                    <div style="margin-top: 60px; text-align: left; width: 80%; border-top: 1px solid #666; padding-top: 20px;">
+                        <h5 style="color: #999; margin-bottom: 10px; font-size: 0.7em;">FONTES CONSULTADAS:</h5>
+                        <ul style="font-size: 0.6em; color: #aaa; columns: 2; list-style: none;">
+                            <li>• ADICHIE, Chimamanda. <em>O Perigo da História Única</em>.</li>
+                            <li>• LOPES, Nei. <em>Contos e Lendas da África</em>.</li>
+                            <li>• MANDELA, Nelson. <em>Meus Contos Africanos</em>.</li>
+                            <li>• PRANDI, Reginaldo. <em>Mitologia dos Orixás</em>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1920,
+            height: 1080,
+            margin: 0.04,
+            minScale: 0.2,
+            maxScale: 2.0,
+            hash: true,
+            transition: 'fade',
+            controls: true,
+            progress: true,
+            center: true
+        });
+    </script>
+</body>
+</html>
