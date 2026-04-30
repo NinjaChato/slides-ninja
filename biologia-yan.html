@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>OGMs e Transgênicos · Yan, Beto, Ana Clara e Pedro</title>
+    <style>
+        :root {
+            --bg: #f4f9f0;
+            --surface: #ffffff;
+            --surface2: #f0f7ec;
+            --surface3: #e6f0e1;
+            --accent: #2e7d32;
+            --accent2: #1b5e20;
+            --accent3: #558b2f;
+            --accent-light: #81c784;
+            --text: #1a2e1a;
+            --text2: #2d3a2d;
+            --text3: #4a5b4a;
+            --warning: #f9a825;
+            --danger: #c62828;
+            --border: #c8e6c9;
+            --radius: 28px;
+            --radius-sm: 16px;
+            --shadow: 0 15px 45px rgba(0, 40, 0, 0.08);
+            --font: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: 0.5s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(145deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            background-attachment: fixed;
+        }
+
+        /* Fundo temático de dupla hélice de DNA */
+        .dna-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.06;
+            background-image: repeating-linear-gradient(45deg,
+                    #2e7d32 0px,
+                    #2e7d32 2px,
+                    transparent 2px,
+                    transparent 18px),
+                repeating-linear-gradient(-45deg,
+                    #2e7d32 0px,
+                    #2e7d32 2px,
+                    transparent 2px,
+                    transparent 18px);
+            background-size: 40px 40px;
+            animation: helixMove 35s linear infinite;
+        }
+
+        @keyframes helixMove {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 80px 40px;
+            }
+        }
+
+        .presentation-container {
+            position: relative;
+            z-index: 1;
+            width: 90vw;
+            max-width: 1100px;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            max-height: 85vh;
+            perspective: 1200px;
+            margin: 2rem auto;
+        }
+
+        .slide-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: clamp(20px, 5vw, 60px) clamp(20px, 5vw, 60px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: clamp(10px, 2vh, 28px);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateX(70px) scale(0.93);
+            pointer-events: none;
+            transition: all var(--transition);
+            overflow-y: auto;
+            background: linear-gradient(135deg, #ffffff 0%, #f7fdf5 100%);
+            will-change: transform, opacity;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: all;
+            z-index: 10;
+        }
+
+        .slide.exit-left {
+            opacity: 0;
+            transform: translateX(-70px) scale(0.93);
+            pointer-events: none;
+        }
+
+        .slide.exit-right {
+            opacity: 0;
+            transform: translateX(70px) scale(0.93);
+            pointer-events: none;
+        }
+
+        /* Barra decorativa superior */
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20%;
+            right: 20%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent-light));
+            border-radius: 0 0 12px 12px;
+            opacity: 0.9;
+        }
+
+        .slide h1 {
+            font-size: clamp(1.8rem, 4vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            color: var(--accent2);
+            margin-top: 0.2em;
+        }
+
+        .slide h2 {
+            font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+            font-weight: 700;
+            color: #1e3a1e;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .slide h2 .icon {
+            font-size: 1.3em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(38px, 5vw, 54px);
+            height: clamp(38px, 5vw, 54px);
+            border-radius: 14px;
+            background: rgba(46, 125, 50, 0.1);
+            flex-shrink: 0;
+        }
+
+        .slide h3 {
+            font-size: 1.2rem;
+            color: #2e4a2e;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .slide p {
+            font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+            line-height: 1.6;
+            color: var(--text2);
+            max-width: 95%;
+        }
+
+        .slide ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 1.5vh, 16px);
+            max-width: 92%;
+        }
+
+        .slide ul li {
+            position: relative;
+            padding-left: 30px;
+            font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+            color: #2e402e;
+            line-height: 1.5;
+        }
+
+        .slide ul li::before {
+            content: '🧬';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1rem;
+        }
+
+        .card-row {
+            display: flex;
+            gap: clamp(10px, 2vw, 22px);
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1 1 180px;
+            background: var(--surface2);
+            border-radius: var(--radius-sm);
+            padding: clamp(14px, 2vw, 24px) clamp(12px, 2vw, 20px);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            cursor: default;
+            background: #fafff7;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 22px rgba(46, 125, 50, 0.12);
+            transform: translateY(-3px);
+        }
+
+        .card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .card h4 {
+            color: #1d331d;
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: var(--text3);
+            line-height: 1.5;
+            max-width: 100%;
+        }
+
+        .highlight-box {
+            background: rgba(46, 125, 50, 0.05);
+            border-left: 5px solid var(--accent);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 14px 18px;
+            margin: 6px 0;
+        }
+
+        .highlight-box.warning {
+            border-left-color: var(--warning);
+            background: rgba(249, 168, 37, 0.06);
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(12px, 2vw, 24px);
+            align-items: start;
+        }
+
+        /* Navegação fixa inferior */
+        .nav-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: clamp(8px, 2vw, 16px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            padding: 10px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 35px rgba(0, 20, 0, 0.1);
+        }
+
+        .nav-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            color: #2e7d32;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 14px rgba(46, 125, 50, 0.3);
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #a5d6a7;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .nav-dot.active-dot {
+            background: var(--accent);
+            width: 26px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(46, 125, 50, 0.4);
+        }
+
+        .slide-counter {
+            color: var(--text3);
+            font-size: 0.85rem;
+            font-weight: 500;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Animações de entrada */
+        .slide.active .anim-item {
+            animation: fadeSlideIn 0.45s ease forwards;
+        }
+
+        .anim-delay-1 {
+            animation-delay: 0.1s;
+            opacity: 0;
+        }
+        .anim-delay-2 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        .anim-delay-3 {
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+        .anim-delay-4 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 5px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: #c8e6c9;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 650px) {
+            .presentation-container {
+                aspect-ratio: auto;
+                height: 80vh;
+                max-height: 90vh;
+                margin: 1rem auto;
+            }
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            .card-row {
+                flex-direction: column;
+            }
+            .slide {
+                padding: 20px 18px;
+                gap: 14px;
+            }
+            .nav-bar {
+                padding: 8px 16px;
+                bottom: 10px;
+            }
+            .nav-btn {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        .team-block {
+            background: var(--surface3);
+            border-radius: var(--radius-sm);
+            padding: 16px 24px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--accent2);
+            border: 1px solid var(--border);
+        }
+
+        .source-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .source-item {
+            background: #f5fbf2;
+            border-radius: 12px;
+            padding: 12px 18px;
+            border: 1px solid #dcedc8;
+            flex: 1 1 160px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="dna-bg" aria-hidden="true"></div>
+
+<div class="presentation-container">
+    <div class="slide-wrapper" id="slideWrapper">
+
+        <!-- Slide 1 -->
+        <div class="slide active" data-index="0">
+            <div style="text-align:center; gap:clamp(10px,2vh,18px);" class="anim-item">
+                <div style="font-size:clamp(2.2rem,5vw,4rem); margin-bottom:4px;">🧬🌱</div>
+                <h1>Organismos Geneticamente<br>Modificados são Transgênicos?</h1>
+                <p style="font-size:clamp(1rem,2.2vw,1.5rem); color:#3a5a3a;">E Transgênicos: o que precisamos saber sobre eles</p>
+                <p style="color:var(--accent); font-weight:600;">Yan, Beto, Ana Clara e Pedro</p>
+                <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                    <span style="background:rgba(46,125,50,0.1); padding:8px 20px; border-radius:20px; font-size:0.9rem;">Biotecnologia</span>
+                    <span style="background:rgba(46,125,50,0.07); padding:8px 20px; border-radius:20px; font-size:0.9rem;">Ciência & Sociedade</span>
+                    <span style="background:rgba(85,139,47,0.08); padding:8px 20px; border-radius:20px; font-size:0.9rem;">Segurança Alimentar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-index="1">
+            <h2 class="anim-item"><span class="icon">🔬</span> O que são OGMs?</h2>
+            <p class="anim-item anim-delay-1">
+                <strong>OGM</strong> (Organismo Geneticamente Modificado) é qualquer ser vivo cujo DNA foi alterado em laboratório por técnicas de engenharia genética, criando combinações que não ocorreriam naturalmente.
+            </p>
+            <div class="highlight-box anim-item anim-delay-2">
+                <p>🧫 <strong>Termo abrangente:</strong> engloba todos os tipos de modificação genética, como transgênicos, cisgênicos e organismos editados por CRISPR.</p>
+            </div>
+            <div class="card-row anim-item anim-delay-3">
+                <div class="card"><div class="card-icon">🧪</div><h4>Técnicas principais</h4><p>Transgenia, cisgenia, edição gênica (CRISPR/Cas9), silenciamento gênico.</p></div>
+                <div class="card"><div class="card-icon">🌽</div><h4>Exemplos</h4><p>Soja tolerante a herbicidas, milho Bt, leveduras para insulina, salmão de crescimento rápido.</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-index="2">
+            <h2 class="anim-item"><span class="icon">🧬</span> O que são Transgênicos?</h2>
+            <p class="anim-item anim-delay-1">
+                <strong>Transgênico</strong> é um tipo específico de OGM que contém, obrigatoriamente, <strong>genes de uma espécie diferente</strong>. Houve transferência de DNA entre organismos que não se cruzariam naturalmente.
+            </p>
+            <div class="highlight-box anim-item anim-delay-2">
+                <p>🔑 <strong>Todo transgênico é um OGM, mas nem todo OGM é transgênico.</strong></p>
+            </div>
+            <div class="two-col anim-item anim-delay-3">
+                <div class="card"><div class="card-icon">🐟➕🍅</div><h4>Exemplo transgênico</h4><p>Tomate com gene de peixe (proteína anticongelante).</p></div>
+                <div class="card"><div class="card-icon">✂️🌾</div><h4>OGM não‑transgênico</h4><p>Trigo editado por CRISPR com glúten reduzido, sem DNA externo.</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" data-index="3">
+            <h2 class="anim-item"><span class="icon">⚖️</span> OGM vs Transgênico</h2>
+            <div class="two-col anim-item anim-delay-1">
+                <div class="card" style="border-top:4px solid var(--accent);"><h4 style="color:var(--accent);">🔵 OGM (geral)</h4><ul><li>Qualquer alteração genética em laboratório</li><li>Pode ou não usar genes de outras espécies</li><li>Inclui CRISPR, cisgenia, transgenia</li><li>Cogumelo que não escurece (gene próprio silenciado)</li></ul></div>
+                <div class="card" style="border-top:4px solid var(--accent3);"><h4 style="color:var(--accent3);">🟢 Transgênico (específico)</h4><ul><li>Subcategoria dos OGMs</li><li><strong>Sempre</strong> contém DNA de outra espécie</li><li>Transferência interespecífica</li><li>Milho Bt (gene bacteriano), soja RR</li></ul></div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" data-index="4">
+            <h2 class="anim-item"><span class="icon">📋</span> Transgênicos: o que precisamos saber</h2>
+            <div class="card-row anim-item anim-delay-1">
+                <div class="card"><div class="card-icon">✅</div><h4>Benefícios</h4><p>Maior produtividade, resistência a pragas, redução de agrotóxicos, arroz dourado com vitamina A.</p></div>
+                <div class="card"><div class="card-icon">⚠️</div><h4>Riscos</h4><p>Fluxo gênico, superpragas, dependência de patentes.</p></div>
+                <div class="card"><div class="card-icon">🔍</div><h4>Regulamentação</h4><p>CTNBio exige testes de alergenicidade, toxicidade e impacto ambiental.</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide" data-index="5">
+            <h2 class="anim-item"><span class="icon">💬</span> Mitos e Verdades</h2>
+            <div class="two-col anim-item anim-delay-1">
+                <div>
+                    <div class="highlight-box warning"><p><strong>❌ Mito:</strong> "Transgênicos causam câncer"</p></div>
+                    <p style="font-size:0.9rem; margin:8px 0 18px 0;">Revisões da OMS não encontraram evidências de risco.</p>
+                    <div class="highlight-box warning"><p><strong>❌ Mito:</strong> "Não existem na natureza"</p></div>
+                    <p style="font-size:0.9rem;">A batata-doce possui naturalmente genes de bactéria.</p>
+                </div>
+                <div>
+                    <div class="highlight-box"><p><strong>✅ Verdade:</strong> São extensivamente testados</p></div>
+                    <p style="font-size:0.9rem; margin:8px 0 18px 0;">Média de 10+ anos de pesquisa antes da liberação.</p>
+                    <div class="highlight-box"><p><strong>✅ Verdade:</strong> Rotulagem obrigatória</p></div>
+                    <p style="font-size:0.9rem;">Símbolo "T" no rótulo para alimentos com mais de 1% de transgênicos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" data-index="6">
+            <h2 class="anim-item"><span class="icon">🌟</span> Resumo & Conclusão</h2>
+            <div class="highlight-box anim-item anim-delay-1" style="border-left-color: var(--accent3);">
+                <p style="font-size:1.1rem;"><strong>OGM ≠ Transgênico.</strong> A edição gênica moderna ampliou o conceito para além da transgenia.</p>
+            </div>
+            <ul class="anim-item anim-delay-2">
+                <li><strong>OGM</strong> = qualquer alteração genética em laboratório</li>
+                <li><strong>Transgênico</strong> = OGM com gene de <em>outra espécie</em></li>
+                <li>Evidências científicas confirmam a segurança dos aprovados</li>
+                <li>Debate envolve ciência, economia e sustentabilidade</li>
+                <li>Informação de qualidade é a melhor aliada</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Fontes e equipe -->
+        <div class="slide" data-index="7">
+            <h2 class="anim-item"><span class="icon">📚</span> Fontes Consultadas</h2>
+            <div class="source-list anim-item anim-delay-1">
+                <div class="source-item"><strong>Brasil Escola</strong><br>Artigos e resumos sobre biotecnologia e OGMs.</div>
+                <div class="source-item"><strong>Toda Matéria</strong><br>Conteúdo didático sobre transgênicos e engenharia genética.</div>
+                <div class="source-item"><strong>Mundo Educação</strong><br>Explicações ilustradas de genética e biotecnologia.</div>
+                <div class="source-item"><strong>Biologia Net</strong><br>Materiais de estudo sobre organismos geneticamente modificados.</div>
+            </div>
+            <div class="anim-item anim-delay-2" style="text-align:center; margin-top:22px;">
+                <div class="team-block">
+                    👥 Yan, Beto, Ana Clara e Pedro
+                </div>
+                <p style="margin-top:12px; color:var(--text3); font-weight:600;">2ºA - Biologia</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Barra de navegação -->
+<div class="nav-bar" id="navBar">
+    <button class="nav-btn" id="prevBtn" title="Slide anterior">◀</button>
+    <div class="nav-dots" id="navDots"></div>
+    <span class="slide-counter" id="slideCounter">1 / 8</span>
+    <button class="nav-btn" id="nextBtn" title="Próximo slide">▶</button>
+</div>
+
+<script>
+    (() => {
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let isTransitioning = false;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const navDots = document.getElementById('navDots');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function createDots() {
+            navDots.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'nav-dot';
+                if (i === currentIndex) dot.classList.add('active-dot');
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                navDots.appendChild(dot);
+            }
+        }
+
+        function updateUI() {
+            const dots = navDots.querySelectorAll('.nav-dot');
+            dots.forEach((d, i) => d.classList.toggle('active-dot', i === currentIndex));
+            slideCounter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : 'auto';
+            nextBtn.style.opacity = currentIndex === totalSlides - 1 ? '0.5' : '1';
+            nextBtn.style.pointerEvents = currentIndex === totalSlides - 1 ? 'none' : 'auto';
+        }
+
+        function goToSlide(index) {
+            if (isTransitioning || index === currentIndex || index < 0 || index >= totalSlides) return;
+            isTransitioning = true;
+
+            const oldSlide = slides[currentIndex];
+            const newSlide = slides[index];
+            const direction = index > currentIndex ? 'right' : 'left';
+
+            // Remove estado ativo e aplica classe de saída
+            oldSlide.classList.remove('active');
+            oldSlide.classList.add(direction === 'left' ? 'exit-left' : 'exit-right');
+
+            // Ativa novo slide após um pequeno delay
+            setTimeout(() => {
+                newSlide.classList.add('active');
+            }, 20);
+
+            // Limpa classes e estados após a transição
+            setTimeout(() => {
+                oldSlide.classList.remove('exit-left', 'exit-right');
+                oldSlide.style.transform = '';
+                oldSlide.style.opacity = '';
+                isTransitioning = false;
+            }, 550); // maior que a duração da transição (0.5s)
+
+            currentIndex = index;
+            updateUI();
+        }
+
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) goToSlide(currentIndex - 1);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                goToSlide(totalSlides - 1);
+            }
+        });
+
+        // Suporte a gestos de toque (swipe)
+        let touchStartX = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const diffX = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(diffX) > 40) {
+                if (diffX < -20) nextSlide();
+                else if (diffX > 20) prevSlide();
+            }
+        });
+
+        // Inicialização
+        createDots();
+        updateUI();
+        slides[0].classList.add('active');
+    })();
+</script>
+</body>
+</html>
