@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streaming vs Cable TV: The New Reality</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#E50914',
+              purple: '#6366F1',
+              darkBg: '#090A0F',
+              cardBg: '#131520',
+              accent: '#38BDF8'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth slide transitions */
+    .slide-transition {
+      transition: opacity 0.5s ease-in-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body {
+      background-color: #090A0F;
+    }
+    /* Hide scrollbars but allow scrolling if needed in small screens */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-red selection:text-white overflow-x-hidden">
+
+  <!-- Interactive Presentation Canvas -->
+  <main class="flex-1 relative w-full min-h-[80vh] flex items-center justify-center p-4 md:p-8">
+    
+    <!-- SLIDE 1: Title & Introduction -->
+    <div id="slide-1" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-100 scale-100 z-10 pointer-events-auto px-6 text-center space-y-6 bg-gradient-to-b from-brand-darkBg via-brand-darkBg to-brand-red/15">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-red/10 border border-brand-red/30 rounded-full text-brand-red text-sm font-semibold tracking-wider uppercase">
+        <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+        Media & Consumer Trends Analysis
+      </div>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-black font-heading tracking-tight leading-none text-white max-w-4xl">
+        Has the Streaming Era <br>Officially Transformed Into <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-purple-400 to-brand-accent">The New Cable TV?</span>
+      </h1>
+      <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+        Imagine watching your favourite show at home and, just as something is about to happen, an ad appears. Not only that, you often have to switch between services to find your shows. Streaming services are now showing similarities with cable TV, which annoys many people.
+      </p>
+      
+      <!-- Informative Quick Start Badge -->
+      <div class="pt-6 flex flex-wrap gap-3 justify-center text-xs text-gray-500">
+        <span class="bg-gray-900 px-3 py-1.5 rounded-full border border-gray-800">Use <strong>Left / Right Arrow Keys</strong> or <strong>Buttons Below</strong> to Navigate</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Explaining Fragmentation -->
+    <div id="slide-2" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-0 scale-95 z-0 pointer-events-none px-4 md:px-12 bg-brand-darkBg">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Explanatory Text Column -->
+        <div class="lg:col-span-5 space-y-4 text-center lg:text-left">
+          <span class="text-brand-accent text-xs font-bold uppercase tracking-widest font-heading">The Problem</span>
+          <h2 class="text-3xl md:text-4xl font-bold font-heading text-white">Too Crowded & Separated</h2>
+          <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+            There is no doubt that streaming services have become way too crowded and separated. Instead of having just one or two main services to watch our favourite shows, the streaming industry is separated into too many different services.
+          </p>
+          <div class="p-4 bg-brand-cardBg border border-gray-800 rounded-xl text-left hidden sm:block">
+            <span class="text-brand-accent font-bold text-sm block mb-1">Exclusive Content</span>
+            <p class="text-xs text-gray-400">This is mainly because some streaming services have exclusive content that they use to attract the customer's attention, forcing viewers to pay multiple subscriptions just to get the same amount of shows they used to get in one place.</p>
+          </div>
+        </div>
+
+        <!-- Visual Side-by-Side Comparison -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-brand-cardBg/40 border border-gray-800 p-6 rounded-2xl space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-gray-500 font-heading">The Unified Past</span>
+              <span class="text-lg">📦</span>
+            </div>
+            <h4 class="text-white font-bold text-base">One Central Place</h4>
+            <ul class="text-xs text-gray-400 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 mt-0.5">✓</span>
+                <span>We used to only need 1 streaming service like Netflix (at maximum 2, like Prime Video).</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-400 mt-0.5">✓</span>
+                <span>All your movies and series were kept inside a simple, practical, and fun environment.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-brand-cardBg border border-brand-red/30 p-6 rounded-2xl space-y-4 shadow-xl shadow-brand-red/5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-brand-red font-heading">The Frustrating Present</span>
+              <span class="text-lg">🧩</span>
+            </div>
+            <h4 class="text-brand-red font-bold text-base">Fragmented Platforms</h4>
+            <ul class="text-xs text-gray-300 space-y-2">
+              <li class="flex items-start gap-2">
+                <span class="text-brand-red mt-0.5">✕</span>
+                <span>We are now forced to pay for multiple different platforms like Hulu, Disney+, Apple TV and more.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-brand-red mt-0.5">✕</span>
+                <span>The mess of managing all of these subscriptions proves streaming has become a frustrating chore.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Cost Stacking & Calculator -->
+    <div id="slide-3" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-0 scale-95 z-0 pointer-events-none px-4 md:px-12 bg-brand-darkBg">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Explanatory Text Column -->
+        <div class="lg:col-span-5 space-y-4 text-center lg:text-left">
+          <span class="text-purple-400 text-xs font-bold uppercase tracking-widest font-heading">Incredibly Expensive</span>
+          <h2 class="text-3xl md:text-4xl font-bold font-heading text-white">The Cost of Stacking Subscriptions</h2>
+          <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+            There is no doubt that subscribing to multiple services at the same time has become incredibly expensive. This rising cumulative cost completely defeats the original purpose of cheap, ad-free streaming.
+          </p>
+          <div class="p-4 bg-gray-900 border border-gray-800 rounded-xl space-y-2 text-left">
+            <span class="text-gray-400 text-xs font-bold uppercase tracking-wider">Traditional Cable Comparison</span>
+            <div class="text-xl font-bold text-white">$85.00<span class="text-xs text-gray-500 font-normal"> / month average</span></div>
+            <p class="text-xs text-gray-500 leading-tight">When multiple streaming subscriptions cost as much as traditional cable, the savings completely vanish.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Calculator Module -->
+        <div class="lg:col-span-7 bg-brand-cardBg p-6 rounded-3xl border border-gray-800 w-full shadow-2xl">
+          <h3 class="text-sm font-bold uppercase tracking-widest text-gray-300 mb-4 flex justify-between items-center">
+            <span>Choose Your Stack</span>
+            <span class="text-[10px] text-gray-500 lowercase font-bold">Click rows to toggle</span>
+          </h3>
+          
+          <div class="space-y-2.5 max-h-[220px] overflow-y-auto pr-1 no-scrollbar" id="calcContainer">
+            <!-- Populated dynamically via JavaScript -->
+          </div>
+
+          <!-- Total Calculation Window -->
+          <div class="mt-6 pt-5 border-t border-gray-800/80 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="text-center sm:text-left">
+              <div class="text-xs text-gray-500 uppercase tracking-widest">Combined Monthly Cost:</div>
+              <div class="text-3xl font-black font-heading text-white flex items-baseline justify-center sm:justify-start gap-1">
+                $<span id="liveTotal">0.00</span>
+                <span class="text-xs text-gray-400 font-normal">/ month</span>
+              </div>
+            </div>
+            <div id="costComparisonBadge" class="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300">
+              Select Platforms
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Price Inflation Curve Graph -->
+    <div id="slide-4" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-0 scale-95 z-0 pointer-events-none px-4 md:px-12 bg-brand-darkBg">
+      <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Explanatory Text Column -->
+        <div class="lg:col-span-5 space-y-4 text-center lg:text-left">
+          <span class="text-rose-400 text-xs font-bold uppercase tracking-widest font-heading">Tactics & Quality</span>
+          <h2 class="text-3xl md:text-4xl font-bold font-heading text-white">Worse Plans, Growing Prices</h2>
+          <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+            Streaming services keep raising their prices for monthly plans, but instead of giving us more benefits, they are doing the opposite. They are forcing us into cheaper plans flooded with ads or making us pay a premium to get rid of them.
+          </p>
+          <div class="bg-brand-cardBg/60 p-4 border border-gray-800 rounded-xl space-y-2 text-left">
+            <span class="text-xs text-gray-400 font-bold block">Ad-Supported Influx</span>
+            <p class="text-xs text-gray-500 leading-relaxed">Almost every major streaming platform (like Netflix, Disney+ and Prime Video) has recently created ad-supported plans or raised subscription prices.</p>
+          </div>
+        </div>
+
+        <!-- Chart Visualization -->
+        <div class="lg:col-span-7 bg-brand-cardBg p-6 rounded-3xl border border-gray-800 w-full min-h-[340px] flex flex-col justify-between shadow-2xl">
+          <div class="flex justify-between items-center mb-2 pb-3 border-b border-gray-800/80">
+            <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Premium Ad-Free Bundle Price Evolution</span>
+            <span class="text-xs text-brand-red bg-brand-red/10 border border-brand-red/20 px-2.5 py-1 rounded font-bold">+110% Rise Since 2018</span>
+          </div>
+          <div class="relative w-full h-[240px] sm:h-[260px]">
+            <canvas id="inflationChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: The Illusion of Freedom -->
+    <div id="slide-5" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-0 scale-95 z-0 pointer-events-none px-4 md:px-12 bg-brand-darkBg">
+      <div class="max-w-5xl w-full space-y-8 text-center">
+        <div>
+          <span class="text-brand-accent text-xs font-bold uppercase tracking-widest font-heading">Autonomy Fallacy</span>
+          <h2 class="text-3xl md:text-5xl font-bold font-heading text-white">The "Freedom" Illusion</h2>
+          <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+            Contrastingly, a lot of people believe that streaming is still better than cable because it gives us the freedom and accessibility to watch whatever we want, whenever we want, without being stuck to a fixed schedule. However, this freedom is mostly inexistent.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+          <!-- Card 1 -->
+          <div class="p-5 bg-brand-cardBg/80 border border-gray-800 rounded-2xl space-y-3 text-left">
+            <div class="text-xl">🔄</div>
+            <h4 class="font-bold text-sm text-white">Platform Migration</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">If your favorite show leaves Netflix and moves to another platform, you are basically forced to buy another subscription just to keep watching it.</p>
+          </div>
+          <!-- Card 2 -->
+          <div class="p-5 bg-brand-cardBg/80 border border-gray-800 rounded-2xl space-y-3 text-left">
+            <div class="text-xl">🔒</div>
+            <h4 class="font-bold text-sm text-white">Password Lockdowns</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">Sharing features and access parameters are highly restricted, converting what was a flexible option into a highly restrictive ecosystem.</p>
+          </div>
+          <!-- Card 3 -->
+          <div class="p-5 bg-brand-cardBg/80 border border-gray-800 rounded-2xl space-y-3 text-left">
+            <div class="text-xl">📢</div>
+            <h4 class="font-bold text-sm text-white">Not Free At All</h4>
+            <p class="text-xs text-gray-400 leading-relaxed">What looks like a convenient choice ends up being a stressful task of managing different passwords and bills.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Direct Core Conclusion Quote -->
+    <div id="slide-6" class="slide-transition absolute inset-0 flex flex-col items-center justify-center opacity-0 scale-95 z-0 pointer-events-none px-4 md:px-12 bg-gradient-to-t from-brand-darkBg via-brand-darkBg to-brand-red/10">
+      <div class="max-w-4xl text-center space-y-8">
+        <span class="inline-flex items-center gap-2 px-3 py-1 bg-brand-red/10 border border-brand-red/30 rounded-full text-brand-red text-xs font-bold tracking-wider uppercase">
+          Final Summary
+        </span>
+        
+        <blockquote class="text-2xl md:text-5xl lg:text-6xl font-heading font-black tracking-tight text-white max-w-4xl mx-auto leading-tight">
+          "We didn't actually escape cable... <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-purple-400 to-brand-accent">we just let it change its name."</span>
+        </blockquote>
+
+        <div class="w-16 h-1 bg-gradient-to-r from-brand-red to-brand-purple mx-auto rounded-full"></div>
+
+        <!-- Academic Bibliography Container -->
+        <div class="bg-brand-cardBg/60 border border-gray-800/80 p-5 rounded-2xl max-w-2xl mx-auto text-left space-y-2">
+          <h5 class="text-[10px] font-bold tracking-widest text-gray-500 uppercase border-b border-gray-800 pb-2">References & Evidence</h5>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10px] text-gray-400 leading-tight">
+            <div>
+              <strong>Casserly, M. (2022).</strong> The collapse of traditional cable and the shift to internet distribution. <em>Forbes Magazine</em>.
+            </div>
+            <div>
+              <strong>Heritage, S. (2023).</strong> Is it time to say goodbye to the binge watch? How platforms are mimicking old TV schedules. <em>The Guardian</em>.
+            </div>
+            <div>
+              <strong>Sweney, M. (2022).</strong> Why is Netflix losing so many subscribers and what can it do about it?. <em>The Guardian</em>.
+            </div>
+            <div>
+              <strong>Wile, R. (2023).</strong> Streaming has officially surpassed cable as the most-watched viewing platform amid price hikes. <em>NBC News</em>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Clean, Uncluttered Slideshow Controls Bar -->
+  <footer class="w-full bg-brand-darkBg/90 border-t border-gray-800/80 px-6 py-4 flex flex-col sm:flex-row gap-4 items-center justify-between z-30 relative">
+    <!-- Nav buttons -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1">
+        <button id="prevBtn" class="p-2 hover:bg-gray-800 rounded-md text-gray-400 hover:text-white transition" title="Previous Slide">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="nextBtn" class="p-2 hover:bg-gray-800 rounded-md text-gray-400 hover:text-white transition" title="Next Slide">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+      <div class="text-xs text-gray-400 font-mono">
+        Slide <span id="currentSlideIdx" class="font-bold text-white">1</span> of <span id="totalSlides">6</span>
+      </div>
+    </div>
+
+    <!-- Dynamic Progress Dot Indicators -->
+    <div class="flex gap-1.5" id="jumpDots">
+      <!-- Generated via JS -->
+    </div>
+  </footer>
+
+  <!-- Progress bar tracker strip on top -->
+  <div class="fixed top-0 left-0 w-full bg-gray-900 h-1.5 overflow-hidden z-40">
+    <div id="progressBar" class="bg-gradient-to-r from-brand-red via-brand-purple to-brand-accent h-full w-[16.66%] transition-all duration-300 ease-out"></div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+    let priceChart;
+
+    // Premium Subscription Costs Tracker Index (Reflecting realistic Ad-Free pricing ranges)
+    const platforms = [
+      { id: 'netflix', name: 'Netflix Premium (Ad-Free, 4K)', price: 22.99, checked: true },
+      { id: 'disney', name: 'Disney+ (Ad-Free)', price: 15.99, checked: true },
+      { id: 'prime', name: 'Prime Video (Ad-Free Upgrade)', price: 17.98, checked: false },
+      { id: 'hulu', name: 'Hulu (Ad-Free)', price: 18.99, checked: false },
+      { id: 'appletv', name: 'Apple TV+', price: 9.99, checked: true },
+      { id: 'max', name: 'Max (Ad-Free, Ultimate)', price: 20.99, checked: false }
+    ];
+
+    // Explicitly grab DOM element references so that they are guaranteed to work in sandboxed environments
+    let calcContainer, liveTotalEl, costComparisonBadge, prevBtn, nextBtn, currentSlideIdx, progressBar, jumpDotsContainer;
+
+    // Slide Navigator Function
+    function changeSlide(directionOrTarget) {
+      const currentSlideEl = document.getElementById(`slide-${currentSlide}`);
+      if (currentSlideEl) {
+        currentSlideEl.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        currentSlideEl.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'z-10');
+        currentSlideEl.style.zIndex = "0";
+      }
+
+      if (typeof directionOrTarget === 'number') {
+        currentSlide = directionOrTarget;
+      } else if (directionOrTarget === 'next') {
+        currentSlide = currentSlide < totalSlides ? currentSlide + 1 : 1;
+      } else if (directionOrTarget === 'prev') {
+        currentSlide = currentSlide > 1 ? currentSlide - 1 : totalSlides;
+      }
+
+      const targetSlideEl = document.getElementById(`slide-${currentSlide}`);
+      if (targetSlideEl) {
+        targetSlideEl.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+        targetSlideEl.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'z-10');
+        targetSlideEl.style.zIndex = "10";
+      }
+
+      updateUI();
+    }
+
+    function updateUI() {
+      // Index numeric tracker
+      if (currentSlideIdx) currentSlideIdx.textContent = currentSlide;
+
+      // Top bar calculation
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      if (progressBar) progressBar.style.width = `${progressPercent}%`;
+
+      // Active slide dots
+      const dots = document.querySelectorAll('.jump-dot');
+      dots.forEach((dot, index) => {
+        if (index + 1 === currentSlide) {
+          dot.className = 'jump-dot h-2.5 bg-brand-red w-6 rounded-full transition-all duration-300';
+        } else {
+          dot.className = 'jump-dot h-2.5 bg-gray-700 w-2.5 rounded-full hover:bg-gray-500 transition-all duration-300';
+        }
+      });
+
+      // Handle graph updates upon viewing the chart slide
+      if (currentSlide === 4 && priceChart) {
+        priceChart.update();
+      }
+    }
+
+    // Build interactive Budget list items
+    function initCalculator() {
+      if (!calcContainer) return;
+      calcContainer.innerHTML = '';
+      platforms.forEach(p => {
+        const row = document.createElement('div');
+        row.className = `flex items-center justify-between p-3.5 rounded-xl border transition duration-200 cursor-pointer ${p.checked ? 'bg-brand-red/5 border-brand-red/30' : 'bg-gray-900/40 border-gray-800 hover:bg-gray-800/20'}`;
+        
+        // Use flat <span> and layout divs instead of labeled inputs with "for" tags to prevent browser double-click bugs
+        row.innerHTML = `
+          <div class="flex items-center gap-3 pointer-events-none">
+            <input type="checkbox" id="chk-${p.id}" ${p.checked ? 'checked' : ''} class="w-4 h-4 accent-brand-red rounded focus:ring-0 cursor-pointer">
+            <span class="text-sm font-semibold text-gray-200 select-none">${p.name}</span>
+          </div>
+          <span class="text-sm font-mono text-brand-accent font-bold">$${p.price.toFixed(2)}</span>
+        `;
+        
+        row.addEventListener('click', () => {
+          const checkbox = row.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+          p.checked = checkbox.checked;
+          
+          if (p.checked) {
+            row.className = 'flex items-center justify-between p-3.5 rounded-xl border border-brand-red/30 bg-brand-red/5 transition duration-200 cursor-pointer';
+          } else {
+            row.className = 'flex items-center justify-between p-3.5 rounded-xl border border-gray-800 bg-gray-900/40 hover:bg-gray-800/20 transition duration-200 cursor-pointer';
+          }
+          calculateTotal();
+        });
+
+        calcContainer.appendChild(row);
+      });
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      const sum = platforms.reduce((acc, p) => p.checked ? acc + p.price : acc, 0);
+      if (liveTotalEl) liveTotalEl.textContent = sum.toFixed(2);
+
+      // Comparative badge logic
+      if (!costComparisonBadge) return;
+      if (sum === 0) {
+        costComparisonBadge.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-gray-800 text-gray-500';
+        costComparisonBadge.textContent = 'Add plans';
+      } else if (sum < 45) {
+        costComparisonBadge.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+        costComparisonBadge.textContent = 'Below Cable cost';
+      } else if (sum < 85) {
+        costComparisonBadge.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20';
+        costComparisonBadge.textContent = 'Approaching Cable Cost';
+      } else {
+        costComparisonBadge.className = 'px-4 py-2 rounded-xl text-xs font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20';
+        costComparisonBadge.textContent = 'Exceeds Cable baseline!';
+      }
+    }
+
+    // Chart.js graph visualization creation
+    function initChart() {
+      const canvasEl = document.getElementById('inflationChart');
+      if (!canvasEl) return;
+      const ctx = canvasEl.getContext('2d');
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['2018', '2020', '2022', '2024', '2026'],
+          datasets: [
+            {
+              label: 'Combined Stream Bundle Premium Tier ($)',
+              data: [42.00, 56.50, 71.00, 89.90, 106.93],
+              borderColor: '#E50914',
+              backgroundColor: 'rgba(229, 9, 20, 0.12)',
+              borderWidth: 4,
+              tension: 0.35,
+              fill: true,
+              pointBackgroundColor: '#E50914',
+              pointRadius: 6
+            },
+            {
+              label: 'Cable Cost Baseline ($)',
+              data: [85.00, 85.00, 85.00, 85.00, 85.00],
+              borderColor: '#38BDF8',
+              borderDash: [6, 6],
+              borderWidth: 2,
+              fill: false,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              grid: { color: 'rgba(55, 65, 81, 0.15)' },
+              ticks: {
+                color: '#6b7280',
+                font: { family: 'Plus Jakarta Sans', weight: 'bold' },
+                callback: function(value) { return '$' + value; }
+              }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#9ca3af', font: { family: 'Plus Jakarta Sans' } }
+            }
+          }
+        }
+      });
+    }
+
+    // Navigation indicators setup
+    function buildJumpDots() {
+      if (!jumpDotsContainer) return;
+      jumpDotsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `jump-dot h-2.5 rounded-full transition-all duration-300 ${i === 1 ? 'bg-brand-red w-6' : 'bg-gray-700 w-2.5 hover:bg-gray-500'}`;
+        dot.addEventListener('click', () => changeSlide(i));
+        jumpDotsContainer.appendChild(dot);
+      }
+    }
+
+    // Bind event listeners upon document window load
+    window.onload = function() {
+      calcContainer = document.getElementById('calcContainer');
+      liveTotalEl = document.getElementById('liveTotal');
+      costComparisonBadge = document.getElementById('costComparisonBadge');
+      prevBtn = document.getElementById('prevBtn');
+      nextBtn = document.getElementById('nextBtn');
+      currentSlideIdx = document.getElementById('currentSlideIdx');
+      progressBar = document.getElementById('progressBar');
+      jumpDotsContainer = document.getElementById('jumpDots');
+
+      // Setup actions
+      initCalculator();
+      initChart();
+      buildJumpDots();
+      updateUI();
+    };
+
+    // Keyboard arrow keys navigation support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide('next');
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        changeSlide('prev');
+      }
+    });
+  </script>
+</body>
+</html>
