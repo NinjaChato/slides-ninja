@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migrações, Imigração e Refúgio — Geografia 2°A</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{
+  --bg:#07111f; --panel:#0d1b2d; --panel2:#11243b; --text:#eef6ff;
+  --muted:#a8bdd3; --cyan:#55d6ff; --blue:#4c7dff; --violet:#9d6cff;
+  --green:#52e0a0; --orange:#ffb45b; --red:#ff6f86;
+  --line:rgba(255,255,255,.10);
+}
+*{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+body{overflow:hidden}
+.deck{height:100vh;position:relative}
+.slide{position:absolute;inset:0;padding:58px 7vw 76px;display:none;overflow:auto;background:
+ radial-gradient(circle at 80% 10%,rgba(76,125,255,.17),transparent 28%),
+ radial-gradient(circle at 10% 90%,rgba(157,108,255,.12),transparent 30%),var(--bg)}
+.slide.active{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kicker{color:var(--cyan);font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:15px}
+h1,h2,h3{font-family:"Space Grotesk",sans-serif;margin:0 0 18px}
+h1{font-size:clamp(3rem,7vw,6.5rem);line-height:.92;max-width:1000px}
+h2{font-size:clamp(2rem,4vw,4rem);line-height:1}
+h3{font-size:1.15rem}
+p{color:var(--muted);line-height:1.65}
+.hero-sub{font-size:1.15rem;max-width:720px}
+.names{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.name{padding:9px 14px;border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:999px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.16)}
+.card strong{color:#fff}
+.tag{display:inline-block;padding:6px 10px;border-radius:8px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(85,214,255,.11);color:var(--cyan);margin-bottom:12px}
+.bigword{font-family:"Space Grotesk";font-size:2rem;font-weight:700;margin-bottom:10px}
+.definition{font-size:1.02rem;color:#dceaf7}
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:25px 0}
+.pill{padding:14px 18px;border-radius:16px;background:var(--panel2);border:1px solid var(--line);font-weight:700}
+.arrow{color:var(--cyan);font-size:1.4rem}
+.compare{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03)}
+.compare th,.compare td{text-align:left;padding:16px;border-bottom:1px solid var(--line);vertical-align:top}
+.compare th{background:rgba(85,214,255,.08);color:#dff8ff}
+.compare tr:last-child td{border-bottom:0}
+.hl{color:var(--cyan);font-weight:800}.green{color:var(--green);font-weight:800}.orange{color:var(--orange);font-weight:800}.red{color:var(--red);font-weight:800}
+.quote{border-left:4px solid var(--cyan);padding:16px 20px;background:rgba(85,214,255,.06);border-radius:0 16px 16px 0;color:#dceaf7;font-size:1.05rem}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.time{padding:20px;border-top:3px solid var(--blue);background:rgba(255,255,255,.045);border-radius:14px}
+.time b{font-size:1.25rem}.time small{display:block;color:var(--muted);margin-top:8px;line-height:1.45}
+.icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:rgba(85,214,255,.1);font-size:1.5rem;margin-bottom:15px}
+.sources{font-size:.74rem;color:#8096ad;line-height:1.55;margin-top:24px}
+.sources a{color:#9bdfff}
+.footer{position:fixed;left:7vw;right:7vw;bottom:20px;display:flex;justify-content:space-between;align-items:center;z-index:5;color:#70879d;font-size:.75rem;pointer-events:none}
+.controls{pointer-events:auto;display:flex;gap:8px}
+button{border:1px solid var(--line);background:rgba(13,27,45,.88);color:#fff;border-radius:10px;padding:8px 12px;cursor:pointer}
+button:hover{border-color:rgba(85,214,255,.6)}
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--violet));width:0;z-index:10}
+.map{height:310px;border-radius:28px;border:1px solid var(--line);position:relative;overflow:hidden;background:
+radial-gradient(circle at 18% 58%,rgba(82,224,160,.28) 0 2px,transparent 3px),
+radial-gradient(circle at 72% 42%,rgba(255,180,91,.35) 0 2px,transparent 3px),
+linear-gradient(135deg,#0b2131,#0b1627)}
+.route{position:absolute;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform-origin:left center;filter:drop-shadow(0 0 8px rgba(85,214,255,.5))}
+.dot{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 7px rgba(85,214,255,.1)}
+.label{position:absolute;font-size:.72rem;color:#cfe0ef;font-weight:700}
+.big-number{font-family:"Space Grotesk";font-size:3.2rem;font-weight:700;color:var(--cyan)}
+.two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:25px;align-items:center}
+ul{color:var(--muted);line-height:1.7;padding-left:1.2em}
+li{margin:7px 0}
+@media(max-width:850px){.grid,.grid2,.timeline,.two-col{grid-template-columns:1fr}.slide{padding:42px 5vw 80px}.map{height:220px}body{overflow:auto}}
+@media print{body{overflow:visible}.slide{position:relative;display:block;page-break-after:always;min-height:100vh}.footer,.progress{display:none}}
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="progress" id="progress"></div>
+
+<section class="slide active">
+  <div class="kicker">Ciências Humanas • Geografia</div>
+  <h1>Migração,<br><span style="color:var(--cyan)">Imigração</span> & Refúgio</h1>
+  <p class="hero-sub">Entender por que as pessoas se deslocam, quais palavras usamos para descrever esses movimentos e por que <b>migrante</b> e <b>refugiado</b> não significam a mesma coisa.</p>
+  <div class="names"><span class="name">Luis</span><span class="name">Cauã</span><span class="name">Yan</span><span class="name">Saimon</span></div>
+  <div class="quote" style="margin-top:35px;max-width:820px">“O movimento de pessoas transforma territórios, culturas, economias e relações sociais.”</div>
+  <div class="sources">Base conceitual: materiais oficiais do Currículo Paulista/EFAPE sobre migrações e refúgio.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">01 • Conceito central</div>
+  <h2>O que é <span class="hl">migração</span>?</h2>
+  <div class="two-col">
+    <div>
+      <p class="definition">Migração é o <b>deslocamento de pessoas</b> de um lugar para outro, podendo ocorrer dentro de um país ou entre países. Ela pode ser temporária ou permanente e pode acontecer por diferentes motivos.</p>
+      <div class="flow">
+        <div class="pill">Lugar de origem</div><div class="arrow">→</div><div class="pill">Deslocamento</div><div class="arrow">→</div><div class="pill">Lugar de destino</div>
+      </div>
+      <p>O Currículo Paulista propõe analisar as dinâmicas das populações e compreender como fatores <b>naturais, políticos, econômicos, sociais, religiosos e culturais</b> influenciam a mobilidade e a fixação de pessoas.</p>
+    </div>
+    <div class="card">
+      <div class="icon">↔</div>
+      <h3>Migração é o termo mais amplo</h3>
+      <p>Dentro dele aparecem situações diferentes: migração interna, migração internacional, imigração, emigração e deslocamentos forçados, entre outros.</p>
+    </div>
+  </div>
+  <div class="sources">Fonte: Currículo Paulista / EFAPE, Ciências Humanas e Geografia. O material destaca a mobilidade e a fixação de pessoas em função de eventos naturais, políticos, econômicos, sociais, religiosos e culturais.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">02 • As palavras mudam conforme o ponto de vista</div>
+  <h2>Migrante, imigrante ou emigrante?</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Termo geral</span>
+      <div class="bigword">Migrante</div>
+      <p>É a pessoa que <b>se desloca</b> de um lugar para outro. O termo não indica, sozinho, se ela entrou ou saiu de um país.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Ponto de vista do destino</span>
+      <div class="bigword">Imigrante</div>
+      <p>É quem <b>entra em outro país ou região para viver</b> ali. Para o país que recebe, essa pessoa é imigrante.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Ponto de vista da origem</span>
+      <div class="bigword">Emigrante</div>
+      <p>É quem <b>sai do seu país ou região de origem</b> para viver em outro lugar. Para o país que deixa, é emigrante.</p>
+    </div>
+  </div>
+  <div class="quote" style="margin-top:22px"><b>Exemplo:</b> uma pessoa que sai do Brasil para morar na França é <span class="orange">emigrante para o Brasil</span> e <span class="green">imigrante para a França</span>. Ela também é, de forma geral, uma <span class="hl">migrante internacional</span>.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">03 • Por que as pessoas migram?</div>
+  <h2>Não existe uma única causa.</h2>
+  <div class="grid2">
+    <div class="card"><div class="icon">💼</div><h3>Econômicas</h3><p>Busca por emprego, renda, melhores condições de vida ou oportunidades profissionais e educacionais.</p></div>
+    <div class="card"><div class="icon">🏠</div><h3>Sociais e familiares</h3><p>Reunião familiar, acesso a serviços, estudo, mudanças no estilo de vida ou busca por maior segurança.</p></div>
+    <div class="card"><div class="icon">⚔️</div><h3>Políticas</h3><p>Guerras, perseguições, violência, instabilidade política e violações de direitos podem provocar deslocamentos.</p></div>
+    <div class="card"><div class="icon">🌪️</div><h3>Ambientais</h3><p>Desastres, secas, enchentes e outras transformações ambientais podem contribuir para a saída de populações.</p></div>
+  </div>
+  <p style="margin-top:22px">Uma mesma migração pode ter <b>várias causas ao mesmo tempo</b>. Por isso, analisar o contexto é mais importante do que tentar encaixar toda pessoa em uma única categoria.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker">04 • A diferença mais importante</div>
+  <h2>Migrante × Refugiado</h2>
+  <table class="compare">
+    <tr><th></th><th>Migrante</th><th>Refugiado</th></tr>
+    <tr><td><b>Ideia principal</b></td><td>Deslocamento de uma pessoa ou grupo por diferentes motivos.</td><td>Pessoa que está fora de seu país e precisa de proteção internacional por situações graves, como perseguição, conflitos ou violência.</td></tr>
+    <tr><td><b>Motivação</b></td><td>Pode ser econômica, familiar, educacional, social, ambiental, política etc.</td><td>Está relacionada à necessidade de <span class="red">proteção</span> diante de ameaças e violações graves.</td></tr>
+    <tr><td><b>Escolha e contexto</b></td><td>As situações variam muito; não existe uma única experiência migratória.</td><td>O elemento central é que retornar ao país de origem pode colocar a pessoa em risco ou deixá-la sem proteção adequada.</td></tr>
+    <tr><td><b>Direitos</b></td><td>Continua sendo uma pessoa portadora de direitos.</td><td>Tem direito à proteção prevista pelo direito internacional e pela legislação aplicável.</td></tr>
+  </table>
+  <div class="quote" style="margin-top:20px">O Currículo Paulista orienta justamente a <b>problematizar essa diferença</b> e relacionar migrações/refúgio aos Direitos Humanos.</div>
+  <div class="sources">Fonte: Currículo Paulista / EFAPE, “Currículo em Ação – Ciências Humanas”, com atividade específica sobre a diferença entre migrantes e refugiados.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">05 • Entendendo o refúgio</div>
+  <h2>Refugiado é mais que “alguém que mudou de país”.</h2>
+  <div class="two-col">
+    <div>
+      <div class="card" style="margin-bottom:16px"><span class="tag">Deslocamento forçado</span><p>Quando uma pessoa deixa seu local de origem porque permanecer ali pode representar uma ameaça grave à sua vida, liberdade ou segurança, o deslocamento pode ser considerado <b>forçado</b>.</p></div>
+      <div class="card"><span class="tag">Proteção</span><p>O refúgio está ligado à necessidade de <b>proteção internacional</b>. Por isso, refugiados não devem ser tratados apenas como pessoas procurando melhores oportunidades econômicas.</p></div>
+    </div>
+    <div>
+      <div class="big-number">01</div><p><b>Solicitante de refúgio</b><br>Pessoa que pediu proteção e aguarda uma decisão sobre seu pedido.</p>
+      <div class="big-number">02</div><p><b>Refugiado reconhecido</b><br>Pessoa cuja condição de refugiado foi reconhecida conforme as regras aplicáveis.</p>
+    </div>
+  </div>
+  <div class="sources">O material do Currículo Paulista aborda motivações do refúgio, acolhimento e Direitos Humanos, além da realidade de refugiados no Brasil.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">06 • Um mundo em movimento</div>
+  <h2>As migrações transformam os territórios.</h2>
+  <div class="map">
+    <div class="dot" style="left:18%;top:58%"></div><div class="label" style="left:15%;top:64%">origem</div>
+    <div class="dot" style="left:70%;top:38%"></div><div class="label" style="left:67%;top:29%">destino</div>
+    <div class="route" style="left:20%;top:59%;width:51%;transform:rotate(-17deg)"></div>
+    <div class="dot" style="left:43%;top:72%"></div><div class="label" style="left:39%;top:77%">outro fluxo</div>
+    <div class="route" style="left:44%;top:72%;width:30%;transform:rotate(-58deg)"></div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="card"><h3>Impactos no destino</h3><p>Novas culturas, idiomas, hábitos e conhecimentos; mudanças no mercado de trabalho; demanda por moradia, educação, saúde e outros serviços.</p></div>
+    <div class="card"><h3>Impactos na origem</h3><p>Redução ou mudança da população local, envio de remessas, formação de redes transnacionais e transformação de relações familiares e culturais.</p></div>
+  </div>
+  <p style="margin-top:18px"><b>Importante:</b> migração não é apenas um número em um mapa. Ela envolve pessoas, identidades, direitos, desafios e contribuições para as sociedades.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker">07 • Brasil e São Paulo</div>
+  <h2>Migração também faz parte da nossa história.</h2>
+  <div class="timeline">
+    <div class="time"><b>Brasil</b><small>Formação histórica marcada por diferentes movimentos populacionais, incluindo deslocamentos indígenas, a presença portuguesa, a diáspora africana e diferentes correntes migratórias.</small></div>
+    <div class="time"><b>Imigração</b><small>Ao longo dos séculos XIX e XX, o Brasil recebeu importantes fluxos de imigrantes de diferentes partes do mundo.</small></div>
+    <div class="time"><b>Migração interna</b><small>Movimentos dentro do próprio país também transformaram cidades, regiões, mercado de trabalho e distribuição populacional.</small></div>
+    <div class="time"><b>Hoje</b><small>O Brasil também recebe migrantes e refugiados e precisa discutir acolhimento, direitos, integração e combate à xenofobia.</small></div>
+  </div>
+  <div class="quote" style="margin-top:25px">O Currículo Paulista destaca que os migrantes são <b>sujeitos portadores de direitos e deveres</b> e propõe condições de acolhimento e combate ao preconceito, ao racismo e à xenofobia.</div>
+  <div class="sources">Fonte: EFAPE — “Ciências Humanas: Eu também faço parte dessa história: migração”; materiais do Currículo Paulista sobre processos migratórios.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">08 • Direitos Humanos</div>
+  <h2>Acolher também é garantir direitos.</h2>
+  <div class="grid">
+    <div class="card"><div class="icon">⚖</div><h3>Igualdade</h3><p>A condição migratória não elimina a dignidade nem os direitos fundamentais de uma pessoa.</p></div>
+    <div class="card"><div class="icon">🏫</div><h3>Educação</h3><p>O Currículo Paulista aborda o acolhimento de estudantes migrantes e a necessidade de combater discriminação no ambiente escolar.</p></div>
+    <div class="card"><div class="icon">🤝</div><h3>Integração</h3><p>Acolher significa criar condições para participação social, acesso a serviços, respeito cultural e convivência.</p></div>
+  </div>
+  <div class="quote" style="margin-top:22px"><b>Xenofobia</b> é a hostilidade, preconceito ou discriminação contra pessoas percebidas como estrangeiras ou de outra origem. Combater a xenofobia é parte de uma sociedade que respeita a diversidade.</div>
+  <div class="sources">O Currículo Paulista relaciona migrações e refúgio aos Direitos Humanos e recomenda campanhas de acolhimento e combate ao preconceito, racismo e xenofobia.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">09 • Resumo para a apresentação</div>
+  <h2>Se você lembrar de 5 coisas, lembre destas:</h2>
+  <div class="grid2">
+    <div class="card"><span class="tag">01</span><h3>Migração</h3><p>É o <b>deslocamento de pessoas</b> entre lugares.</p></div>
+    <div class="card"><span class="tag">02</span><h3>Imigrante</h3><p>É quem <b>entra no lugar de destino</b> para viver nele.</p></div>
+    <div class="card"><span class="tag">03</span><h3>Emigrante</h3><p>É quem <b>sai do lugar de origem</b> para viver em outro.</p></div>
+    <div class="card"><span class="tag">04</span><h3>Refugiado</h3><p>É alguém que necessita de <b>proteção internacional</b> diante de situações graves.</p></div>
+  </div>
+  <div class="card" style="margin-top:18px;text-align:center"><span class="tag">05</span><h3>Todos os casos envolvem pessoas e direitos.</h3><p>Por isso, estudar migrações é também estudar território, diversidade, desigualdade, acolhimento e Direitos Humanos.</p></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">10 • Conclusão</div>
+  <h2>Mais do que cruzar fronteiras, migrar é mudar de vida.</h2>
+  <p class="hero-sub">Os movimentos migratórios fazem parte da história humana e continuam moldando o mundo atual. Entender a diferença entre migração, imigração, emigração e refúgio ajuda a evitar generalizações e a compreender as diferentes experiências de quem se desloca.</p>
+  <div class="flow" style="margin-top:34px">
+    <div class="pill">Deslocamento</div><div class="arrow">+</div><div class="pill">Território</div><div class="arrow">+</div><div class="pill">Direitos</div><div class="arrow">+</div><div class="pill">Diversidade</div>
+  </div>
+  <div class="quote" style="margin-top:28px">“Compreender as migrações é compreender como pessoas, culturas e territórios se transformam.”</div>
+  <div class="sources">
+    <b>Referências principais</b><br>
+    EFAPE / Secretaria da Educação de SP — Currículo Paulista e Currículo em Ação (Ciências Humanas).<br>
+    Materiais oficiais sobre migrações, refugiados, Direitos Humanos e acolhimento de estudantes migrantes.
+  </div>
+</section>
+
+</div>
+
+<div class="footer">
+  <span id="counter">1 / 10</span>
+  <div class="controls">
+    <button onclick="prev()">←</button><button onclick="next()">→</button>
+  </div>
+</div>
+
+<script>
+let i=0;
+const slides=[...document.querySelectorAll('.slide')];
+function show(n){
+  i=(n+slides.length)%slides.length;
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  document.getElementById('counter').textContent=(i+1)+' / '+slides.length;
+  document.getElementById('progress').style.width=((i+1)/slides.length*100)+'%';
+}
+function next(){show(i+1)}
+function prev(){show(i-1)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(slides.length-1);
+});
+let startX=0;
+document.addEventListener('touchstart',e=>startX=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>60)(dx<0?next:prev)()},{passive:true});
+show(0);
+</script>
+</body>
+</html>
