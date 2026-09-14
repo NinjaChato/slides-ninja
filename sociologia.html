@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Dimensão Deliberativa da Democracia — Sociologia 2º A</title>
+    <style>
+      :root {
+        --bg: #070a12;
+        --panel: #101625;
+        --panel2: #151d30;
+        --text: #f4f7fb;
+        --muted: #a9b5c9;
+        --accent: #6ee7f2;
+        --accent2: #9b7bff;
+        --line: #27334b;
+        --good: #65e6a7;
+        --warn: #ffd166;
+      }
+
+      * {
+        box-sizing: border-box
+      }
+
+      html {
+        font-size: clamp(14px, 1vw, 20px)
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+
+      /* ---------- estrutura ---------- */
+      .deck {
+        width: 100vw;
+        height: 100vh;
+        position: relative
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        padding: 2.4rem 3.6rem 1rem;
+        background:
+          radial-gradient(circle at 86% 10%, rgba(110, 231, 242, .11), transparent 30%),
+          radial-gradient(circle at 6% 92%, rgba(155, 123, 255, .10), transparent 32%),
+          var(--bg);
+      }
+
+      .slide.active {
+        display: flex
+      }
+
+      .body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        padding-right: .4rem;
+        scrollbar-width: thin;
+        scrollbar-color: #2b3a56 transparent
+      }
+
+      .body::-webkit-scrollbar {
+        width: 6px
+      }
+
+      .body::-webkit-scrollbar-thumb {
+        background: #2b3a56;
+        border-radius: 99px
+      }
+
+      .body::-webkit-scrollbar-track {
+        background: transparent
+      }
+
+      .body-inner {
+        margin: auto 0;
+        width: 100%
+      }
+
+      .slide.active .body-inner {
+        animation: rise .42s cubic-bezier(.2, .7, .3, 1) both
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px)
+        }
+
+        to {
+          opacity: 1;
+          transform: none
+        }
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        .slide.active .body-inner {
+          animation: none
+        }
+      }
+
+      /* ---------- tipografia ---------- */
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.1rem;
+        flex: 0 0 auto
+      }
+
+      .kicker {
+        font-size: .82rem;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-weight: 800
+      }
+
+      .num {
+        font-size: .78rem;
+        color: #71809a;
+        white-space: nowrap
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 3.9vw, 3.6rem);
+        line-height: 1.03;
+        margin: 0 0 1.1rem;
+        letter-spacing: -.035em;
+        max-width: 22ch
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 2.5vw, 2.35rem);
+        line-height: 1.1;
+        margin: 0 0 1.2rem;
+        letter-spacing: -.025em
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        margin: 0 0 .55rem;
+        color: var(--accent);
+        line-height: 1.25
+      }
+
+      p,
+      li {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #dbe2ee;
+        margin: .45em 0
+      }
+
+      ul {
+        margin: .4em 0 0;
+        padding-left: 1.15em
+      }
+
+      li {
+        margin: .35em 0
+      }
+
+      li::marker {
+        color: var(--accent)
+      }
+
+      strong,
+      b {
+        color: #fff;
+        font-weight: 700
+      }
+
+      .small {
+        font-size: .82rem;
+        color: var(--muted);
+        line-height: 1.45
+      }
+
+      .note {
+        font-size: .75rem;
+        color: #8090a8;
+        margin-top: .7rem;
+        line-height: 1.4
+      }
+
+      /* ---------- blocos ---------- */
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 1.3rem
+      }
+
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem
+      }
+
+      .card {
+        background: linear-gradient(150deg, rgba(21, 29, 48, .92), rgba(13, 19, 32, .92));
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 1.15rem 1.25rem;
+        box-shadow: 0 14px 40px rgba(0, 0, 0, .25);
+      }
+
+      .card p:first-of-type {
+        margin-top: 0
+      }
+
+      .card p:last-child {
+        margin-bottom: 0
+      }
+
+      .quote {
+        border-left: 4px solid var(--accent);
+        padding: .85rem 1.1rem;
+        background: rgba(110, 231, 242, .06);
+        border-radius: 0 14px 14px 0;
+        margin: .9rem 0 0
+      }
+
+      .quote p {
+        margin: 0;
+        font-size: .95rem
+      }
+
+      .pill {
+        display: inline-block;
+        border: 1px solid #33415e;
+        border-radius: 999px;
+        padding: .3em .72em;
+        margin: .22em .18em .22em 0;
+        color: #dce7f5;
+        font-size: .82rem
+      }
+
+      .accent {
+        color: var(--accent)
+      }
+
+      .purple {
+        color: #b9a5ff
+      }
+
+      .green {
+        color: var(--good)
+      }
+
+      /* ---------- capa ---------- */
+      .hero {
+        max-width: 60rem
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 1.35vw, 1.35rem);
+        color: #c6d0e0;
+        line-height: 1.5;
+        max-width: 52ch
+      }
+
+      .meta {
+        margin-top: 1.8rem;
+        display: flex;
+        gap: .55rem;
+        flex-wrap: wrap
+      }
+
+      .meta span {
+        background: #121b2c;
+        border: 1px solid #2c3953;
+        padding: .5em .9em;
+        border-radius: 11px;
+        font-size: .88rem;
+        color: #dce5f2
+      }
+
+      .hint {
+        margin-top: 1.6rem;
+        font-size: .78rem;
+        color: #697790;
+        letter-spacing: .03em
+      }
+
+      /* ---------- fluxos ---------- */
+      .flow {
+        display: flex;
+        align-items: stretch;
+        gap: .55rem;
+        margin-top: .4rem;
+        flex-wrap: wrap
+      }
+
+      .node {
+        flex: 1 1 8rem;
+        padding: .85rem .7rem;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        text-align: center;
+        background: #101827;
+        font-size: .9rem;
+        font-weight: 600;
+        line-height: 1.3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+      }
+
+      .node .small {
+        font-weight: 400;
+        display: block;
+        margin-top: .25em
+      }
+
+      .arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        font-size: 1.15rem;
+        flex: 0 0 auto;
+        padding: 0 .1rem
+      }
+
+      /* ---------- passos ---------- */
+      .step {
+        display: grid;
+        grid-template-columns: 2.6rem 1fr;
+        gap: .85rem;
+        align-items: start;
+        margin-bottom: .75rem
+      }
+
+      .step:last-child {
+        margin-bottom: 0
+      }
+
+      .stepno {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-size: .95rem;
+        font-weight: 900;
+        background: linear-gradient(145deg, #18243a, #0f1625);
+        border: 1px solid #33415e;
+        color: var(--accent)
+      }
+
+      .step b {
+        font-size: .98rem
+      }
+
+      .step .small {
+        display: block;
+        margin-top: .15em
+      }
+
+      /* ---------- comparação ---------- */
+      .compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .9rem
+      }
+
+      .compare>div {
+        padding: 1.1rem 1.2rem;
+        border-radius: 16px;
+        border: 1px solid var(--line)
+      }
+
+      .compare .bad {
+        background: rgba(255, 255, 255, .028)
+      }
+
+      .compare .good {
+        background: rgba(101, 230, 167, .055);
+        border-color: rgba(101, 230, 167, .28)
+      }
+
+      .compare h3 {
+        margin-bottom: .5rem
+      }
+
+      .compare .bad h3 {
+        color: #ff9db1
+      }
+
+      .compare ul {
+        margin: 0;
+        padding-left: 1.15em
+      }
+
+      .compare li {
+        font-size: .92rem
+      }
+
+      /* ---------- dados ---------- */
+      .stat {
+        font-size: clamp(1.9rem, 3vw, 2.7rem);
+        font-weight: 900;
+        letter-spacing: -.04em;
+        line-height: 1;
+        background: linear-gradient(90deg, var(--accent2), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent
+      }
+
+      .statlabel {
+        font-size: .9rem;
+        color: var(--muted);
+        line-height: 1.4;
+        margin-top: .45rem
+      }
+
+      .barwrap {
+        margin: .85rem 0
+      }
+
+      .barlabel {
+        display: flex;
+        justify-content: space-between;
+        font-size: .85rem;
+        margin-bottom: .35rem;
+        color: #d8dfeb
+      }
+
+      .bar {
+        height: 14px;
+        background: #202b40;
+        border-radius: 99px;
+        overflow: hidden
+      }
+
+      .fill {
+        height: 100%;
+        border-radius: 99px;
+        background: linear-gradient(90deg, var(--accent2), var(--accent));
+        animation: grow .8s cubic-bezier(.2, .7, .3, 1) both
+      }
+
+      @keyframes grow {
+        from {
+          transform: scaleX(0);
+          transform-origin: left
+        }
+
+        to {
+          transform: scaleX(1)
+        }
+      }
+
+      /* ---------- fontes ---------- */
+      .sourcegrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .6rem
+      }
+
+      .source {
+        font-size: .74rem;
+        line-height: 1.4;
+        color: #bdc8d9;
+        padding: .6rem .7rem;
+        border: 1px solid #28344b;
+        border-radius: 11px;
+        background: #0d1421
+      }
+
+      .source b {
+        display: block;
+        color: #fff;
+        margin-bottom: .15em
+      }
+
+      /* ---------- rodapé e controles ---------- */
+      .foot {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding-top: .7rem;
+        color: #64728a;
+        font-size: .72rem
+      }
+
+      .progress {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 3px;
+        z-index: 30;
+        width: 0;
+        background: linear-gradient(90deg, var(--accent2), var(--accent));
+        transition: width .3s cubic-bezier(.2, .7, .3, 1)
+      }
+
+      .controls {
+        position: fixed;
+        right: 1.1rem;
+        bottom: 1rem;
+        z-index: 20;
+        display: flex;
+        gap: .4rem
+      }
+
+      button {
+        background: rgba(18, 27, 43, .9);
+        color: #dbe6f4;
+        border: 1px solid #2d3b55;
+        border-radius: 11px;
+        width: 2.6rem;
+        height: 2.6rem;
+        font-size: 1.05rem;
+        line-height: 1;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: .18s;
+        backdrop-filter: blur(6px)
+      }
+
+      button:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px)
+      }
+
+      button:active {
+        transform: translateY(0)
+      }
+
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px
+      }
+
+      /* ---------- responsivo ---------- */
+      @media(max-width:900px) {
+        .slide {
+          padding: 1.4rem 1.1rem .7rem
+        }
+
+        .grid2,
+        .grid3,
+        .compare,
+        .sourcegrid {
+          grid-template-columns: 1fr
+        }
+
+        .flow {
+          flex-direction: column
+        }
+
+        .arrow {
+          transform: rotate(90deg);
+          padding: .15rem 0
+        }
+
+        .hero {
+          max-width: 100%
+        }
+
+        h1 {
+          max-width: 100%
+        }
+
+        .controls {
+          right: .6rem;
+          bottom: .6rem
+        }
+
+        button {
+          width: 2.4rem;
+          height: 2.4rem
+        }
+      }
+
+      @media(max-height:520px) {
+        .slide {
+          padding-top: 1rem;
+          padding-bottom: .5rem
+        }
+
+        .kicker,
+        .num {
+          font-size: .72rem
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress" id="progress"></div>
+    <div class="deck">
+      <!-- ============ 01 · CAPA ============ -->
+      <section class="slide active">
+        <div class="body">
+          <div class="body-inner hero">
+            <div class="kicker" style="margin-bottom:1rem">Sociologia • 2º Ano A • 2026</div>
+            <h1>A dimensão <span class="accent">deliberativa</span> da democracia </h1>
+            <p class="subtitle"> Democracia não é só votar. É também <strong>conversar, ouvir, discutir ideias e decidir junto</strong> — de um jeito em que todo mundo tenha chance real de participar. </p>
+            <div class="meta">
+              <span>Professor: <b>Adriano</b>
+              </span>
+              <span>
+                <b>Luis</b>
+              </span>
+              <span>
+                <b>Yan</b>
+              </span>
+              <span>2º A — Ensino Médio</span>
+            </div>
+            <div class="hint">Use as setas ← → do teclado (ou os botões no canto) para navegar.</div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Sociologia • Ciências Humanas e Sociais Aplicadas</span>
+          <span>01 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 02 · CONCEITO ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">01 • Conceito central</div>
+          <div class="num">02 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>O que significa <span class="accent">deliberar</span>? </h2>
+            <div class="grid2">
+              <div class="card">
+                <h3>Votar não é a mesma coisa que deliberar</h3>
+                <p>
+                  <strong>Votar</strong> é escolher uma opção. Cada pessoa marca a sua preferência e, no fim, conta-se quem teve mais votos. É rápido e resolve o resultado.
+                </p>
+                <p>
+                  <strong>Deliberar</strong> é a conversa que vem antes (ou junto) da votação. As pessoas explicam <em>por que</em> pensam assim, escutam os outros, fazem perguntas e podem até mudar de opinião.
+                </p>
+                <div class="quote">
+                  <p>Na democracia deliberativa, o que importa não é só <strong>o resultado final</strong>. Importa também <strong>como se chegou até ele</strong>: se todos puderam falar, se as razões foram ouvidas e se o processo foi justo. </p>
+                </div>
+              </div>
+              <div class="card">
+                <h3>A ideia em três passos</h3>
+                <div class="flow">
+                  <div class="node">Problema <span class="small">“O que precisa ser decidido?”</span>
+                  </div>
+                  <div class="arrow">→</div>
+                  <div class="node">Debate <span class="small">argumentos + escuta</span>
+                  </div>
+                  <div class="arrow">→</div>
+                  <div class="node">Decisão <span class="small">aceita como válida</span>
+                  </div>
+                </div>
+                <p style="margin-top:1.1rem">Isso <strong>não</strong> quer dizer que todo mundo precisa concordar no final. As pessoas continuam pensando diferente. A diferença é que as divergências são resolvidas com <strong>argumentos e regras democráticas</strong> — e não com força, ameaça ou mentira. </p>
+                <div>
+                  <span class="pill">participação</span>
+                  <span class="pill">argumentação</span>
+                  <span class="pill">escuta</span>
+                  <span class="pill">pluralismo</span>
+                  <span class="pill">legitimidade</span>
+                </div>
+                <p class="small" style="margin-top:.7rem">
+                  <strong>Legitimidade</strong> = quando as pessoas aceitam a decisão como válida, mesmo sem concordar com ela.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Base teórica: teoria democrática deliberativa</span>
+          <span>02 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 03 · HABERMAS ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">02 • Sociologia e Habermas</div>
+          <div class="num">03 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>A <span class="purple">esfera pública</span>: onde a sociedade conversa </h2>
+            <div class="grid2">
+              <div style="display:flex;flex-direction:column;gap:1rem">
+                <div class="card">
+                  <h3>Quem é Jürgen Habermas?</h3>
+                  <p>É um <strong>sociólogo e filósofo alemão</strong>, nascido em 1929. É um dos autores mais importantes quando o assunto é democracia deliberativa. </p>
+                  <p>Para ele, os problemas da sociedade precisam chegar até a <strong>esfera pública</strong>: os espaços onde as pessoas discutem assuntos que interessam a todos. </p>
+                  <p class="small" style="margin-top:.6rem">
+                    <strong>Em outras palavras:</strong> esfera pública é a praça, a escola, o jornal, a TV, a internet, a reunião de bairro, o movimento social. Tudo isso é lugar de debate.
+                  </p>
+                </div>
+                <div class="card">
+                  <h3>O caminho da democracia</h3>
+                  <p style="font-size:.92rem">Sociedade civil → debate público → formação da opinião → instituições políticas → decisões → volta para a sociedade.</p>
+                  <p class="small">A ideia é aproximar o que a população pensa dos lugares onde as decisões são tomadas de verdade.</p>
+                </div>
+              </div>
+              <div class="card">
+                <h3>O que ajuda a deliberação a funcionar</h3>
+                <div class="step">
+                  <div class="stepno">1</div>
+                  <div>
+                    <b>Acesso</b>
+                    <span class="small">Todo mundo pode participar e consegue entender as informações importantes.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">2</div>
+                  <div>
+                    <b>Liberdade</b>
+                    <span class="small">Dá para falar sem medo de ameaça, represália ou castigo.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">3</div>
+                  <div>
+                    <b>Igualdade</b>
+                    <span class="small">O argumento vale pelo que diz — não pelo dinheiro, cargo ou fama de quem fala.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">4</div>
+                  <div>
+                    <b>Razões públicas</b>
+                    <span class="small">Quem propõe algo precisa explicar o porquê, de um jeito que os outros entendam.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">5</div>
+                  <div>
+                    <b>Poder rever a posição</b>
+                    <span class="small">Ouvir um bom argumento pode mudar de ideia. E isso é normal, não é vergonha.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Habermas • esfera pública • democracia deliberativa</span>
+          <span>03 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 04 · NA PRÁTICA ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">03 • Na prática</div>
+          <div class="num">04 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>Onde a deliberação acontece no Brasil?</h2>
+            <div class="grid3">
+              <div class="card">
+                <h3>🏛 Audiências públicas</h3>
+                <p>Reuniões abertas em que o governo chama a população, especialistas e grupos interessados para <strong>ouvir opiniões antes de decidir</strong>. </p>
+                <p class="small">Exemplo atual: o TSE fez audiências públicas em 2026 para receber sugestões sobre as regras das Eleições Gerais.</p>
+              </div>
+              <div class="card">
+                <h3>👥 Conselhos de participação</h3>
+                <p>Grupos fixos com representantes da sociedade e do governo que discutem temas como <strong>saúde, educação, assistência social e direitos</strong>. </p>
+                <p class="small">A ideia é ter participação o ano inteiro — não só no dia da eleição.</p>
+              </div>
+              <div class="card">
+                <h3>💻 Internet e redes sociais</h3>
+                <p>Hoje o debate é muito mais rápido e alcança muito mais gente do que antes.</p>
+                <p class="small">Mas atenção: <strong>falar muito não é o mesmo que falar bem</strong>. Algoritmos, notícias falsas, briga e falta de acesso podem estragar o debate. </p>
+              </div>
+            </div>
+            <div class="card" style="margin-top:1rem">
+              <h3>Como funciona uma audiência pública, passo a passo</h3>
+              <div class="flow">
+                <div class="node">Órgão público <span class="small">apresenta o problema e a proposta</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="node">Sociedade <span class="small">pergunta, critica, sugere</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="node">Registro <span class="small">as contribuições entram no processo</span>
+                </div>
+                <div class="arrow">→</div>
+                <div class="node">Decisão <span class="small">tomada com justificativa e regras</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Exemplo institucional: TSE — audiências públicas</span>
+          <span>04 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 05 · DADOS ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">04 • Dados</div>
+          <div class="num">05 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>Democracia também depende de <span class="accent">confiança</span>
+            </h2>
+            <div class="grid2">
+              <div class="card">
+                <h3>Brasil — confiança na Igreja (2024)</h3>
+                <div class="stat">63%</div>
+                <p class="statlabel">dos entrevistados no Brasil disseram ter “muita” ou “alguma” confiança na Igreja, segundo o Latinobarómetro.</p>
+                <div style="margin-top:1.2rem">
+                  <div class="barwrap">
+                    <div class="barlabel">
+                      <span>Brasil</span>
+                      <b>63%</b>
+                    </div>
+                    <div class="bar">
+                      <div class="fill" style="width:63%"></div>
+                    </div>
+                  </div>
+                  <div class="barwrap">
+                    <div class="barlabel">
+                      <span>América Latina</span>
+                      <b>61%</b>
+                    </div>
+                    <div class="bar">
+                      <div class="fill" style="width:61%"></div>
+                    </div>
+                  </div>
+                </div>
+                <p class="note">Esse dado é usado aqui como termômetro de confiança social — não como medida direta da democracia deliberativa.</p>
+              </div>
+              <div class="card">
+                <h3>Por que isso importa?</h3>
+                <p>Para as pessoas participarem do debate público, elas precisam acreditar que <strong>vale a pena</strong> escutar, responder e participar. </p>
+                <p>Quando as instituições democráticas são pouco confiáveis, esse ciclo se quebra:</p>
+                <div class="quote">
+                  <p>
+                    <strong>informação → debate → participação → decisão → confiança → mais participação</strong>
+                  </p>
+                </div>
+                <p style="margin-top:.9rem">O Latinobarómetro mostra que instituições centrais da democracia — como o Judiciário, o Congresso e os partidos — têm <strong>pouca confiança</strong> em vários países da América Latina. Por isso, participação e confiança são temas tão importantes para a sociologia. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Fonte do gráfico: Latinobarómetro 2024</span>
+          <span>05 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 06 · LIMITES ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">05 • Limites e críticas</div>
+          <div class="num">06 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>Deliberar é democrático — mas <span class="purple">não é fácil</span>
+            </h2>
+            <div class="compare">
+              <div class="bad">
+                <h3>O que atrapalha</h3>
+                <ul>
+                  <li>
+                    <strong>Desigualdade de recursos:</strong> quem tem mais tempo, dinheiro e estudo consegue participar mais.
+                  </li>
+                  <li>
+                    <strong>Desigualdade de voz:</strong> alguns grupos aparecem mais e são mais ouvidos do que outros.
+                  </li>
+                  <li>
+                    <strong>Desinformação:</strong> às vezes o argumento se baseia em informação falsa ou manipulada.
+                  </li>
+                  <li>
+                    <strong>Polarização:</strong> a discussão vira briga de “time” e ninguém escuta ninguém.
+                  </li>
+                  <li>
+                    <strong>Manipulação:</strong> quem controla o assunto ou o canal de comunicação decide o que será discutido.
+                  </li>
+                </ul>
+              </div>
+              <div class="good">
+                <h3>O que melhora</h3>
+                <ul>
+                  <li>
+                    <strong>Transparência:</strong> dados, critérios e decisões abertos — qualquer um pode conferir.
+                  </li>
+                  <li>
+                    <strong>Inclusão:</strong> quem é afetado pela decisão precisa poder participar dela.
+                  </li>
+                  <li>
+                    <strong>Regras claras:</strong> tempo de fala, respeito e direito de resposta.
+                  </li>
+                  <li>
+                    <strong>Educação para a cidadania:</strong> aprender a checar fontes e avaliar argumentos.
+                  </li>
+                  <li>
+                    <strong>Prestar contas:</strong> quem decide precisa explicar o que fez com as sugestões recebidas.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="quote" style="margin-top:1rem">
+              <p>
+                <strong>Importante:</strong> a democracia deliberativa é um <em>ideal</em> — um “deveria ser”. Nenhum debate real é 100% perfeito. A teoria serve como <strong>meta</strong>, não como descrição do que já existe.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Críticas discutidas na literatura acadêmica sobre democracia deliberativa</span>
+          <span>06 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 07 · ESCOLA ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">06 • Sociologia aplicada</div>
+          <div class="num">07 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>Um exemplo do nosso dia: <span class="accent">a escola</span>
+            </h2>
+            <div class="grid2">
+              <div class="card">
+                <h3>A situação</h3>
+                <p>A escola precisa decidir como reorganizar um espaço comum dos estudantes.</p>
+                <p>
+                  <strong>Jeito 1 — vertical:</strong> a direção decide sozinha e só comunica.
+                </p>
+                <p>
+                  <strong>Jeito 2 — só votação:</strong> cada turma escolhe uma opção, sem discutir os motivos.
+                </p>
+                <p>
+                  <strong>Jeito 3 — deliberativo:</strong> existe uma conversa organizada <em>antes</em> da decisão. É esse jeito que a teoria está propondo.
+                </p>
+              </div>
+              <div class="card">
+                <h3>Como seria essa deliberação?</h3>
+                <div class="step">
+                  <div class="stepno">1</div>
+                  <div>
+                    <b>Informar</b>
+                    <span class="small">Explicar custos, regras, limites e objetivos.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">2</div>
+                  <div>
+                    <b>Ouvir</b>
+                    <span class="small">Estudantes, professores e direção dizem o que precisam.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">3</div>
+                  <div>
+                    <b>Argumentar</b>
+                    <span class="small">Cada proposta explica o porquê e responde às críticas.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">4</div>
+                  <div>
+                    <b>Revisar</b>
+                    <span class="small">As ideias podem ser combinadas ou melhoradas depois do debate.</span>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="stepno">5</div>
+                  <div>
+                    <b>Decidir e explicar</b>
+                    <span class="small">A decisão segue as regras e se explica como as sugestões foram usadas.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="margin-top:1rem">
+              <h3>O ponto sociológico</h3>
+              <p>Democracia não é só uma coisa distante, do governo. Ela está nas relações do dia a dia: <strong>conflitos de interesse, desigualdades, jeitos de conversar, participação e construção coletiva de regras</strong>. </p>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Aplicação: participação, cidadania e vida coletiva</span>
+          <span>07 / 08</span>
+        </div>
+      </section>
+      <!-- ============ 08 · CONCLUSÃO ============ -->
+      <section class="slide">
+        <div class="topline">
+          <div class="kicker">07 • Conclusão e fontes</div>
+          <div class="num">08 / 08</div>
+        </div>
+        <div class="body">
+          <div class="body-inner">
+            <h2>Resumindo: <span class="accent">democracia é também conversar sobre o poder</span>
+            </h2>
+            <div class="grid2">
+              <div class="card">
+                <h3>Para lembrar na apresentação</h3>
+                <ul>
+                  <li>A dimensão deliberativa valoriza <strong>debate público + razões + escuta + participação</strong>. </li>
+                  <li>Habermas fala da ligação entre <strong>esfera pública, sociedade civil e instituições</strong>. </li>
+                  <li>Deliberar <strong>não acaba com o conflito</strong> — só faz com que ele seja discutido com argumentos, e não com força. </li>
+                  <li>A qualidade do processo depende de <strong>inclusão, informação, liberdade e igualdade</strong> de participação. </li>
+                  <li>No Brasil, <strong>audiências públicas e conselhos</strong> são formas institucionais de aproximar a sociedade das decisões. </li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Fontes utilizadas</h3>
+                <div class="sourcegrid">
+                  <div class="source">
+                    <b>Currículo Paulista — Ensino Médio (EFAPE/SEDUC-SP)</b>Currículo Paulista, etapa Ensino Médio; área de Ciências Humanas e Sociais Aplicadas / Sociologia.
+                  </div>
+                  <div class="source">
+                    <b>Stanford Encyclopedia of Philosophy</b>“Jürgen Habermas” — esfera pública, democracia discursiva e relação entre cidadãos e instituições.
+                  </div>
+                  <div class="source">
+                    <b>SCIELO — Kriterion / UFMG</b>Jorge Adriano Lubenow. “Esfera pública e democracia deliberativa em Habermas” (2010).
+                  </div>
+                  <div class="source">
+                    <b>PUCRS — Veritas</b>Luiz Paulo Rouanet. “Democracia deliberativa: entre Rawls e Habermas” (2011).
+                  </div>
+                  <div class="source">
+                    <b>Teoria &amp; Pesquisa — UFSCar</b>Pedro Alcântara. “Deliberação e democracia: a teoria deliberativa e seus críticos” (2018).
+                  </div>
+                  <div class="source">
+                    <b>Latinobarómetro 2024</b>Pesquisa regional com dados sobre democracia, instituições e confiança; gráfico do slide 5.
+                  </div>
+                  <div class="source">
+                    <b>Tribunal Superior Eleitoral — TSE</b>Audiências públicas e participação social no processo eleitoral, incluindo as realizadas em 2026.
+                  </div>
+                  <div class="source">
+                    <b>Portal de Dados Abertos do TSE</b>Dados públicos eleitorais e transparência institucional.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="foot">
+          <span>Professor: Adriano • Integrantes: Luis e Yan • 2º A</span>
+          <span>08 / 08</span>
+        </div>
+      </section>
+    </div>
+    <div class="controls">
+      <button onclick="prev()" aria-label="Slide anterior">←</button>
+      <button onclick="next()" aria-label="Próximo slide">→</button>
+      <button onclick="toggleFS()" aria-label="Tela cheia">⛶</button>
+    </div>
+    <script>
+      (function() {
+        var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+        var progress = document.getElementById('progress');
+        var current = 0;
+
+        function show(i) {
+          current = (i + slides.length) % slides.length;
+          slides.forEach(function(s, n) {
+            s.classList.toggle('active', n === current);
+          });
+          progress.style.width = ((current + 1) / slides.length * 100) + '%';
+          var body = slides[current].querySelector('.body');
+          if (body) body.scrollTop = 0;
+        }
+
+        function next() {
+          show(current + 1);
+        }
+
+        function prev() {
+          show(current - 1);
+        }
+        window.next = next;
+        window.prev = prev;
+        window.toggleFS = function() {
+          if (!document.fullscreenElement) {
+            (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen || function() {}).call(document.documentElement);
+          } else {
+            (document.exitFullscreen || document.webkitExitFullscreen || function() {}).call(document);
+          }
+        };
+        document.addEventListener('keydown', function(e) {
+          var k = e.key;
+          if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Spacebar') {
+            e.preventDefault();
+            next();
+          } else if (k === 'ArrowLeft' || k === 'PageUp') {
+            e.preventDefault();
+            prev();
+          } else if (k === 'Home') {
+            e.preventDefault();
+            show(0);
+          } else if (k === 'End') {
+            e.preventDefault();
+            show(slides.length - 1);
+          } else if (k === 'f' || k === 'F') {
+            toggleFS();
+          }
+        });
+        /* swipe no celular */
+        var x0 = null,
+          y0 = null;
+        document.addEventListener('touchstart', function(e) {
+          x0 = e.touches[0].clientX;
+          y0 = e.touches[0].clientY;
+        }, {
+          passive: true
+        });
+        document.addEventListener('touchend', function(e) {
+          if (x0 === null) return;
+          var dx = e.changedTouches[0].clientX - x0;
+          var dy = e.changedTouches[0].clientY - y0;
+          if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+            if (dx < 0) next();
+            else prev();
+          }
+          x0 = null;
+          y0 = null;
+        }, {
+          passive: true
+        });
+        show(0);
+      })();
+    </script>
+  </body>
+</html>
