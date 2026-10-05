@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drogas lícitas — Tabaco e Nicotina</title>
+    <meta name="description" content="Apresentação de Biologia — 2º A — Drogas lícitas: tabaco e nicotina." />
+    <style>
+      :root {
+        --bg: #07090c;
+        --panel: rgba(18, 22, 28, .72);
+        --panel2: rgba(24, 29, 36, .58);
+        --text: #f4f7fb;
+        --muted: #aab4c0;
+        --red: #ff5d55;
+        --amber: #ffc45b;
+        --mint: #7de2c4;
+        --line: rgba(255, 255, 255, .10);
+        --shadow: 0 28px 80px rgba(0, 0, 0, .44);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif
+      }
+
+      button {
+        font: inherit;
+        color: inherit
+      }
+
+      body:before,
+      body:after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        pointer-events: none;
+        filter: blur(55px);
+        opacity: .28;
+        z-index: 0
+      }
+
+      body:before {
+        width: 34vw;
+        height: 34vw;
+        background: var(--red);
+        top: -16vw;
+        right: -10vw;
+        border-radius: 50%
+      }
+
+      body:after {
+        width: 30vw;
+        height: 30vw;
+        background: var(--mint);
+        bottom: -18vw;
+        left: -10vw;
+        border-radius: 50%
+      }
+
+      #app {
+        position: relative;
+        z-index: 1;
+        width: 100vw;
+        height: 100vh
+      }
+
+      .slides {
+        width: 100%;
+        height: 100%;
+        position: relative
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: 5.5vh 6vw 8vh;
+        display: grid;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(3vw) scale(.985);
+        transition: opacity .55s ease, transform .65s cubic-bezier(.22, .61, .36, 1), visibility .55s;
+        overflow: hidden
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: none
+      }
+
+      .slide.exit {
+        transform: translateX(-3vw) scale(.985)
+      }
+
+      .grid-bg {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(rgba(255, 255, 255, .028) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .028) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)
+      }
+
+      .noise {
+        position: absolute;
+        inset: 0;
+        opacity: .05;
+        mix-blend-mode: screen;
+
+        background-image: url("data:image/svg+xml,%3Csvg
+xmlns='http://www.w3.org/2000/svg'width='140'height='140'viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise'baseFrequency='.9'numOctaves='4'stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25'height='100%25'filter='url(%23n)'opacity='.22'/%3E%3C/svg%3E")}
+.topline {
+            display:flex; align-items:center; justify-content:space-between; position:relative; z-index:2; margin-bottom:2vh; text-transform:uppercase; letter-spacing:.15em; font-size:.72rem; color:#86919d
+          }
+
+          .badge {
+            border:1px solid var(--line); padding:.55rem .75rem; border-radius:999px; background:rgba(255, 255, 255, .03); backdrop-filter:blur(10px)
+          }
+
+          .kicker {
+            color:var(--red); font-weight:800; letter-spacing:.16em; text-transform:uppercase; font-size:.8rem; margin-bottom:1.05rem
+          }
+
+          h1, h2, h3 {
+            letter-spacing:-.035em; line-height:1.02
+          }
+
+          h1 {
+            font-size:clamp(3.1rem, 7vw, 7.6rem); max-width:12ch
+          }
+
+          h2 {
+            font-size:clamp(2.3rem, 4.9vw, 5.4rem); max-width:14ch
+          }
+
+          .lede {
+            color:var(--muted); font-size:clamp(1rem, 1.55vw, 1.35rem); line-height:1.55; max-width:64ch
+          }
+
+          .em {
+            color:var(--amber)
+          }
+
+          .red {
+            color:var(--red)
+          }
+
+          .mint {
+            color:var(--mint)
+          }
+
+          .muted {
+            color:var(--muted)
+          }
+
+          .content {
+            position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; min-height:100%; padding-top:1vh
+          }
+
+          .two {
+            display:grid; grid-template-columns:1.08fr .92fr; gap:4vw; align-items:center; min-height:74vh
+          }
+
+          .two.reverse {
+            grid-template-columns:.92fr 1.08fr
+          }
+
+          .hero {
+            position:relative; border-radius:34px; overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(255, 255, 255, .1); min-height:62vh; background:linear-gradient(145deg, #1a2028, #0c0f13)
+          }
+
+          .hero img {
+            width:100%; height:100%; object-fit:cover; position:absolute; inset:0; filter:saturate(.82) contrast(1.05)
+          }
+
+          .hero:after {
+            content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(5, 7, 9, .08), rgba(5, 7, 9, .58)), linear-gradient(0deg, rgba(5, 7, 9, .5), transparent 55%)
+          }
+
+          .caption {
+            position:absolute; left:1.2rem; bottom:1rem; z-index:2; font-size:.7rem; color:#c8d0d8; background:rgba(0, 0, 0, .34); padding:.45rem .6rem; border-radius:8px; backdrop-filter:blur(8px)
+          }
+
+          .title-side {
+            display:flex; flex-direction:column; gap:1.35rem
+          }
+
+          .meta {
+            display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.4rem
+          }
+
+          .meta span {
+            padding:.5rem .75rem; border-radius:999px; border:1px solid var(--line); background:rgba(255, 255, 255, .03); color:#d4dbe2; font-size:.85rem
+          }
+
+          .quote {
+            border-left:3px solid var(--red); padding:.8rem 1rem; background:rgba(255, 255, 255, .025); border-radius:0 14px 14px 0; color:#d8e0e6; font-size:clamp(1rem, 1.4vw, 1.2rem)
+          }
+
+          .cards {
+            display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-top:1.4rem
+          }
+
+          .card {
+            background:linear-gradient(145deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02)); border:1px solid var(--line); border-radius:22px; padding:1.2rem; backdrop-filter:blur(14px); box-shadow:0 14px 45px rgba(0, 0, 0, .18); min-height:155px
+          }
+
+          .card .icon {
+            width:40px; height:40px; border-radius:13px; display:grid; place-items:center; background:rgba(255, 255, 255, .06); border:1px solid var(--line); margin-bottom:1rem
+          }
+
+          .card b {
+            display:block; font-size:1.03rem; margin-bottom:.45rem
+          }
+
+          .card p {
+            font-size:.9rem; line-height:1.45; color:var(--muted)
+          }
+
+          .splitCards {
+            display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.4rem
+          }
+
+          .note {
+            font-size:.78rem; line-height:1.45; color:#8895a2; margin-top:1rem; max-width:80ch
+          }
+
+          .diagram {
+            border:1px solid var(--line); background:radial-gradient(circle at 30% 20%, rgba(125, 226, 196, .1), transparent 42%), linear-gradient(145deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .018)); border-radius:30px; min-height:56vh; display:grid; place-items:center; padding:2rem; box-shadow:var(--shadow); backdrop-filter:blur(10px)
+          }
+
+          .diagram svg {
+            width:100%; height:auto; max-height:52vh
+          }
+
+          .tagrow {
+            display:flex; gap:.55rem; flex-wrap:wrap; margin-top:.2rem
+          }
+
+          .tag {
+            font-size:.75rem; padding:.48rem .62rem; border-radius:999px; background:rgba(255, 255, 255, .04); border:1px solid var(--line); color:#cbd4dc
+          }
+
+          .flow {
+            display:grid; grid-template-columns:repeat(7, 1fr); gap:.5rem; align-items:center; margin-top:2rem
+          }
+
+          .node {
+            min-height:100px; border-radius:18px; padding:.8rem; background:rgba(255, 255, 255, .045); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; text-align:center; font-size:.84rem; font-weight:700
+          }
+
+          .arrow {
+            color:var(--red); font-size:1.2rem; text-align:center
+          }
+
+          .bodyviz {
+            position:relative; min-height:59vh; border-radius:30px; border:1px solid var(--line); background:radial-gradient(circle at 50% 20%, rgba(255, 196, 91, .09), transparent 30%), linear-gradient(145deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02)); display:grid; place-items:center; box-shadow:var(--shadow); overflow:hidden
+          }
+
+          .bodyviz:before {
+            content:""; position:absolute; inset:10% 18%; border-radius:50%; background:radial-gradient(circle, rgba(255, 93, 85, .1), transparent 62%); filter:blur(10px)
+          }
+
+          .statRow {
+            display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.2rem
+          }
+
+          .stat {
+            padding:1.2rem; border:1px solid var(--line); border-radius:22px; background:rgba(255, 255, 255, .035)
+          }
+
+          .stat strong {
+            display:block; font-size:clamp(2rem, 4vw, 3.7rem); letter-spacing:-.05em
+          }
+
+          .stat span {
+            display:block; color:var(--muted); font-size:.84rem; margin-top:.3rem; line-height:1.35
+          }
+
+          .compare {
+            display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.35rem
+          }
+
+          .compare .col {
+            border:1px solid var(--line); border-radius:26px; padding:1.35rem; background:linear-gradient(145deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02)); min-height:290px
+          }
+
+          .col h3 {
+            font-size:1.15rem; margin-bottom:.8rem
+          }
+
+          .col ul {
+            list-style:none; display:grid; gap:.65rem
+          }
+
+          .col li {
+            display:flex; gap:.65rem; align-items:flex-start; color:#d3dce4; line-height:1.38; font-size:.9rem
+          }
+
+          .dot {
+            width:9px; height:9px; border-radius:50%; margin-top:.4rem; flex:none; background:var(--red)
+          }
+
+          .vapes {
+            display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; align-items:center
+          }
+
+          .photoSmall {
+            height:26vh; border-radius:24px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow)
+          }
+
+          .photoSmall img {
+            width:100%; height:100%; object-fit:cover
+          }
+
+          .miniDevice {
+            border:1px solid var(--line); border-radius:24px; padding:1.1rem; display:flex; align-items:center; gap:1.1rem; background:rgba(255, 255, 255, .035)
+          }
+
+          .device {
+            width:110px; height:240px; border-radius:28px; background:linear-gradient(145deg, #242b33, #0d1116); border:2px solid rgba(255, 255, 255, .13); box-shadow:inset 0 0 0 5px rgba(255, 255, 255, .02), 0 20px 45px rgba(0, 0, 0, .3); position:relative; transform:rotate(7deg)
+          }
+
+          .device:before {
+            content:""; position:absolute; top:-17px; left:25px; width:57px; height:25px; border-radius:9px 9px 4px 4px; background:linear-gradient(90deg, #ffcc88, #ddd3c4 45%, #494f56);
+          }
+
+          .device:after {
+            content:"AEROSSOL"; position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(90deg); font-size:.7rem; letter-spacing:.18em; color:#8d9aa7
+          }
+
+          .footer {
+            position:absolute; left:6vw; right:6vw; bottom:2.2vh; display:flex; justify-content:space-between; align-items:center; color:#75808c; font-size:.72rem; letter-spacing:.05em; z-index:3
+          }
+
+          .footer .hint {
+            opacity:.75
+          }
+
+          .progress {
+            position:fixed; left:0; bottom:0; height:3px; background:linear-gradient(90deg, var(--red), var(--amber)); width:11.11%; z-index:20; box-shadow:0 0 14px rgba(255, 93, 85, .55); transition:width .45s ease
+          }
+
+          .controls {
+            position:fixed; right:2vw; bottom:2.3vh; z-index:25; display:flex; gap:.5rem
+          }
+
+          .controls button {
+            border:1px solid var(--line); width:42px; height:42px; border-radius:13px; background:rgba(14, 18, 23, .72); backdrop-filter:blur(12px); cursor:pointer; display:grid; place-items:center; transition:.2s transform, .2s background
+          }
+
+          .controls button:hover {
+            transform:translateY(-2px); background:rgba(255, 255, 255, .08)
+          }
+
+          .credits {
+            display:grid; gap:.8rem; margin-top:1.2rem; max-width:72ch
+          }
+
+          .credits a {
+            color:#dce4ea; text-decoration:none; border-bottom:1px dashed #687581
+          }
+
+          .credits p {
+            font-size:.76rem; line-height:1.45; color:#8d99a4
+          }
+
+          .curr {
+            display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start; margin-top:1.3rem
+          }
+
+          .currCode {
+            font-size:1rem; font-weight:900; color:#0b1114; background:var(--mint); padding:.72rem .8rem; border-radius:15px
+          }
+
+          .conclusions {
+            display:grid; grid-template-columns:repeat(4, 1fr); gap:.8rem; margin-top:1.35rem
+          }
+
+          .conclusions div {
+            padding:1rem; border:1px solid var(--line); border-radius:20px; background:rgba(255, 255, 255, .035); font-size:.88rem; line-height:1.4; color:#dbe2e8
+          }
+
+          .bigline {
+            font-size:clamp(1.3rem, 2.1vw, 1.8rem); line-height:1.35; color:#dde4ea; max-width:35ch
+          }
+
+          .reveal {
+            opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .7s cubic-bezier(.22, .61, .36, 1)
+          }
+
+          .active .reveal {
+            opacity:1; transform:none
+          }
+
+          .active .d1 {
+            transition-delay:.1s
+          }
+
+          .active .d2 {
+            transition-delay:.18s
+          }
+
+          .active .d3 {
+            transition-delay:.26s
+          }
+
+          .active .d4 {
+            transition-delay:.34s
+          }
+
+          .active .d5 {
+            transition-delay:.42s
+          }
+
+          @media(max-width:900px) {
+            .slide {
+              padding:5vh 5vw 11vh; overflow:auto
+            }
+
+            .two, .two.reverse {
+              grid-template-columns:1fr; gap:2rem
+            }
+
+            .hero {
+              min-height:42vh; max-height:48vh
+            }
+
+            .cards, .conclusions {
+              grid-template-columns:1fr 1fr
+            }
+
+            .flow {
+              grid-template-columns:repeat(2, 1fr)
+            }
+
+            .arrow {
+              display:none
+            }
+
+            .diagram {
+              min-height:auto
+            }
+
+            .bodyviz {
+              min-height:44vh
+            }
+
+            .vapes {
+              grid-template-columns:1fr
+            }
+
+            .photoSmall {
+              height:24vh
+            }
+
+            .compare, .splitCards, .statRow {
+              grid-template-columns:1fr
+            }
+
+            .footer {
+              left:5vw; right:5vw
+            }
+
+            .controls {
+              right:4vw; bottom:2.6vh
+            }
+
+            h1 {
+              font-size:clamp(2.8rem, 11vw, 5.2rem)
+            }
+
+            h2 {
+              font-size:clamp(2.25rem, 9vw, 4.3rem)
+            }
+          }
+
+          @media(max-width:560px) {
+            .cards, .conclusions {
+              grid-template-columns:1fr
+            }
+
+            .slide {
+              padding-bottom:13vh
+            }
+
+            .hero {
+              min-height:34vh
+            }
+
+            .topline {
+              font-size:.62rem
+            }
+
+            .footer .hint {
+              display:none
+            }
+
+            .controls button {
+              width:39px; height:39px
+            }
+          }
+
+          @media(prefers-reduced-motion:reduce) {
+            .slide, .reveal {
+              transition:none !important
+            }
+
+            .active .reveal {
+              transition:none
+            }
+          }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="slides" aria-live="polite">
+        <!-- 1 -->
+        <section class="slide active" data-title="Capa">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>Biologia • 2º A • 2026</span>
+            <span class="badge">01 / 09</span>
+          </div>
+          <div class="two">
+            <div class="content title-side">
+              <div class="kicker reveal d1">Drogas lícitas</div>
+              <h1 class="reveal d2">Tabaco <span class="red">&</span> Nicotina </h1>
+              <p class="lede reveal d3">Uma leitura biológica sobre <b>dependência</b>, efeitos no organismo e saúde coletiva — sem confundir legalidade com segurança. </p>
+              <div class="meta reveal d4">
+                <span>Luis</span>
+                <span>Yan</span>
+                <span>Cauã</span>
+                <span>Felipe</span>
+              </div>
+              <div class="quote reveal d5">“Lícita” descreve o <b>status legal</b>. Não é um selo de ausência de risco. </div>
+            </div>
+            <figure class="hero reveal d3">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Cigarette_smoking.jpg" alt="Cigarro aceso em fotografia de domínio público" loading="eager" onerror="this.style.display='none'" />
+              <figcaption class="caption">Imagem: Paolo Neo • domínio público • Wikimedia Commons</figcaption>
+            </figure>
+          </div>
+          <div class="footer">
+            <span>APRESENTAÇÃO • CIÊNCIAS DA NATUREZA</span>
+            <span class="hint">← / → navegar • F tela cheia</span>
+          </div>
+        </section>
+        <!-- 2 -->
+        <section class="slide" data-title="O que são drogas lícitas">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>01 • Conceito</span>
+            <span class="badge">02 / 09</span>
+          </div>
+          <div class="content">
+            <div class="kicker reveal d1">Antes de falar do cigarro</div>
+            <h2 class="reveal d2">O que significa <span class="amber em">“droga lícita”</span>? </h2>
+            <p class="lede reveal d3">Uma substância psicoativa pode alterar processos mentais e o funcionamento do organismo. A diferença entre lícita e ilícita é jurídica e regulatória — <b>não uma escala de inocência</b>. </p>
+            <div class="cards">
+              <div class="card reveal d2">
+                <div class="icon">⚖</div>
+                <b>Lícita</b>
+                <p>Seu uso ou comércio é permitido sob regras específicas. Tabaco é legal, mas fortemente regulamentado.</p>
+              </div>
+              <div class="card reveal d3">
+                <div class="icon">🧠</div>
+                <b>Psicoativa</b>
+                <p>Interage com o sistema nervoso e pode alterar percepção, humor, atenção ou comportamento.</p>
+              </div>
+              <div class="card reveal d4">
+                <div class="icon">⚠</div>
+                <b>Não é “segura”</b>
+                <p>O tabaco causa dependência e está associado a doenças em múltiplos sistemas do corpo.</p>
+              </div>
+            </div>
+            <p class="note reveal d5">Ideia-chave para explicar: <b>legalidade responde “pode ser comercializado sob quais regras?”; biologia responde “o que isso faz ao organismo?”</b>
+            </p>
+          </div>
+          <div class="footer">
+            <span>CONCEITO • SAÚDE INDIVIDUAL E COLETIVA</span>
+          </div>
+        </section>
+        <!-- 3 -->
+        <section class="slide" data-title="Tabaco e nicotina">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>02 • Neurobiologia</span>
+            <span class="badge">03 / 09</span>
+          </div>
+          <div class="two reverse">
+            <div class="diagram reveal d2">
+              <svg viewBox="0 0 700 600" role="img" aria-label="Diagrama simplificado do caminho da nicotina até o cérebro">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop stop-color="#ff5d55" />
+                    <stop offset="1" stop-color="#ffc45b" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="8" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <rect x="38" y="78" width="175" height="110" rx="26" fill="#131a20" stroke="#ffffff" stroke-opacity=".12" />
+                <text x="125" y="125" text-anchor="middle" fill="#f2f5f8" font-size="26" font-weight="800">Inalação</text>
+                <text x="125" y="158" text-anchor="middle" fill="#9daab6" font-size="18">fumaça/aerossol</text>
+                <path d="M214 134 C 298 134, 300 175, 355 175" stroke="url(#g1)" stroke-width="10" fill="none" filter="url(#glow)" />
+                <polygon points="350,160 390,175 350,190" fill="#ff8a63" />
+                <rect x="390" y="78" width="270" height="195" rx="30" fill="#111820" stroke="#ffffff" stroke-opacity=".12" />
+                <circle cx="525" cy="145" r="70" fill="#1b2731" stroke="#7de2c4" stroke-opacity=".6" stroke-width="3" />
+                <path d="M486 142 C512 102,559 111,576 140 C555 170,516 182,486 142Z" fill="#db7e54" opacity=".82" />
+                <circle cx="552" cy="151" r="9" fill="#ff5d55" />
+                <text x="525" y="238" text-anchor="middle" fill="#f2f5f8" font-size="24" font-weight="800">Cérebro</text>
+                <text x="525" y="292" text-anchor="middle" fill="#8fa0ad" font-size="17">nicotina liga-se a</text>
+                <text x="525" y="320" text-anchor="middle" fill="#8fa0ad" font-size="17">receptores nicotínicos</text>
+                <path d="M525 355 C525 410, 400 395, 318 395" stroke="#7de2c4" stroke-width="7" fill="none" />
+                <circle cx="305" cy="395" r="17" fill="#7de2c4" />
+                <rect x="65" y="335" width="255" height="130" rx="26" fill="#151c24" stroke="#ffffff" stroke-opacity=".1" />
+                <text x="192" y="379" text-anchor="middle" fill="#f2f5f8" font-size="24" font-weight="800">Resposta neural</text>
+                <text x="192" y="416" text-anchor="middle" fill="#aab4c0" font-size="17">liberação de neurotransmissores</text>
+                <text x="192" y="440" text-anchor="middle" fill="#ffc45b" font-size="17" font-weight="800">incluindo dopamina</text>
+                <text x="350" y="540" text-anchor="middle" fill="#6f7e8b" font-size="15">Esquema didático — não representa trajetos anatômicos em escala.</text>
+              </svg>
+            </div>
+            <div class="content title-side">
+              <div class="kicker reveal d1">Tabaco ≠ nicotina</div>
+              <h2 class="reveal d2">Duas ideias que se conectam.</h2>
+              <p class="lede reveal d3">
+                <b>Tabaco</b> é a matéria-prima usada em produtos fumígenos e outras formas de consumo. <b>Nicotina</b> é a principal substância responsável pela dependência.
+              </p>
+              <div class="tagrow reveal d4">
+                <span class="tag">sistema nervoso</span>
+                <span class="tag">receptores nicotínicos</span>
+                <span class="tag">dopamina</span>
+                <span class="tag">sistema de recompensa</span>
+              </div>
+              <p class="note reveal d5">A fumaça do cigarro não é “só nicotina”: a combustão do tabaco gera milhares de compostos, muitos deles tóxicos.</p>
+            </div>
+          </div>
+          <div class="footer">
+            <span>NEUROBIOLOGIA • NICOTINA</span>
+          </div>
+        </section>
+        <!-- 4 -->
+        <section class="slide" data-title="Dependência">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>03 • Dependência</span>
+            <span class="badge">04 / 09</span>
+          </div>
+          <div class="content">
+            <div class="kicker reveal d1">Por que é tão difícil parar?</div>
+            <h2 class="reveal d2">A nicotina cria um <span class="red">ciclo</span>. </h2>
+            <p class="lede reveal d3">A exposição repetida favorece adaptações no cérebro. O uso passa a ser reforçado pelo circuito de recompensa, enquanto a ausência da nicotina pode gerar sintomas de abstinência.</p>
+            <div class="flow reveal d4">
+              <div class="node">Nicotina <br>
+                <span class="muted">atinge o cérebro</span>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node">Recompensa <br>
+                <span class="muted">dopamina</span>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node">Repetição <br>
+                <span class="muted">aprendizado</span>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node">Tolerância <br>
+                <span class="muted">adaptação</span>
+              </div>
+              <div class="node">Abstinência <br>
+                <span class="muted">quando falta</span>
+              </div>
+              <div class="arrow">→</div>
+              <div class="node">Desejo/compulsão</div>
+              <div class="arrow">↺</div>
+              <div class="node">Novo consumo</div>
+            </div>
+            <div class="splitCards">
+              <div class="card reveal d4">
+                <div class="icon">+</div>
+                <b>Dependência física</b>
+                <p>O organismo se adapta à presença da nicotina. A retirada pode causar irritabilidade, ansiedade, dificuldade de concentração e forte desejo de fumar.</p>
+              </div>
+              <div class="card reveal d5">
+                <div class="icon">↻</div>
+                <b>Dependência comportamental</b>
+                <p>Rotinas e gatilhos — café, refeições, estresse, ambientes — podem ficar associados ao ato de fumar.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <span>DEPENDÊNCIA • RECOMPENSA • ABSTINÊNCIA</span>
+          </div>
+        </section>
+        <!-- 5 -->
+        <section class="slide" data-title="Efeitos no organismo">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>04 • Fisiologia humana</span>
+            <span class="badge">05 / 09</span>
+          </div>
+          <div class="two reverse">
+            <div class="bodyviz reveal d2">
+              <svg viewBox="0 0 420 680" width="86%" height="86%" aria-label="Ilustração anatômica estilizada do corpo humano com órgãos afetados">
+                <defs>
+                  <radialGradient id="org" cx="50%" cy="45%">
+                    <stop stop-color="#ff6c5f" stop-opacity=".95" />
+                    <stop offset="1" stop-color="#8b2927" stop-opacity=".55" />
+                  </radialGradient>
+                </defs>
+                <g fill="none" stroke="#d6dde3" stroke-opacity=".5" stroke-width="3">
+                  <circle cx="210" cy="92" r="48" />
+                  <path d="M165 145 Q210 122 255 145 Q276 182 267 255 L285 372 Q294 474 260 587 M160 145 Q144 194 153 255 L135 372 Q126 474 160 587" />
+                  <path d="M154 202 L91 305 M266 202 L329 305 M160 586 L140 660 M260 586 L280 660" />
+                </g>
+                <circle cx="210" cy="214" r="21" fill="url(#org)" />
+                <path d="M177 232 Q148 252 172 330 Q198 309 199 255Z" fill="url(#org)" />
+                <path d="M243 232 Q272 252 248 330 Q222 309 221 255Z" fill="url(#org)" />
+                <path d="M191 247 Q210 230 229 247 Q239 278 210 294 Q181 278 191 247Z" fill="#ffb46a" opacity=".75" />
+                <path d="M190 310 Q210 292 230 310 Q238 360 210 390 Q182 360 190 310Z" fill="#d79a5e" opacity=".65" />
+                <g stroke="#ff5d55" stroke-width="4">
+                  <path d="M280 202 L350 190" />
+                  <path d="M261 340 L350 340" />
+                  <path d="M180 420 L70 420" />
+                  <path d="M155 250 L66 240" />
+                </g>
+                <g fill="#f4f7fb" font-family="system-ui" font-size="16" font-weight="800">
+                  <text x="355" y="196">coração</text>
+                  <text x="355" y="346">pulmões</text>
+                  <text x="20" y="426">sistema imunológico</text>
+                  <text x="10" y="246">cérebro</text>
+                </g>
+                <g fill="#9daab6" font-family="system-ui" font-size="13">
+                  <text x="210" y="650" text-anchor="middle">Esquema estilizado para fins didáticos</text>
+                </g>
+              </svg>
+            </div>
+            <div class="content title-side">
+              <div class="kicker reveal d1">Não existe um único “efeito”</div>
+              <h2 class="reveal d2">O organismo inteiro pode entrar na história.</h2>
+              <div class="cards" style="grid-template-columns:1fr 1fr">
+                <div class="card reveal d2">
+                  <div class="icon">🧠</div>
+                  <b>Cérebro</b>
+                  <p>Nicotina ativa receptores nicotínicos e participa dos circuitos de recompensa e dependência.</p>
+                </div>
+                <div class="card reveal d3">
+                  <div class="icon">♥</div>
+                  <b>Cardiovascular</b>
+                  <p>Nicotina aumenta atividade simpática, frequência cardíaca e pressão arterial.</p>
+                </div>
+                <div class="card reveal d4">
+                  <div class="icon">◉</div>
+                  <b>Pulmões</b>
+                  <p>A fumaça do tabaco é tóxica para as vias respiratórias e está ligada a DPOC e cânceres.</p>
+                </div>
+                <div class="card reveal d5">
+                  <div class="icon">＋</div>
+                  <b>Defesas do corpo</b>
+                  <p>O tabagismo enfraquece a resposta imunológica e aumenta a vulnerabilidade a doenças.</p>
+                </div>
+              </div>
+              <p class="note reveal d5">
+                <b>Separação importante:</b> a nicotina explica sobretudo a dependência e vários efeitos cardiovasculares; muitos dos danos do cigarro vêm do conjunto de substâncias presentes na fumaça.
+              </p>
+            </div>
+          </div>
+          <div class="footer">
+            <span>FISIOLOGIA • SISTEMAS DO ORGANISMO</span>
+          </div>
+        </section>
+        <!-- 6 -->
+        <section class="slide" data-title="Doenças e consequências">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="two">
+            <div class="content title-side">
+              <div class="topline" style="margin-bottom:0">
+                <span>05 • Saúde pública</span>
+                <span class="badge">06 / 09</span>
+              </div>
+              <div class="kicker reveal d1">Doenças e consequências</div>
+              <h2 class="reveal d2">O custo é <span class="red">sistêmico</span>. </h2>
+              <p class="lede reveal d3">O tabaco é fator de risco para vários cânceres e para doenças cardiovasculares e respiratórias. A OMS estima <b>mais de 7 milhões de mortes por ano</b> relacionadas ao tabaco. </p>
+              <div class="statRow reveal d4">
+                <div class="stat">
+                  <strong>7M+</strong>
+                  <span>mortes por ano atribuídas ao tabaco, segundo a OMS.</span>
+                </div>
+                <div class="stat">
+                  <strong>1,6M+</strong>
+                  <span>não fumantes morrem por ano por exposição à fumaça de segunda mão, segundo a OMS.</span>
+                </div>
+              </div>
+              <div class="tagrow reveal d5">
+                <span class="tag">câncer</span>
+                <span class="tag">DPOC</span>
+                <span class="tag">AVC</span>
+                <span class="tag">doença cardiovascular</span>
+                <span class="tag">doenças respiratórias</span>
+              </div>
+            </div>
+            <figure class="hero reveal d3" style="min-height:62vh;background:#101419">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Adverse_effects_of_tobacco_smoking.svg" alt="Infográfico dos efeitos adversos do tabagismo no corpo" loading="lazy" onerror="this.style.display='none'" />
+              <div class="caption">Infográfico: Mikael Häggström • domínio público • Wikimedia Commons</div>
+            </figure>
+          </div>
+          <div class="footer">
+            <span>OMS • INCA • SAÚDE PÚBLICA</span>
+          </div>
+        </section>
+        <!-- 7 -->
+        <section class="slide" data-title="Tabagismo passivo e vapes">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>06 • Exposição e regulação</span>
+            <span class="badge">07 / 09</span>
+          </div>
+          <div class="content">
+            <div class="kicker reveal d1">Duas exposições, dois contextos</div>
+            <h2 class="reveal d2">Fumaça de segunda mão <span class="muted">×</span> vapes </h2>
+            <div class="vapes reveal d3">
+              <div class="compare" style="margin-top:0">
+                <div class="col">
+                  <h3 class="red">Tabagismo passivo</h3>
+                  <ul>
+                    <li>
+                      <span class="dot"></span>
+                      <span>É a inalação da fumaça de derivados do tabaco por quem não fuma.</span>
+                    </li>
+                    <li>
+                      <span class="dot"></span>
+                      <span>Está associado a câncer de pulmão, doença cardiovascular e problemas respiratórios.</span>
+                    </li>
+                    <li>
+                      <span class="dot"></span>
+                      <span>Não há nível seguro de exposição à fumaça do tabaco.</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <h3 class="amber">Vapes / DEFs</h3>
+                  <ul>
+                    <li>
+                      <span class="dot" style="background:var(--amber)"></span>
+                      <span>Podem conter nicotina e gerar aerossóis com substâncias tóxicas.</span>
+                    </li>
+                    <li>
+                      <span class="dot" style="background:var(--amber)"></span>
+                      <span>Não são inofensivos e seus riscos de longo prazo continuam sendo estudados.</span>
+                    </li>
+                    <li>
+                      <span class="dot" style="background:var(--amber)"></span>
+                      <span>
+                        <b>No Brasil:</b> fabricar, importar, vender, distribuir e divulgar DEFs é proibido; a Anvisa mantém a proibição pela RDC 855/2024. </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="content" style="padding:0;gap:1rem;justify-content:flex-start">
+                <div class="photoSmall">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Cigarette_smoking.jpg" alt="Fotografia de cigarro aceso" loading="lazy" onerror="this.style.display='none'" />
+                </div>
+                <div class="miniDevice">
+                  <div class="device"></div>
+                  <div>
+                    <b style="font-size:1.1rem">O ponto biológico</b>
+                    <p class="note" style="margin-top:.5rem">Mesmo quando o formato muda, a nicotina continua capaz de causar dependência.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="note reveal d5">Importante para a apresentação: <b>vape não é “droga lícita” no Brasil</b>. Ele entra aqui para comparar formas de exposição à nicotina e explicar a regulação sanitária. </p>
+          </div>
+          <div class="footer">
+            <span>ANVISA • INCA • OMS</span>
+          </div>
+        </section>
+        <!-- 8 -->
+        <section class="slide" data-title="Adolescentes, prevenção e tratamento">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="topline">
+            <span>07 • Juventude e cuidado</span>
+            <span class="badge">08 / 09</span>
+          </div>
+          <div class="two reverse">
+            <div class="content title-side">
+              <div class="kicker reveal d1">Por que isso importa na adolescência?</div>
+              <h2 class="reveal d2">O cérebro ainda está <span class="mint">em desenvolvimento</span>. </h2>
+              <p class="lede reveal d3">A OMS destaca que a nicotina é especialmente prejudicial a crianças, adolescentes e jovens adultos. A exposição nessa fase pode afetar processos ligados à atenção e aprendizagem e aumentar o risco de dependência duradoura.</p>
+              <div class="cards" style="grid-template-columns:1fr 1fr">
+                <div class="card reveal d3">
+                  <div class="icon">01</div>
+                  <b>Prevenção</b>
+                  <p>Informação científica, ambientes sem fumaça, proteção contra marketing e fortalecimento de escolhas conscientes.</p>
+                </div>
+                <div class="card reveal d4">
+                  <div class="icon">02</div>
+                  <b>Tratamento</b>
+                  <p>O SUS oferece cuidado para cessação do tabagismo, com acompanhamento e, quando indicado, medicamentos.</p>
+                </div>
+              </div>
+              <div class="quote reveal d5">
+                <b>Porta de entrada no SUS:</b> Unidade Básica de Saúde. O Ministério da Saúde também orienta pelo <b>Disque Saúde 136</b>.
+              </div>
+            </div>
+            <div class="diagram reveal d2">
+              <svg viewBox="0 0 620 470" aria-label="Infográfico sobre prevenção e tratamento">
+                <defs>
+                  <linearGradient id="m1" x1="0" x2="1">
+                    <stop stop-color="#7de2c4" />
+                    <stop offset="1" stop-color="#ffc45b" />
+                  </linearGradient>
+                </defs>
+                <circle cx="150" cy="160" r="90" fill="#111a1f" stroke="#7de2c4" stroke-width="3" />
+                <path d="M110 155 C116 118,170 105,193 142 C208 170,193 196,160 208 C126 205,104 183,110 155Z" fill="#dc845d" opacity=".85" />
+                <text x="150" y="285" text-anchor="middle" fill="#f4f7fb" font-size="25" font-weight="900">Cérebro jovem</text>
+                <text x="150" y="315" text-anchor="middle" fill="#9daab6" font-size="16">mais vulnerável à dependência</text>
+                <path d="M250 160 H365" stroke="url(#m1)" stroke-width="7" />
+                <polygon points="360,145 395,160 360,175" fill="#ffc45b" />
+                <rect x="398" y="78" width="175" height="90" rx="20" fill="#141b22" stroke="#ffffff" stroke-opacity=".1" />
+                <text x="485" y="116" text-anchor="middle" fill="#f4f7fb" font-size="21" font-weight="900">Prevenção</text>
+                <text x="485" y="145" text-anchor="middle" fill="#9daab6" font-size="15">informação + proteção</text>
+                <rect x="398" y="202" width="175" height="90" rx="20" fill="#141b22" stroke="#ffffff" stroke-opacity=".1" />
+                <text x="485" y="240" text-anchor="middle" fill="#f4f7fb" font-size="21" font-weight="900">Cuidado</text>
+                <text x="485" y="269" text-anchor="middle" fill="#9daab6" font-size="15">UBS + acompanhamento</text>
+                <rect x="398" y="326" width="175" height="90" rx="20" fill="#141b22" stroke="#ffffff" stroke-opacity=".1" />
+                <text x="485" y="364" text-anchor="middle" fill="#f4f7fb" font-size="21" font-weight="900">Cessação</text>
+                <text x="485" y="393" text-anchor="middle" fill="#9daab6" font-size="15">136 • SUS</text>
+                <text x="80" y="390" fill="#7f8d99" font-size="15">A dependência é uma condição tratável.</text>
+              </svg>
+            </div>
+          </div>
+          <div class="footer">
+            <span>JUVENTUDE • PREVENÇÃO • SUS</span>
+          </div>
+        </section>
+        <!-- 9 -->
+        <section class="slide" data-title="Conclusão e referências">
+          <div class="grid-bg"></div>
+          <div class="noise"></div>
+          <div class="content">
+            <div class="topline">
+              <span>08 • Fechamento</span>
+              <span class="badge">09 / 09</span>
+            </div>
+            <div class="kicker reveal d1">Para lembrar na hora de falar</div>
+            <h2 class="reveal d2">Legalidade <span class="muted">≠</span> segurança. </h2>
+            <p class="bigline reveal d3">O tabaco é uma droga legalizada e regulada, mas a nicotina é altamente viciante e o consumo de tabaco pode causar doenças graves e morte prematura.</p>
+            <div class="conclusions">
+              <div class="reveal d2">
+                <b class="red">1.</b>
+                <br>Dependência: a nicotina atua em circuitos de recompensa do cérebro.
+              </div>
+              <div class="reveal d3">
+                <b class="amber">2.</b>
+                <br>Dano sistêmico: coração, pulmões, cérebro e outros órgãos são afetados.
+              </div>
+              <div class="reveal d4">
+                <b class="mint">3.</b>
+                <br>Juventude: começar cedo aumenta o risco de dependência duradoura.
+              </div>
+              <div class="reveal d5">
+                <b>4.</b>
+                <br>Saúde coletiva: prevenção, regulação e tratamento fazem parte da resposta.
+              </div>
+            </div>
+            <div class="curr reveal d4">
+              <div class="currCode">EM13CNT207</div>
+              <div>
+                <b>Conexão com o Currículo Paulista</b>
+                <p class="note" style="margin-top:.35rem">Dialoga com o estudo da fisiologia humana, do sistema nervoso e da saúde e bem-estar do adolescente, incluindo álcool e drogas, além da análise de vulnerabilidades e ações de promoção da saúde.</p>
+              </div>
+            </div>
+            <div class="credits reveal d5">
+              <p>
+                <b>Fontes principais:</b> OMS — <i>Tobacco and nicotine</i> (26 jun. 2026); Ministério da Saúde — PCDT Tabagismo e materiais de 2026; INCA — materiais de controle do tabagismo; Anvisa — Cigarro eletrônico / RDC 855/2024; Currículo Paulista — Organizador curricular de Ciências da Natureza.
+              </p>
+              <p>
+                <b>Imagens:</b> Paolo Neo, “Cigarette smoking” (domínio público); NIH Image Gallery, “Brain side view” (domínio público); Mikael Häggström, “Adverse effects of tobacco smoking” (domínio público), via Wikimedia Commons.
+              </p>
+              <p>
+                <b>Links:</b>
+                <a href="https://www.who.int/en/news-room/fact-sheets/detail/tobacco" target="_blank" rel="noreferrer">OMS</a> · <a href="https://www.gov.br/anvisa/pt-br/assuntos/tabaco/cigarro-eletronico" target="_blank" rel="noreferrer">Anvisa</a> · <a href="https://www.gov.br/saude/pt-br/assuntos/pcdt/t/tabagismo" target="_blank" rel="noreferrer">Ministério da Saúde</a> · <a href="https://www.inca.gov.br/" target="_blank" rel="noreferrer">INCA</a> · <a href="https://efape.educacao.sp.gov.br/curriculopaulista/" target="_blank" rel="noreferrer">Currículo Paulista</a>
+              </p>
+            </div>
+          </div>
+          <div class="footer">
+            <span>FIM • LUIS • YAN • CAUÃ • FELIPE</span>
+            <span class="hint">R para reiniciar</span>
+          </div>
+        </section>
+      </div>
+      <div class="progress" id="progress"></div>
+      <div class="controls" aria-label="Controles da apresentação">
+        <button id="prev" aria-label="Slide anterior">←</button>
+        <button id="next" aria-label="Próximo slide">→</button>
+        <button id="fs" aria-label="Tela cheia">⛶</button>
+      </div>
+    </div>
+    <script>
+      (() => {
+        const slides = [...document.querySelectorAll('.slide')];
+        const progress = document.getElementById('progress');
+        let index = 0;
+        let busy = false;
+        const setSlide = (nextIndex, direction = 1) => {
+          if (busy || nextIndex === index || nextIndex < 0 || nextIndex >= slides.length) return;
+          busy = true;
+          const current = slides[index];
+          const next = slides[nextIndex];
+          current.classList.remove('active');
+          current.classList.toggle('exit', direction > 0);
+          next.classList.remove('exit');
+          next.classList.add('active');
+          index = nextIndex;
+          progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+          setTimeout(() => {
+            current.classList.remove('exit');
+            busy = false;
+          }, 680);
+        };
+        const next = () => setSlide(index + 1, 1);
+        const prev = () => setSlide(index - 1, -1);
+        document.getElementById('next').addEventListener('click', next);
+        document.getElementById('prev').addEventListener('click', prev);
+        document.getElementById('fs').addEventListener('click', async () => {
+          try {
+            if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+            else await document.exitFullscreen();
+          } catch (e) {}
+        });
+        document.addEventListener('keydown', e => {
+          if (['ArrowRight', 'PageDown', ' '].includes(e.key)) {
+            e.preventDefault();
+            next();
+          }
+          if (['ArrowLeft', 'PageUp'].includes(e.key)) {
+            e.preventDefault();
+            prev();
+          }
+          if (e.key.toLowerCase() === 'f') document.getElementById('fs').click();
+          if (e.key.toLowerCase() === 'r') {
+            slides[index].classList.remove('active');
+            index = 0;
+            slides[0].classList.remove('exit');
+            slides[0].classList.add('active');
+            progress.style.width = '11.11%';
+          }
+          if (e.key === 'Home') {
+            slides[index].classList.remove('active');
+            index = 0;
+            slides[0].classList.add('active');
+            progress.style.width = '11.11%';
+          }
+          if (e.key === 'End') {
+            slides[index].classList.remove('active');
+            index = slides.length - 1;
+            slides[index].classList.add('active');
+            progress.style.width = '100%';
+          }
+        });
+        let touchX = null;
+        document.addEventListener('touchstart', e => touchX = e.changedTouches[0].clientX, {
+          passive: true
+        });
+        document.addEventListener('touchend', e => {
+          if (touchX === null) return;
+          const dx = e.changedTouches[0].clientX - touchX;
+          if (Math.abs(dx) > 55) dx < 0 ? next() : prev();
+          touchX = null;
+        }, {
+          passive: true
+        });
+        progress.style.width = '11.11%';
+      })();
+    </script>
+  </body>
+</html>
