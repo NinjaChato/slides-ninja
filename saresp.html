@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071c26">
+<meta name="color-scheme" content="dark">
+<title>Do SARESP para o mundo — Luis Guilherme</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap');
+
+:root{
+  --ink:#f4f0e8; --muted:#b9c2c0; --night:#071c26; --deep:#0b2d38;
+  --teal:#65d4c4; --gold:#f4c56b;
+  --line:rgba(244,240,232,.16); --line-soft:rgba(244,240,232,.08);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --pad-x:clamp(22px,6vw,92px); --pad-y:clamp(30px,5vw,72px);
+  --clear-bottom:calc(118px + env(safe-area-inset-bottom, 0px));
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{
+  margin:0;width:100%;height:100%;
+  background:#061820;color:var(--ink);
+  font-family:'DM Sans',sans-serif;overflow:hidden;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;z-index:10;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+
+/* ---------- DECK / SLIDE ---------- */
+.deck{height:100vh;height:100dvh;width:100%;position:relative}
+
+.slide{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  overflow-x:hidden;overflow-y:auto;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  isolation:isolate;
+  padding:var(--pad-y) var(--pad-x) var(--clear-bottom);
+  background:
+    radial-gradient(circle 31vw at calc(100% + 1vw) calc(100% + 7vw),
+      transparent 0,
+      transparent calc(21vw - 1px),
+      rgba(101,212,196,.18) calc(21vw - 1px),
+      rgba(101,212,196,.18) calc(21vw + 1px),
+      rgba(101,212,196,.025) calc(21vw + 1px),
+      rgba(101,212,196,.025) 26vw,
+      rgba(101,212,196,.02) 26vw,
+      rgba(101,212,196,.02) 31vw,
+      transparent 31vw
+    ),
+    radial-gradient(ellipse at 85% 5%,rgba(101,212,196,.12),transparent 35%),
+    linear-gradient(135deg,#071c26,#0b2b36 58%,#102f39);
+  scrollbar-width:thin;scrollbar-color:rgba(101,212,196,.3) transparent;
+}
+.slide::-webkit-scrollbar{width:6px}
+.slide::-webkit-scrollbar-thumb{background:rgba(101,212,196,.28);border-radius:3px}
+.slide.active{display:flex}
+.slide.enter-right{animation:slideInRight .55s var(--ease) both}
+.slide.enter-left{animation:slideInLeft .55s var(--ease) both}
+@keyframes slideInRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.slide.active .kicker,.slide.active .eyebrow{animation:fadeUp .5s .05s var(--ease) both}
+.slide.active h1,.slide.active h2{animation:fadeUp .6s .12s var(--ease) both}
+.slide.active .lead{animation:fadeUp .6s .22s var(--ease) both}
+.slide.active .cover-meta,.slide.active .thanks{animation:fadeUp .6s .3s var(--ease) both}
+.slide.active .cards,.slide.active .list,.slide.active .route,
+.slide.active .timeline,.slide.active .results,.slide.active .quote,
+.slide.active .credit{animation:fadeUp .6s .32s var(--ease) both}
+.slide.active .photo,.slide.active .logo-placeholder{animation:fadeUp .7s .28s var(--ease) both}
+.slide.active .footer{animation:fadeUp .5s .45s var(--ease) both}
+
+/* ---------- TIPOGRAFIA ---------- */
+h1,h2,h3,p{margin:0}
+h1,h2{
+  font-family:'Playfair Display',serif;font-weight:500;
+  letter-spacing:-.035em;line-height:1.02;text-wrap:balance;
+}
+h1{font-size:clamp(42px,8.4vw,112px);max-width:900px;margin-bottom:24px}
+h2{font-size:clamp(32px,5.4vw,68px);max-width:900px;margin-bottom:20px}
+h3{font-size:18px;line-height:1.25;margin-bottom:10px}
+p{font-size:clamp(15px,1.5vw,19px);line-height:1.6;color:#d5ddda;max-width:720px}
+.lead{font-size:clamp(17px,2vw,24px);line-height:1.5;color:#e2e7e2;max-width:650px}
+.gold{color:var(--gold)}
+.teal{color:var(--teal)}
+.muted{color:var(--muted)}
+
+.kicker{
+  font:500 11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--teal);display:flex;align-items:center;gap:12px;
+  margin-bottom:22px;flex-shrink:0;
+}
+.kicker::before{content:"";height:1px;width:30px;background:var(--teal);flex-shrink:0}
+
+/* ---------- LAYOUT ---------- */
+.layout{
+  display:grid;grid-template-columns:1.05fr .95fr;
+  gap:clamp(24px,5vw,72px);align-items:center;
+  flex:1 0 auto;min-width:0;
+}
+.layout.wide-left{grid-template-columns:1.2fr .8fr}
+.layout.equal{grid-template-columns:1fr 1fr}
+.layout > *{min-width:0}
+.stack{display:flex;flex-direction:column;gap:15px;min-width:0}
+
+/* ---------- PHOTOS ---------- */
+.photo{
+  position:relative;min-height:190px;min-width:0;
+  border:1px dashed rgba(101,212,196,.45);border-radius:12px;overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(101,212,196,.1),rgba(244,197,107,.05)),
+    repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.025) 14px 15px);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  transition:border-color .25s,border-style .25s;
+  contain:layout paint;
+}
+.photo.has-image{border-style:solid;border-color:rgba(101,212,196,.5)}
+.photo img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:none;
+  transition:transform .6s var(--ease);
+}
+.photo.has-image img{display:block}
+.photo.has-image:hover img{transform:scale(1.04)}
+.photo.has-image .placeholder-content{display:none}
+
+.placeholder-content{padding:20px;max-width:320px;position:relative;z-index:1}
+.placeholder-icon{font-size:32px;color:var(--gold);display:block;margin-bottom:12px;line-height:1}
+.placeholder-label{
+  display:block;font:11px 'DM Mono',monospace;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);line-height:1.6;margin-bottom:4px;
+}
+.placeholder-sub{
+  display:inline-block;margin-top:12px;
+  font:11px 'DM Mono',monospace;letter-spacing:.02em;color:var(--teal);
+  padding:5px 12px;border-radius:4px;
+  background:rgba(101,212,196,.08);border:1px dashed rgba(101,212,196,.35);
+}
+.photo.small{min-height:150px}
+.photo.tall{min-height:340px}
+.photo.hero{min-height:380px}
+
+/* ---------- CARDS ---------- */
+.cards{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:12px;margin-top:clamp(18px,3vh,28px);
+}
+.card{
+  padding:18px 20px;border:1px solid var(--line);
+  background:rgba(255,255,255,.035);border-radius:10px;
+  transition:background .25s,border-color .25s,transform .25s;
+}
+@media(hover:hover){
+  .card:hover{
+    background:rgba(255,255,255,.06);
+    border-color:rgba(101,212,196,.35);
+    transform:translateY(-2px);
+  }
+}
+.card .num{font:11px 'DM Mono',monospace;color:var(--gold);margin-bottom:12px;letter-spacing:.04em}
+.card p{font-size:14px;line-height:1.5;color:#c7d2d0}
+
+/* ---------- RESULTS ---------- */
+.results{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;margin-top:clamp(18px,3vh,24px);
+}
+.result{
+  padding:12px 8px;border:1px solid var(--line-soft);
+  border-radius:10px;background:rgba(255,255,255,.03);
+  text-align:center;transition:border-color .25s,background .25s;
+}
+.result .r-num{
+  display:block;font-family:'Playfair Display',serif;font-weight:600;
+  font-size:clamp(20px,2.4vw,28px);line-height:1;color:var(--ink);margin-bottom:6px;
+}
+.result .r-label{
+  display:block;font:9px 'DM Mono',monospace;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);line-height:1.3;
+}
+.result.highlight{
+  border-color:rgba(244,197,107,.5);
+  background:linear-gradient(135deg,rgba(244,197,107,.12),rgba(244,197,107,.04));
+  box-shadow:0 0 0 1px rgba(244,197,107,.15),0 8px 24px rgba(244,197,107,.08);
+}
+.result.highlight .r-num{color:var(--gold)}
+.result.highlight .r-label{color:var(--gold)}
+
+/* ---------- QUOTE ---------- */
+.quote{
+  border-left:2px solid var(--gold);padding:7px 0 7px 22px;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(20px,2.8vw,32px);line-height:1.3;
+  max-width:630px;margin-top:clamp(24px,4vh,32px);color:var(--ink);
+}
+
+/* ---------- ROUTE ---------- */
+.route{
+  display:flex;align-items:center;gap:0;
+  margin:clamp(26px,4vh,36px) 0 clamp(18px,3vh,26px);
+  max-width:790px;
+}
+.route-step{
+  flex:1;position:relative;padding-top:24px;min-width:0;
+  font:10px 'DM Mono',monospace;letter-spacing:.05em;
+  color:var(--muted);text-transform:uppercase;
+}
+.route-step::before{
+  content:"";position:absolute;top:0;left:0;
+  width:10px;height:10px;border:2px solid var(--teal);
+  background:var(--night);border-radius:50%;z-index:1;
+}
+.route-step:not(:last-child)::after{
+  content:"";position:absolute;top:5px;left:10px;right:0;
+  height:1px;background:linear-gradient(90deg,var(--teal),rgba(101,212,196,.2));
+}
+.route-step b{
+  display:block;font-size:13px;color:var(--ink);margin-top:5px;
+  font-weight:600;word-break:break-word;overflow-wrap:anywhere;
+}
+
+/* ---------- TIMELINE ---------- */
+.timeline{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  margin-top:clamp(20px,3.5vh,28px);
+}
+.time-item{
+  border-top:1px solid var(--line);padding:17px 15px 0 0;position:relative;
+}
+.time-item::before{
+  content:"";position:absolute;top:-4px;left:0;
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+}
+.time-item small{
+  font:10px 'DM Mono',monospace;color:var(--teal);
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.time-item p{font-size:13px;line-height:1.5;margin-top:9px}
+
+/* ---------- LIST ---------- */
+.list{
+  list-style:none;padding:0;margin:clamp(20px,3vh,28px) 0 0;
+  max-width:680px;
+}
+.list li{
+  display:flex;gap:15px;padding:13px 0;
+  border-bottom:1px solid var(--line-soft);
+  font-size:clamp(15px,1.4vw,17px);line-height:1.5;color:#dce4df;
+}
+.list li:last-child{border-bottom:0}
+.list li::before{
+  content:"↗";font:16px 'DM Mono',monospace;color:var(--gold);
+  flex-shrink:0;line-height:1.4;
+}
+
+/* ---------- THREE PHOTOS ---------- */
+.three-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;grid-auto-rows:1fr;min-height:340px}
+.three-photos .photo{min-height:160px}
+.three-photos .photo:first-child{grid-row:span 2;min-height:340px}
+
+/* ---------- FOOTER ---------- */
+.footer{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  flex-shrink:0;margin-top:clamp(20px,3vh,32px);padding-top:16px;
+  border-top:1px solid var(--line-soft);
+  font:10px 'DM Mono',monospace;letter-spacing:.14em;
+  color:#a7b8b6;text-transform:uppercase;
+}
+.footer .brand{display:flex;align-items:center;gap:9px}
+.brand-mark{
+  width:8px;height:8px;background:var(--teal);transform:rotate(45deg);
+  flex-shrink:0;box-shadow:0 0 8px rgba(101,212,196,.5);
+}
+
+/* ---------- COVER ---------- */
+.cover-content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;justify-content:center;
+  flex:1 0 auto;min-width:0;
+  max-width:min(900px, calc(100% - 38vw));
+}
+.cover .eyebrow{
+  font:11px 'DM Mono',monospace;letter-spacing:.2em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:28px;
+}
+.cover h1{margin-bottom:22px}
+.cover h1 span{display:block;color:var(--teal);font-style:italic}
+.cover .cover-meta{
+  margin-top:34px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  font:11px 'DM Mono',monospace;letter-spacing:.1em;
+  color:var(--muted);text-transform:uppercase;
+}
+.cover .cover-meta b{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;
+}
+.cover-art{
+  position:absolute;right:5vw;top:12%;
+  width:31vw;height:70%;max-width:480px;min-width:250px;
+  border-radius:48% 48% 8px 8px;overflow:hidden;
+  border:1px solid rgba(101,212,196,.5);
+  transform:rotate(2deg);
+  box-shadow:0 35px 100px rgba(0,0,0,.4);
+  z-index:1;contain:layout paint;
+}
+.cover-art::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,transparent 25%,rgba(7,28,38,.85)),
+    radial-gradient(ellipse at 50% 25%,rgba(244,197,107,.22),transparent 35%);
+}
+.cover-art .photo{height:100%;min-height:0;border:0;border-radius:0}
+
+/* ---------- FINAL ---------- */
+.final h2{font-size:clamp(36px,6.4vw,84px);max-width:850px}
+.thanks{
+  font:12px 'DM Mono',monospace;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-top:22px;
+}
+.credit{
+  font:11px 'DM Mono',monospace;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-top:18px;
+}
+.footnote{font-size:11px!important;color:#91a8a7!important;margin-top:18px}
+.logo-placeholder{
+  border:1px dashed rgba(255,255,255,.35);padding:12px 14px;
+  display:inline-flex;gap:10px;align-items:center;
+  font:10px 'DM Mono',monospace;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.08em;border-radius:4px;
+}
+
+/* ---------- NOTES ---------- */
+.notes{display:none}
+body.notes-on .slide.active .notes{
+  display:block;position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(96px + env(safe-area-inset-bottom, 0px));
+  width:min(860px,calc(100vw - 32px));
+  max-height:30vh;overflow-y:auto;
+  padding:16px 20px;
+  background:rgba(6,24,32,.96);border:1px solid var(--teal);border-radius:12px;
+  font:400 14px/1.55 'DM Sans',sans-serif;color:#d5ddda;
+  z-index:35;box-shadow:0 20px 60px rgba(0,0,0,.5);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+
+/* ---------- CONTROLS ---------- */
+.controls{
+  position:fixed;bottom:max(16px,env(safe-area-inset-bottom,16px));
+  left:50%;transform:translateX(-50%);z-index:30;
+  display:flex;align-items:center;gap:6px;padding:6px;
+  background:rgba(7,28,38,.82);border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;box-shadow:0 12px 40px rgba(0,0,0,.4);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.controls button{
+  font:11px 'DM Mono',monospace;letter-spacing:.06em;
+  color:var(--ink);background:transparent;border:0;
+  padding:10px 16px;border-radius:999px;cursor:pointer;
+  transition:background .2s,color .2s;
+}
+.controls button:hover:not(:disabled){background:rgba(101,212,196,.15);color:var(--teal)}
+.controls button:disabled{opacity:.3;cursor:default}
+.counter{
+  font:11px 'DM Mono',monospace;color:var(--muted);
+  min-width:56px;text-align:center;padding:0 4px;
+}
+
+/* ---------- DOTS ---------- */
+.dots{
+  position:fixed;
+  bottom:calc(max(16px, env(safe-area-inset-bottom,16px)) + 54px);
+  left:50%;transform:translateX(-50%);z-index:29;
+  display:flex;gap:7px;padding:6px 10px;
+  background:rgba(7,28,38,.6);border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.25);border:0;padding:0;cursor:pointer;
+  transition:background .2s,transform .2s;
+}
+.dot:hover{background:rgba(255,255,255,.55)}
+.dot.active{
+  background:var(--teal);transform:scale(1.5);
+  box-shadow:0 0 8px rgba(101,212,196,.6);
+}
+
+/* ---------- TOP TOOLS ---------- */
+.top-tools{
+  position:fixed;top:max(14px,env(safe-area-inset-top,0px));right:16px;
+  z-index:30;display:flex;gap:6px;
+}
+.top-tools button{
+  font:10px 'DM Mono',monospace;letter-spacing:.06em;
+  color:var(--ink);background:rgba(7,28,38,.7);
+  border:1px solid rgba(255,255,255,.18);
+  padding:8px 11px;border-radius:6px;cursor:pointer;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .2s,border-color .2s,color .2s;
+}
+.top-tools button:hover{background:rgba(23,72,85,.9);border-color:var(--teal)}
+.top-tools button.active{
+  background:rgba(101,212,196,.2);border-color:var(--teal);color:var(--teal);
+}
+
+/* ---------- PROGRESS ---------- */
+.progress{
+  position:fixed;bottom:0;left:0;height:3px;width:10%;
+  background:var(--teal);box-shadow:0 0 12px rgba(101,212,196,.6);
+  z-index:40;transition:width .3s var(--ease);
+}
+button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .cover-content{max-width:100%}
+  .cover-art{opacity:.15;right:-10vw;top:18%;width:55vw;height:60%}
+  .cover-art .placeholder-content{display:none}
+  .results{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:820px){
+  :root{--pad-y:58px;--pad-x:22px;--clear-bottom:calc(108px + env(safe-area-inset-bottom,0px))}
+  h1{font-size:clamp(40px,11vw,64px)}
+  h2{font-size:clamp(30px,8.4vw,48px)}
+  .lead{font-size:clamp(16px,4.4vw,19px)}
+  p{font-size:clamp(15px,4vw,17px)}
+  .layout,.layout.wide-left,.layout.equal{
+    grid-template-columns:1fr;gap:22px;align-items:start;
+  }
+  .final h2{font-size:clamp(34px,9vw,52px)}
+  .footer{margin-top:26px}
+  .cards{gap:10px}
+  .card{padding:15px 16px}
+  .timeline{grid-template-columns:1fr 1fr;gap:0 18px}
+  .photo.hero,.photo.tall{min-height:240px}
+  .three-photos{min-height:auto}
+  .three-photos .photo:first-child{min-height:260px}
+  .cover .cover-meta{gap:10px;font-size:10px}
+  .top-tools{top:8px;right:8px;gap:5px}
+  .top-tools button{padding:7px 9px;font-size:9px}
+}
+@media(max-width:600px){
+  .route{
+    overflow-x:auto;overflow-y:hidden;
+    scrollbar-width:none;padding-bottom:8px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .route::-webkit-scrollbar{display:none}
+  .route-step{flex:0 0 auto;min-width:100px}
+  .controls button{padding:10px 14px;font-size:0}
+  .controls button::before{font-size:16px;font-family:'DM Mono',monospace}
+  #prev::before{content:"←"}
+  #next::before{content:"→"}
+}
+@media(max-width:520px){
+  .results{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .result.highlight{grid-column:span 2}
+  .three-photos{grid-template-columns:1fr}
+  .three-photos .photo:first-child{grid-row:auto;min-height:200px}
+  .three-photos .photo{min-height:180px}
+}
+@media(max-width:420px){
+  .cards{grid-template-columns:1fr}
+  .footer{font-size:9px;letter-spacing:.1em}
+  .counter{min-width:50px}
+  .dots{display:none}
+  :root{--clear-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .timeline{grid-template-columns:1fr;gap:0}
+  .time-item{padding:14px 15px 14px 20px;border-top:0;border-left:1px solid var(--line)}
+  .time-item::before{top:20px;left:-4px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+/* ---------- PRINT (revisado) ---------- */
+@page {
+  size: 16in 9in;
+  margin: 0;
+}
+@media print{
+  html,body{
+    width:100%;height:auto;
+    overflow:visible;background:#071c26;
+  }
+  body::before{display:none}
+  .deck{width:100%;height:auto}
+
+  .slide{
+    display:flex!important;position:relative;inset:auto;
+    width:100%;height:9in;min-height:9in;max-height:9in;
+    overflow:hidden;
+    padding:0.5in 0.65in;
+    box-sizing:border-box;
+    page-break-after:always;break-after:page;
+    animation:none!important;
+    scrollbar-width:none;
+  }
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .slide::-webkit-scrollbar{display:none}
+
+  .slide.active .kicker,.slide.active .eyebrow,
+  .slide.active h1,.slide.active h2,.slide.active .lead,
+  .slide.active .cover-meta,.slide.active .thanks,
+  .slide.active .cards,.slide.active .list,.slide.active .route,
+  .slide.active .timeline,.slide.active .results,.slide.active .quote,
+  .slide.active .credit,.slide.active .photo,.slide.active .logo-placeholder,
+  .slide.active .footer{animation:none!important;opacity:1!important;transform:none!important}
+
+  .controls,.top-tools,.progress,.notes,.dots{display:none!important}
+  .slide .footer{margin-top:auto}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style>
+</head>
+<body>
+<div class="top-tools">
+<button id="notesToggle" title="Mostrar/ocultar notas">NOTAS</button>
+<button id="fullscreen">TELA CHEIA ⛶</button>
+<button id="print">EXPORTAR PDF ↗</button>
+</div>
+
+<main class="deck" id="deck">
+
+<!-- 01 · CAPA -->
+<section class="slide active cover" data-title="Capa">
+  <div class="cover-content">
+    <div class="eyebrow">Uma história de educação, coragem e descoberta</div>
+    <h1>Do SARESP<br><span>para o mundo.</span></h1>
+    <p class="lead">Como uma avaliação da rede estadual abriu caminho para uma experiência do outro lado do planeta.</p>
+    <div class="cover-meta"><b></b> Luis Guilherme Batista Nunes <span>·</span> Guaratinguetá, SP <span>·</span> Adelaide, Austrália <span>·</span> 2026</div>
+  </div>
+  <div class="cover-art">
+    <div class="photo">
+      <img src="fotos/capa.jpg" alt="Foto de capa">
+      <div class="placeholder-content">
+        <span class="placeholder-icon">↗</span>
+        <span class="placeholder-label">Sua foto de capa</span>
+        <span class="placeholder-sub">fotos/capa.jpg</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Minha experiência</span><span>01 / 10</span></div>
+  <aside class="notes">Abra contando que a apresentação não é só sobre viajar: é sobre como a educação pode abrir portas. Apresente o destino e diga que vai compartilhar sua experiência real.</aside>
+</section>
+
+<!-- 02 · SARESP -->
+<section class="slide" data-title="O que é o SARESP?">
+  <div class="kicker">01 / A escola como ponto de partida</div>
+  <div class="layout">
+    <div>
+      <h2>O SARESP é mais do que <span class="teal">uma prova.</span></h2>
+      <p class="lead">O SARESP — Sistema de Avaliação de Rendimento Escolar do Estado de São Paulo — é uma avaliação externa de larga escala aplicada pela Seduc-SP. Ele produz indicadores sobre a aprendizagem e orienta políticas públicas de educação.</p>
+      <div class="cards">
+        <div class="card"><div class="num">01 — DIAGNOSTICAR</div><h3>Entender a aprendizagem</h3><p>O SARESP identifica o que os estudantes aprenderam e onde ainda é preciso avançar.</p></div>
+        <div class="card"><div class="num">02 — ORIENTAR</div><h3>Subsidiar políticas públicas</h3><p>Os resultados apoiam decisões pedagógicas e ações de recuperação e aprofundamento.</p></div>
+      </div>
+      <p class="footnote">O SARESP é aplicado anualmente pela Secretaria da Educação do Estado de São Paulo (Seduc-SP).</p>
+    </div>
+    <div class="stack">
+      <div class="photo hero">
+        <img src="fotos/escola-brasil.jpg" alt="E.E. Nilo Santos Vieira">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">⌂</span>
+          <span class="placeholder-label">A escola onde tudo começa</span>
+          <span class="placeholder-sub">fotos/escola-brasil.jpg</span>
+        </div>
+      </div>
+      <div class="logo-placeholder">◇ espaço para logo oficial verificado do SARESP / SEDUC-SP</div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>02 / 10</span></div>
+  <aside class="notes">Explique que o SARESP não é só uma prova: é uma avaliação de larga escala que gera indicadores para a rede. Destaque que ele ajuda a escola a entender o que funciona e o que precisa melhorar.</aside>
+</section>
+
+<!-- 03 · PRONTOS PRO MUNDO -->
+<section class="slide" data-title="Prontos pro Mundo">
+  <div class="kicker">02 / A oportunidade que nasce da avaliação</div>
+  <div class="layout wide-left">
+    <div>
+      <h2>O SARESP abre portas. O <span class="gold">Prontos pro Mundo</span> atravessa o oceano.</h2>
+      <p class="lead">O Prontos pro Mundo é o programa de intercâmbio internacional gratuito do Governo de São Paulo. Ele leva estudantes da rede pública para uma experiência de três meses em high school (equivalente ao Ensino Médio) em países de língua inglesa.</p>
+      <ul class="list">
+        <li>Intercâmbio 100% gratuito: passagens, hospedagem, aulas e traslados custeados pela Seduc-SP.</li>
+        <li>Critérios de seleção definidos em edital, que podem incluir desempenho acadêmico e proficiência em inglês.</li>
+        <li>Destinos como Austrália, Canadá, Irlanda e Nova Zelândia.</li>
+      </ul>
+      <p class="footnote">Requisitos e critérios podem mudar a cada edição. Consulte sempre o edital oficial no site da Seduc-SP.</p>
+    </div>
+    <div class="stack">
+      <div class="photo hero">
+        <img src="fotos/intercambio.jpg" alt="Intercâmbio">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">✳</span>
+          <span class="placeholder-label">Uma oportunidade internacional</span>
+          <span class="placeholder-sub">fotos/intercambio.jpg</span>
+        </div>
+      </div>
+      <div class="logo-placeholder">◇ espaço para logo oficial do Prontos pro Mundo</div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>03 / 10</span></div>
+  <aside class="notes">Explique que o Prontos pro Mundo é a consequência prática de uma boa trajetória escolar. O SARESP é um dos critérios, mas não o único. Reforce que o programa é gratuito e organizado pela Seduc-SP.</aside>
+</section>
+
+<!-- 04 · TRAJETÓRIA -->
+<section class="slide" data-title="Minha trajetória">
+  <div class="kicker">03 / A minha história</div>
+  <div class="layout">
+    <div>
+      <h2>De estudante a <span class="teal">intercambista.</span></h2>
+      <p class="lead">Sou Luis Guilherme, estudante do 2ºA da E.E. Nilo Santos Vieira, em Guaratinguetá. O SARESP foi o ponto de partida da minha trajetória até a Austrália.</p>
+      <div class="results">
+        <div class="result highlight"><span class="r-num">1º</span><span class="r-label">em Guaratinguetá</span></div>
+        <div class="result"><span class="r-num">33º</span><span class="r-label">Ranking estadual</span></div>
+        <div class="result"><span class="r-num">9,63</span><span class="r-label">Nota final</span></div>
+        <div class="result"><span class="r-num">9,06</span><span class="r-label">Inglês</span></div>
+        <div class="result"><span class="r-num">8,20</span><span class="r-label">SARESP</span></div>
+      </div>
+      <div class="timeline">
+        <div class="time-item"><small>Antes</small><p>Estudar, participar e aproveitar as oportunidades da escola.</p></div>
+        <div class="time-item"><small>Seleção</small><p>Preparar a documentação e cumprir as etapas oficiais.</p></div>
+        <div class="time-item"><small>Abril 2026</small><p>Embarque rumo a Adelaide, na Austrália.</p></div>
+        <div class="time-item"><small>Julho 2026</small><p>Retorno ao Brasil com novas experiências.</p></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="photo tall">
+        <img src="fotos/eu.jpg" alt="Luis Guilherme">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">◎</span>
+          <span class="placeholder-label">Minha trajetória</span>
+          <span class="placeholder-sub">fotos/eu.jpg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>04 / 10</span></div>
+  <aside class="notes">Conte sua trajetória com suas palavras. Destaque que o 1º lugar em Guaratinguetá e a nota 9,63 foram resultados de estudo e dedicação. Mencione que o SARESP foi um dos critérios, mas não o único.</aside>
+</section>
+
+<!-- 05 · VIAGEM -->
+<section class="slide" data-title="A viagem até a Austrália">
+  <div class="kicker">04 / Do outro lado do planeta</div>
+  <div class="layout">
+    <div>
+      <h2>Três conexões.<br><span class="gold">Outro mundo.</span></h2>
+      <p class="lead">A viagem começou no Brasil e atravessou continentes até chegar ao sul da Austrália.</p>
+      <div class="route">
+        <div class="route-step">Brasil<b>Guarulhos</b></div>
+        <div class="route-step">Chile<b>Santiago</b></div>
+        <div class="route-step">Austrália<b>Sydney</b></div>
+        <div class="route-step">Destino<b>Adelaide</b></div>
+      </div>
+      <p>Foi minha primeira grande viagem internacional — uma experiência que começou muito antes de chegar à escola australiana.</p>
+    </div>
+    <div class="stack">
+      <div class="photo hero">
+        <img src="fotos/aviao.jpg" alt="A caminho da Austrália">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">✈</span>
+          <span class="placeholder-label">A caminho da Austrália</span>
+          <span class="placeholder-sub">fotos/aviao.jpg</span>
+        </div>
+      </div>
+      <div class="photo small">
+        <img src="fotos/chegada.jpg" alt="A chegada">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">⌁</span>
+          <span class="placeholder-label">A chegada</span>
+          <span class="placeholder-sub">fotos/chegada.jpg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>05 / 10</span></div>
+  <aside class="notes">Mostre o percurso e use a foto do avião. Fale sobre a dimensão da viagem e o que sentiu ao chegar.</aside>
+</section>
+
+<!-- 06 · BLACKWOOD -->
+<section class="slide" data-title="Minha escola na Austrália">
+  <div class="kicker">05 / Blackwood High School</div>
+  <div class="layout wide-left">
+    <div>
+      <h2>Uma escola nova.<br><span class="teal">Outra perspectiva.</span></h2>
+      <p class="lead">Em Adelaide, estudei na Blackwood High School — uma escola pública governamental localizada nos arredores de Adelaide, na Austrália do Sul, que atende do 7º ao 12º ano.</p>
+      <div class="cards">
+        <div class="card"><div class="num">01 — APRENDER</div><h3>Inglês no cotidiano</h3><p>Usar o idioma dentro e fora da sala de aula.</p></div>
+        <div class="card"><div class="num">02 — OBSERVAR</div><h3>Novas rotinas</h3><p>Conhecer práticas e ambientes diferentes dos que eu já conhecia.</p></div>
+      </div>
+    </div>
+    <div class="photo hero">
+      <img src="fotos/blackwood.jpg" alt="Blackwood High School">
+      <div class="placeholder-content">
+        <span class="placeholder-icon">⌂</span>
+        <span class="placeholder-label">Blackwood High School</span>
+        <span class="placeholder-sub">fotos/blackwood.jpg</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>06 / 10</span></div>
+  <aside class="notes">Apresente a escola e conte como era sua rotina. Use exemplos específicos que você viveu.</aside>
+</section>
+
+<!-- 07 · COTIDIANO -->
+<section class="slide" data-title="A vida fora da sala de aula">
+  <div class="kicker">06 / Pessoas, lugares e cotidiano</div>
+  <div class="layout">
+    <div>
+      <h2>O intercâmbio acontece também <span class="gold">fora da aula.</span></h2>
+      <p class="lead">A convivência diária, a cidade e as pequenas situações do cotidiano também fazem parte de conhecer outro país.</p>
+      <ul class="list">
+        <li>Conviver com a família anfitriã.</li>
+        <li>Conhecer lugares e hábitos diferentes.</li>
+        <li>Praticar o inglês em situações reais.</li>
+        <li>Aprender a se adaptar a uma nova rotina.</li>
+      </ul>
+    </div>
+    <div class="three-photos">
+      <div class="photo">
+        <img src="fotos/familia.jpg" alt="Família anfitriã">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">♡</span>
+          <span class="placeholder-label">Família anfitriã</span>
+          <span class="placeholder-sub">fotos/familia.jpg</span>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="fotos/adelaide.jpg" alt="Adelaide">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">⌖</span>
+          <span class="placeholder-label">Adelaide</span>
+          <span class="placeholder-sub">fotos/adelaide.jpg</span>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="fotos/passeio.jpg" alt="Passeio">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">✳</span>
+          <span class="placeholder-label">Um momento marcante</span>
+          <span class="placeholder-sub">fotos/passeio.jpg</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>07 / 10</span></div>
+  <aside class="notes">Escolha uma foto da família anfitriã e uma da cidade. Conte uma lembrança verdadeira de convivência, passeio ou rotina.</aside>
+</section>
+
+<!-- 08 · APRENDIZADOS -->
+<section class="slide" data-title="O que eu trouxe dessa experiência">
+  <div class="kicker">07 / Aprendizados</div>
+  <div class="layout equal">
+    <div>
+      <h2>Voltei com mais do que <span class="teal">fotografias.</span></h2>
+      <p class="lead">Viver em outro país pode ampliar a forma como a gente enxerga a escola, o idioma e o próprio futuro.</p>
+      <div class="quote">“Conhecer outro lugar também muda a maneira como você olha para casa.”</div>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="num">01</div><h3>Inglês</h3><p>Praticar o idioma em contextos reais.</p></div>
+      <div class="card"><div class="num">02</div><h3>Autonomia</h3><p>Assumir responsabilidades em uma rotina diferente.</p></div>
+      <div class="card"><div class="num">03</div><h3>Cultura</h3><p>Aprender convivendo com outros costumes.</p></div>
+      <div class="card"><div class="num">04</div><h3>Perspectiva</h3><p>Perceber novas possibilidades para o futuro.</p></div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>08 / 10</span></div>
+  <aside class="notes">Escolha dois aprendizados e dê exemplos reais. Compartilhe o que a experiência significou para você.</aside>
+</section>
+
+<!-- 09 · CONSELHOS -->
+<section class="slide" data-title="Conselhos para o SARESP">
+  <div class="kicker">08 / Para quem ainda vai fazer a prova</div>
+  <div class="layout">
+    <div>
+      <h2>Leve o SARESP a sério. <span class="gold">Leve seu futuro também.</span></h2>
+      <p class="lead">O SARESP é uma das portas de entrada para oportunidades como o Prontos pro Mundo. O melhor ponto de partida é fazer bem o que está ao seu alcance, todos os dias.</p>
+      <ul class="list">
+        <li>Revise os conteúdos e tire suas dúvidas.</li>
+        <li>Leia os enunciados com atenção.</li>
+        <li>Administre o tempo durante a prova.</li>
+        <li>Estude com constância, não só na véspera.</li>
+        <li>Procure oportunidades e leia os requisitos oficiais.</li>
+      </ul>
+      <p class="footnote">O SARESP é um dos critérios do Prontos pro Mundo, mas não o único. Cada edição tem regras próprias — confira o edital oficial.</p>
+    </div>
+    <div class="stack">
+      <div class="photo hero">
+        <img src="fotos/estudo.jpg" alt="Estudo">
+        <div class="placeholder-content">
+          <span class="placeholder-icon">✎</span>
+          <span class="placeholder-label">O próximo passo começa agora</span>
+          <span class="placeholder-sub">fotos/estudo.jpg</span>
+        </div>
+      </div>
+      <div class="logo-placeholder">◇ QR / LINK PARA PÁGINA OFICIAL — INSERIR APÓS CONFERIR</div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>09 / 10</span></div>
+  <aside class="notes">Fale diretamente aos alunos. Dê conselhos práticos. Reforce que uma boa nota no SARESP é importante, mas o Prontos pro Mundo tem outras etapas e critérios.</aside>
+</section>
+
+<!-- 10 · ENCERRAMENTO -->
+<section class="slide final" data-title="Encerramento">
+  <div class="kicker">09 / O próximo capítulo</div>
+  <div class="layout equal">
+    <div>
+      <h2>Uma oportunidade pode começar <span class="teal">no SARESP.</span></h2>
+      <p class="lead">Estude, descubra as oportunidades e esteja preparado para quando uma porta se abrir.</p>
+      <p class="thanks">Obrigado pela atenção.</p>
+      <p class="credit">Luis Guilherme Batista Nunes · E.E. Nilo Santos Vieira · Guaratinguetá, SP</p>
+    </div>
+    <div class="photo hero">
+      <img src="fotos/final.jpg" alt="Lembrança final">
+      <div class="placeholder-content">
+        <span class="placeholder-icon">✳</span>
+        <span class="placeholder-label">Uma última lembrança</span>
+        <span class="placeholder-sub">fotos/final.jpg</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>10 / 10</span></div>
+  <aside class="notes">Encerre retomando a ideia central: o SARESP pode ser o início de uma trajetória que leva longe. Agradeça e convide a plateia a fazer perguntas.</aside>
+</section>
+
+</main>
+
+<div class="progress" id="progress"></div>
+<div class="dots" id="dots" aria-label="Navegação de slides"></div>
+
+<nav class="controls" aria-label="Controles da apresentação">
+  <button id="prev" aria-label="Slide anterior">← VOLTAR</button>
+  <span class="counter" id="counter">01 / 10</span>
+  <button id="next" aria-label="Próximo slide">AVANÇAR →</button>
+</nav>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll('.slide')];
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const deck = document.getElementById('deck');
+  const notesToggle = document.getElementById('notesToggle');
+  const dotsContainer = document.getElementById('dots');
+  let index = 0;
+
+  slides.forEach((s, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Ir para slide ' + (i + 1) + (s.dataset.title ? ': ' + s.dataset.title : ''));
+    dot.addEventListener('click', () => show(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  function updateUI() {
+    counter.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+    progress.style.width = ((index + 1) / slides.length * 100) + '%';
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === slides.length - 1;
+    [...dotsContainer.children].forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  function show(n) {
+    const newIndex = Math.max(0, Math.min(slides.length - 1, n));
+    if (newIndex === index) { updateUI(); return; }
+    const dir = newIndex > index ? 'right' : 'left';
+    index = newIndex;
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'enter-right', 'enter-left');
+      if (i === index) {
+        s.classList.add('active');
+        s.classList.add(dir === 'right' ? 'enter-right' : 'enter-left');
+        s.scrollTop = 0;
+      }
+    });
+    updateUI();
+  }
+
+  prevBtn.addEventListener('click', () => show(index - 1));
+  nextBtn.addEventListener('click', () => show(index + 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.target.matches('input, textarea, select')) return;
+    if (['ArrowRight', ' ', 'PageDown'].includes(e.key)) { e.preventDefault(); show(index + 1); }
+    else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(index - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); show(0); }
+    else if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+    else if (e.key.toLowerCase() === 'n') { e.preventDefault(); toggleNotes(); }
+    else if (e.key === 'Escape') {
+      document.body.classList.remove('notes-on');
+      notesToggle.textContent = 'NOTAS';
+      notesToggle.classList.remove('active');
+    }
+  });
+
+  let sx = 0, sy = 0, st = 0, blockSwipe = false;
+  deck.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) { blockSwipe = true; return; }
+    if (e.target.closest('input, button, a, .route, .cards, .list')) { blockSwipe = true; return; }
+    blockSwipe = false;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now();
+  }, { passive: true });
+
+  deck.addEventListener('touchend', e => {
+    if (blockSwipe || e.changedTouches.length !== 1) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - sx; const dy = t.clientY - sy; const dt = Date.now() - st;
+    if (dt > 800) return;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) show(index + 1); else show(index - 1);
+    }
+  }, { passive: true });
+
+  document.querySelectorAll('.photo img').forEach(img => {
+    const box = img.closest('.photo');
+    const setLoaded = () => box.classList.add('has-image');
+    const setFailed = () => box.classList.remove('has-image');
+    if (img.complete) {
+      if (img.naturalWidth > 0) setLoaded();
+      else setFailed();
+    } else {
+      img.addEventListener('load', setLoaded, { once: true });
+      img.addEventListener('error', setFailed, { once: true });
+    }
+  });
+
+  function toggleNotes() {
+    const on = document.body.classList.toggle('notes-on');
+    notesToggle.textContent = on ? 'OCULTAR NOTAS' : 'NOTAS';
+    notesToggle.classList.toggle('active', on);
+  }
+  notesToggle.addEventListener('click', toggleNotes);
+
+  document.getElementById('fullscreen').addEventListener('click', () => {
+    const el = document.documentElement;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
+    } else {
+      (document.exitFullscreen || document.webkitExitFullscreen || (() => {})).call(document);
+    }
+  })
+
+  document.getElementById('print').addEventListener('click', () => window.print());
+
+  updateUI();
+})();
+</script>
+</body>
+  </html>
