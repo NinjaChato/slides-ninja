@@ -71,7 +71,8 @@ body::before{
 .slide.active .cards,.slide.active .list,.slide.active .route,
 .slide.active .timeline,.slide.active .results,.slide.active .quote,
 .slide.active .credit{animation:fadeUp .6s .32s var(--ease) both}
-.slide.active .photo,.slide.active .logo-slot{animation:fadeUp .7s .28s var(--ease) both}
+.slide.active .photo,.slide.active .logo-slot,
+.slide.active .program-link{animation:fadeUp .7s .28s var(--ease) both}
 .slide.active .footer{animation:fadeUp .5s .45s var(--ease) both}
 
 /* ---------- TIPOGRAFIA ---------- */
@@ -175,6 +176,52 @@ p{font-size:clamp(15px,1.5vw,19px);line-height:1.6;color:#d5ddda;max-width:720px
 .logo-slot.empty{border-style:dashed;border-color:rgba(255,255,255,.35)}
 .logo-slot.empty img{display:none}
 .logo-slot.empty .logo-fallback{display:block}
+
+/* ---------- BOTÃO LINK DO PROGRAMA ---------- */
+.program-link{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 20px;
+  border:1px solid rgba(101,212,196,.45);
+  border-radius:10px;
+  background:linear-gradient(135deg,rgba(101,212,196,.08),rgba(101,212,196,.02));
+  color:var(--ink);
+  text-decoration:none;
+  transition:background .25s,border-color .25s,transform .25s;
+}
+.program-link:hover{
+  background:linear-gradient(135deg,rgba(101,212,196,.14),rgba(101,212,196,.04));
+  border-color:var(--teal);
+  transform:translateY(-2px);
+}
+.program-link:focus-visible{
+  outline:2px solid var(--teal);
+  outline-offset:2px;
+}
+.program-link .link-icon{
+  font:20px 'DM Mono',monospace;
+  color:var(--teal);
+  flex-shrink:0;
+  line-height:1;
+}
+.program-link .link-text{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  min-width:0;
+}
+.program-link .link-text strong{
+  font:600 14px/1.3 'DM Sans',sans-serif;
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+.program-link .link-text small{
+  font:11px 'DM Mono',monospace;
+  color:var(--teal);
+  letter-spacing:.02em;
+  word-break:break-all;
+}
 
 /* ---------- CARDS ---------- */
 .cards{
@@ -536,7 +583,9 @@ button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .slide.active .cards,.slide.active .list,.slide.active .route,
   .slide.active .timeline,.slide.active .results,.slide.active .quote,
   .slide.active .credit,.slide.active .photo,.slide.active .logo-slot,
-  .slide.active .footer{animation:none!important;opacity:1!important;transform:none!important}
+  .slide.active .program-link,.slide.active .footer{
+    animation:none!important;opacity:1!important;transform:none!important
+  }
 
   .controls,.top-tools,.progress,.notes,.dots{display:none!important}
   .slide .footer{margin-top:auto}
@@ -829,10 +878,13 @@ button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
           <span class="placeholder-sub">fotos/estudo.jpg</span>
         </div>
       </div>
-      <div class="logo-slot">
-        <img src="fotos/qr-oficial.png" alt="QR code oficial">
-        <span class="logo-fallback">◇ QR / LINK PARA PÁGINA OFICIAL — INSERIR APÓS CONFERIR</span>
-      </div>
+      <a href="https://www.prontospromundo.educacao.sp.gov.br/" target="_blank" rel="noopener noreferrer" class="program-link">
+        <span class="link-icon">↗</span>
+        <span class="link-text">
+          <strong>Acesse o site oficial do programa</strong>
+          <small>prontospromundo.educacao.sp.gov.br</small>
+        </span>
+      </a>
     </div>
   </div>
   <div class="footer"><span class="brand"><i class="brand-mark"></i> Do SARESP para o mundo</span><span>09 / 10</span></div>
