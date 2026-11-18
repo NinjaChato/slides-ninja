@@ -3,859 +3,1091 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#210b18">
-<title>9 de Novembro | Memória e Resistência</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#250b19">
+<title>9 de Novembro — Memória e Resistência</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
- --wine:#57152b;
- --dark:#210b18;
- --dark2:#35101f;
- --purple:#76508d;
- --purple2:#a889bb;
- --gold:#e9c46a;
- --cream:#f7f0e5;
- --muted:#c9bdc3;
- --panel:rgba(255,255,255,.055);
- --line:rgba(233,196,106,.25);
+:root{
+  --wine:#641b35;
+  --wine-dark:#250b19;
+  --wine-mid:#3b1025;
+  --purple:#76518e;
+  --purple-light:#b59ac7;
+  --gold:#e9c46a;
+  --cream:#f8f0e6;
+  --muted:#c9b9c2;
+  --line:rgba(233,196,106,.25);
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:var(--wine-dark);
+}
+
 body{
- background:var(--dark);
- color:var(--cream);
- font-family:'DM Sans',sans-serif;
- overflow:hidden;
+  color:var(--cream);
+  font-family:"DM Sans",sans-serif;
 }
+
+button{font:inherit}
+
 .deck{
- height:100dvh;
- width:100%;
- position:relative;
- overflow:hidden;
- background:
- radial-gradient(ellipse at 15% 15%,rgba(118,80,141,.2),transparent 35%),
- radial-gradient(ellipse at 85% 85%,rgba(87,21,43,.5),transparent 45%),
- var(--dark);
+  position:relative;
+  width:100%;
+  height:100dvh;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse at 8% 12%,rgba(118,81,142,.22),transparent 35%),
+    radial-gradient(ellipse at 90% 90%,rgba(100,27,53,.38),transparent 42%),
+    var(--wine-dark);
 }
+
 .deck:before{
- content:"";
- position:absolute;
- inset:0;
- pointer-events:none;
- opacity:.12;
- background-image:radial-gradient(rgba(233,196,106,.4) .7px,transparent .7px);
- background-size:25px 25px;
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    radial-gradient(rgba(233,196,106,.35) .65px,transparent .65px);
+  background-size:22px 22px;
 }
-.topline{
- position:absolute;top:0;left:0;width:100%;height:4px;
- background:rgba(255,255,255,.08);z-index:30;
+
+.top-line{
+  position:absolute;
+  z-index:50;
+  top:0;left:0;
+  width:100%;height:4px;
+  background:rgba(255,255,255,.08);
 }
+
 .progress{
- height:4px;width:0;background:var(--gold);
- transition:width .4s;position:absolute;top:0;left:0;z-index:31;
+  width:0;height:4px;
+  background:var(--gold);
+  transition:width .35s ease;
 }
+
 .slide{
- position:absolute;inset:0;
- padding:clamp(28px,5vw,76px) clamp(24px,7vw,104px) 100px;
- display:flex;flex-direction:column;gap:25px;
- opacity:0;visibility:hidden;
- transform:translateX(25px);
- transition:opacity .45s,transform .45s,visibility .45s;
- overflow-y:auto;
+  position:absolute;
+  inset:0;
+  display:none;
+  padding:clamp(25px,4.5vh,54px) clamp(25px,6vw,92px) 82px;
+  overflow:hidden;
 }
+
 .slide.active{
- opacity:1;visibility:visible;transform:none;z-index:5;
+  display:flex;
+  flex-direction:column;
+  animation:appear .35s ease both;
 }
-.kicker{
- display:flex;align-items:center;gap:12px;
- color:var(--gold);font-size:.75rem;
- letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(9px)}
+  to{opacity:1;transform:translateY(0)}
 }
-.kicker:before{content:"";width:30px;height:1px;background:var(--gold)}
-h1,h2{font-family:'Playfair Display',serif}
+
+.slide:after{
+  content:"";
+  position:absolute;
+  right:-130px;
+  top:-150px;
+  width:390px;height:390px;
+  border:1px solid rgba(233,196,106,.12);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:clamp(15px,2.5vh,28px);
+  flex-shrink:0;
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.eyebrow:before{
+  content:"";
+  display:inline-block;
+  width:27px;height:1px;
+  background:var(--gold);
+  vertical-align:middle;
+  margin-right:10px;
+}
+
+h1,h2,h3{
+  font-family:"Playfair Display",serif;
+}
+
 h1{
- font-size:clamp(3rem,7vw,6.8rem);
- line-height:1.02;letter-spacing:-.045em;
- margin:22px 0;
+  font-size:clamp(3.2rem,7.5vw,7rem);
+  line-height:.98;
+  letter-spacing:-.045em;
+  font-weight:800;
 }
+
 h2{
- font-size:clamp(2rem,4vw,3.8rem);
- line-height:1.08;margin-bottom:15px;
+  font-size:clamp(2rem,4.3vw,4rem);
+  line-height:1.06;
+  letter-spacing:-.025em;
 }
+
 h3{
- color:var(--gold);font-size:1rem;
- letter-spacing:.1em;text-transform:uppercase;
- margin-bottom:13px;
+  font-size:clamp(1.2rem,1.7vw,1.6rem);
+  line-height:1.15;
+  color:var(--gold);
+  margin-bottom:10px;
 }
-p,li{
- color:#eee5e6;
- font-size:clamp(.94rem,1.3vw,1.12rem);
- line-height:1.7;
+
+p{
+  font-size:clamp(.9rem,1.2vw,1.08rem);
+  line-height:1.58;
+  color:#eee4e6;
+  margin-bottom:12px;
 }
-p{margin-bottom:14px}
+
+p:last-child{margin-bottom:0}
+
 strong{color:var(--gold)}
-ul{padding-left:22px;margin:10px 0}
-li{margin-bottom:8px}
-.small{font-size:.82rem;color:var(--muted)}
+
 .gold{color:var(--gold)}
+.purple{color:var(--purple-light)}
+
 .rule{
- width:80px;height:3px;
- background:linear-gradient(90deg,var(--gold),var(--purple2));
- margin:22px 0;
+  height:3px;width:65px;
+  background:linear-gradient(90deg,var(--gold),var(--purple-light));
+  margin:18px 0;
 }
-.hero{
- display:flex;flex-direction:column;
- justify-content:center;flex:1;
- max-width:1050px;
+
+.content{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
 }
-.hero-date{
- color:var(--gold);font-weight:700;
- letter-spacing:.3em;font-size:.9rem;
+
+.split{
+  display:grid;
+  grid-template-columns:1.04fr .96fr;
+  gap:clamp(22px,4vw,60px);
+  align-items:center;
+  flex:1;
+  min-height:0;
 }
-.hero-text{
- max-width:760px;
- color:#d8cbd1;
- font-size:clamp(1.05rem,1.7vw,1.4rem);
- line-height:1.7;
+
+.split.photo-left{
+  grid-template-columns:.96fr 1.04fr;
 }
-.hero-mark{
- position:absolute;right:8%;bottom:16%;
- width:min(25vw,280px);aspect-ratio:1;
- border:1px solid rgba(233,196,106,.3);
- border-radius:50%;display:grid;place-items:center;
- font:800 clamp(5rem,12vw,9rem) 'Playfair Display';
- color:rgba(233,196,106,.3);
- transform:rotate(-12deg);
+
+.text-column{
+  min-width:0;
 }
-.hero-mark:before,.hero-mark:after{
- content:"";position:absolute;inset:13%;
- border:1px solid rgba(168,137,187,.3);border-radius:50%;
+
+.photo{
+  position:relative;
+  width:100%;
+  height:min(55vh,440px);
+  min-height:220px;
+  overflow:hidden;
+  border-radius:13px;
+  border:1px solid rgba(233,196,106,.38);
+  background:
+    linear-gradient(145deg,#4b1b38,#1b0b19);
+  box-shadow:0 18px 45px rgba(0,0,0,.32);
 }
-.hero-mark:after{inset:26%}
-.layout{
- display:grid;grid-template-columns:1fr 1fr;
- gap:clamp(22px,4vw,55px);align-items:center;
- flex:1;min-height:0;
+
+.photo img{
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:sepia(.12) contrast(1.04);
 }
-.layout.reverse{grid-template-columns:1fr 1fr}
-.stack{display:flex;flex-direction:column;gap:12px}
+
+.photo.broken img{display:none}
+
+.photo-fallback{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:12px;
+  text-align:center;
+  padding:25px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(181,154,199,.25),transparent 40%),
+    linear-gradient(145deg,#4b1b38,#1b0b19);
+}
+
+.photo.broken .photo-fallback{display:flex}
+
+.photo-fallback .symbol{
+  font:800 clamp(4rem,8vw,7rem) "Playfair Display";
+  color:rgba(233,196,106,.55);
+}
+
+.photo-fallback span:last-child{
+  color:var(--muted);
+  font-size:.8rem;
+}
+
+.photo-caption{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:28px 16px 13px;
+  font-size:.74rem;
+  color:white;
+  background:linear-gradient(transparent,rgba(20,5,13,.9));
+}
+
 .panel{
- background:linear-gradient(145deg,rgba(118,80,141,.18),rgba(255,255,255,.035));
- border:1px solid rgba(233,196,106,.17);
- border-left:3px solid var(--gold);
- padding:clamp(18px,2.3vw,28px);
- border-radius:3px 15px 15px 3px;
+  padding:clamp(16px,2vw,25px);
+  border-radius:4px 13px 13px 4px;
+  background:linear-gradient(120deg,rgba(118,81,142,.19),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.09);
+  border-left:3px solid var(--gold);
 }
-.panel p:last-child{margin-bottom:0}
-.image{
- position:relative;height:min(48vh,420px);
- min-height:250px;overflow:hidden;
- border:1px solid rgba(233,196,106,.3);
- border-radius:14px;background:#160a10;
- box-shadow:0 20px 55px rgba(0,0,0,.4);
+
+.panel + .panel{margin-top:12px}
+
+.panel p{font-size:clamp(.86rem,1.1vw,1rem)}
+
+.mini-label{
+  font-size:.68rem;
+  color:var(--purple-light);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:800;
+  margin-bottom:8px;
 }
-.image img{width:100%;height:100%;object-fit:cover;display:block}
-.image:after{
- content:"";position:absolute;inset:45% 0 0;
- background:linear-gradient(transparent,rgba(20,7,14,.8));
-}
-.image figcaption{
- position:absolute;bottom:13px;left:15px;right:15px;
- z-index:2;font-size:.77rem;line-height:1.4;
- color:white;
-}
+
 .cards{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:16px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
+
 .card{
- padding:23px;background:var(--panel);
- border:1px solid rgba(255,255,255,.1);
- border-radius:13px;min-height:160px;
+  padding:clamp(17px,2vw,25px);
+  min-height:0;
+  border-radius:12px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(233,196,106,.18);
+  position:relative;
+  overflow:hidden;
 }
-.number{
- font:700 clamp(2rem,4vw,3.6rem) 'Playfair Display';
- color:var(--gold);margin-bottom:12px;
+
+.card:before{
+  content:"";
+  position:absolute;
+  width:90px;height:90px;
+  right:-35px;top:-40px;
+  border-radius:50%;
+  border:1px solid rgba(181,154,199,.22);
 }
-.card p{font-size:.93rem;margin:0}
-.two-col{
- display:grid;grid-template-columns:1fr 1fr;gap:18px;
+
+.card-number{
+  font:800 clamp(2.3rem,4.5vw,4.2rem) "Playfair Display";
+  color:var(--gold);
+  line-height:1.1;
+  margin-bottom:12px;
 }
+
+.card p{font-size:clamp(.82rem,1.05vw,.98rem)}
+
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
 .definition{
- background:rgba(255,255,255,.045);
- border-radius:12px;padding:24px;
- border-top:3px solid var(--purple2);
+  padding:clamp(18px,2.4vw,30px);
+  background:rgba(255,255,255,.045);
+  border-top:3px solid var(--purple-light);
+  border-radius:4px 4px 12px 12px;
 }
-.definition h3{
- font:700 1.5rem 'Playfair Display';
- text-transform:none;letter-spacing:0;
-}
-.definition p{font-size:.96rem;margin:0}
-.timeline{
- display:grid;grid-template-columns:repeat(3,1fr);
- gap:15px;
-}
-.time{
- padding:20px;background:rgba(255,255,255,.045);
- border-top:2px solid var(--purple2);
- border-radius:0 0 12px 12px;
-}
-.time b{
- display:block;color:var(--gold);
- font:700 1.8rem 'Playfair Display';
- margin-bottom:10px;
-}
-.time p{font-size:.9rem;margin:0}
+
+.definition p{font-size:clamp(.87rem,1.12vw,1.02rem)}
+
 .callout{
- border-top:1px solid var(--line);
- border-bottom:1px solid var(--line);
- padding:17px 0;margin-top:10px;
- line-height:1.65;color:#e9dfe3;
+  margin-top:15px;
+  padding:15px 20px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  color:#eadfe4;
+  font-size:clamp(.85rem,1.1vw,1rem);
+  line-height:1.55;
 }
-.quote{
- font:600 clamp(1.5rem,3.3vw,3.2rem)/1.3 'Playfair Display';
- max-width:900px;
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
 }
-.sources{
- display:grid;grid-template-columns:1fr 1fr;gap:15px 25px;
+
+.timeline-item{
+  position:relative;
+  padding:17px 18px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.08);
+  border-top:2px solid var(--purple-light);
+  border-radius:3px 3px 10px 10px;
 }
-.sources a{
- color:var(--gold);text-decoration:none;
- border-bottom:1px solid var(--line);
- padding:10px 0;font-size:.9rem;
+
+.timeline-item b{
+  display:block;
+  color:var(--gold);
+  font:700 clamp(1.45rem,2.3vw,2.1rem) "Playfair Display";
+  margin-bottom:7px;
 }
-.sources a:hover{color:white}
-.controls{
- position:absolute;z-index:40;
- bottom:22px;left:clamp(20px,4vw,56px);
- right:clamp(20px,4vw,56px);
- display:flex;justify-content:space-between;align-items:center;
+
+.timeline-item p{font-size:clamp(.78rem,.98vw,.91rem)}
+
+.big-quote{
+  font:700 clamp(1.7rem,3.4vw,3.4rem)/1.22 "Playfair Display";
+  max-width:850px;
 }
-.counter{font-size:.85rem;letter-spacing:.12em;color:var(--muted)}
+
+.source-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 25px;
+}
+
+.source-grid a{
+  color:var(--gold);
+  font-size:clamp(.78rem,1vw,.93rem);
+  text-decoration:none;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.source-grid a:hover{color:white}
+
+.cover{
+  justify-content:center;
+}
+
+.cover .hero-copy{
+  max-width:920px;
+  position:relative;
+  z-index:2;
+}
+
+.cover .date{
+  color:var(--gold);
+  font-weight:800;
+  letter-spacing:.3em;
+  font-size:.85rem;
+  margin-bottom:22px;
+}
+
+.cover .subtitle{
+  max-width:670px;
+  color:#dfd1d8;
+  font-size:clamp(1rem,1.5vw,1.3rem);
+  line-height:1.65;
+}
+
+.cover-mark{
+  position:absolute;
+  right:9%;
+  bottom:14%;
+  width:min(28vw,310px);
+  aspect-ratio:1;
+  border:1px solid rgba(233,196,106,.3);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:rgba(233,196,106,.32);
+  font:800 clamp(6rem,13vw,11rem) "Playfair Display";
+  transform:rotate(-12deg);
+}
+
+.cover-mark:before,.cover-mark:after{
+  content:"";
+  position:absolute;
+  inset:13%;
+  border:1px solid rgba(181,154,199,.35);
+  border-radius:50%;
+}
+
+.cover-mark:after{inset:26%}
+
+.footer{
+  position:absolute;
+  z-index:30;
+  bottom:0;left:0;right:0;
+  height:65px;
+  padding:0 clamp(20px,4vw,55px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(transparent,rgba(19,5,13,.8));
+}
+
+.counter{
+  color:var(--muted);
+  font-size:.78rem;
+  letter-spacing:.12em;
+}
+
 .counter b{color:var(--gold)}
-.nav{display:flex;gap:10px}
-.nav button,.utility button{
- background:rgba(53,16,31,.95);
- color:var(--cream);
- border:1px solid rgba(233,196,106,.6);
- cursor:pointer;transition:.2s;
+
+.controls{
+  display:flex;
+  align-items:center;
+  gap:9px;
 }
-.nav button{
- width:45px;height:45px;border-radius:50%;font-size:1.3rem;
+
+.controls button{
+  border:1px solid rgba(233,196,106,.48);
+  color:var(--cream);
+  background:rgba(59,16,37,.9);
+  cursor:pointer;
+  transition:.2s;
 }
-.utility button{
- padding:9px 13px;border-radius:30px;margin-right:8px;
+
+.controls button:hover{
+  color:var(--wine-dark);
+  background:var(--gold);
 }
-.nav button:hover,.utility button:hover{
- background:var(--gold);color:var(--dark);
+
+.nav-button{
+  width:38px;height:38px;
+  border-radius:50%;
+  font-size:1.15rem;
 }
-.nav button:disabled{opacity:.3;cursor:not-allowed}
-.hint{
- position:absolute;right:55px;bottom:80px;
- color:#a99aa2;font-size:.72rem;
+
+.utility-button{
+  padding:9px 12px;
+  border-radius:30px;
+  font-size:.76rem;
 }
-@media(max-width:850px){
- .slide{padding:28px 23px 100px;gap:17px}
- .layout,.layout.reverse{grid-template-columns:1fr;gap:17px}
- .image{height:25vh;min-height:175px}
- .timeline{grid-template-columns:1fr 1fr}
- .hero-mark{width:170px;opacity:.3}
+
+.controls button:disabled{
+  opacity:.28;
+  cursor:not-allowed;
 }
-@media(max-width:540px){
- .cards,.two-col,.sources,.timeline{grid-template-columns:1fr}
- .card{min-height:0;padding:17px}
- .image{height:22vh;min-height:145px}
- .hero-mark{width:120px;right:0}
- .hint{display:none}
+
+.key-hint{
+  position:absolute;
+  right:30px;
+  bottom:75px;
+  color:rgba(255,255,255,.38);
+  font-size:.67rem;
+  letter-spacing:.05em;
 }
+
+@media(max-width:760px){
+  .slide{padding:25px 23px 76px}
+  .split,.split.photo-left{
+    grid-template-columns:1fr;
+    gap:13px;
+  }
+  .photo{
+    height:23vh;
+    min-height:125px;
+  }
+  .photo-left .photo{order:2}
+  .photo-left .text-column{order:1}
+  .cards{gap:9px}
+  .card{padding:13px}
+  .timeline{gap:8px}
+  .timeline-item{padding:12px}
+  .cover-mark{right:0;bottom:13%;opacity:.45;width:145px}
+  .key-hint{display:none}
+}
+
+@media(max-width:500px){
+  .two{gap:9px}
+  .definition{padding:14px}
+  .definition p{font-size:.79rem;line-height:1.45}
+  .cards{grid-template-columns:1fr 1fr}
+  .cards .card:last-child{grid-column:1/-1}
+  .timeline{grid-template-columns:1fr 1fr}
+  .source-grid{grid-template-columns:1fr}
+  .header{margin-bottom:12px}
+  .footer{height:58px}
+  .utility-button{padding:8px}
+}
+
+@media(max-height:650px) and (min-width:761px){
+  .slide{padding-top:20px;padding-bottom:65px}
+  .header{margin-bottom:12px}
+  .photo{height:48vh;min-height:180px}
+  p{line-height:1.42;margin-bottom:8px}
+  .panel{padding:14px}
+  .panel + .panel{margin-top:8px}
+  .timeline-item{padding:12px}
+  .footer{height:55px}
+}
+
 @media(prefers-reduced-motion:reduce){
- *,*:before,*:after{transition:none!important}
+  *,*:before,*:after{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
-<main class="deck">
+<main class="deck" id="deck">
 
-<div class="topline"></div>
-<div class="progress" id="progress"></div>
-
-<!-- 01 - CAPA -->
-<section class="slide active">
- <div class="hero">
-  <div class="kicker">História • Memória • Direitos humanos</div>
-  <div class="hero-date">9 DE NOVEMBRO</div>
-  <h1>Contra o fascismo.<br><span class="gold">Contra o antissemitismo.</span></h1>
-  <div class="rule"></div>
-  <p class="hero-text">
-   Uma data para recordar as vítimas da intolerância, compreender
-   como o ódio pode se transformar em política e reafirmar
-   o compromisso com a dignidade humana.
-  </p>
-  <p class="small" style="margin-top:25px;letter-spacing:.12em">
-   MEMÓRIA NÃO É APENAS PASSADO. É RESPONSABILIDADE NO PRESENTE.
-  </p>
- </div>
- <div class="hero-mark">9</div>
-</section>
-
-<!-- 02 - A DATA -->
-<section class="slide">
- <div>
-  <div class="kicker">01 / A data</div>
-  <h2>Por que 9 de novembro?</h2>
- </div>
- <div class="layout">
-  <div class="stack">
-   <div class="panel">
-    <p>
-     O <strong>Dia Internacional contra o Fascismo e o Antissemitismo</strong>
-     é lembrado anualmente em 9 de novembro.
-    </p>
-    <p>
-     A data está diretamente associada à memória da
-     <strong>Noite dos Cristais</strong>, o pogrom antissemita ocorrido
-     na Alemanha nazista em 1938.
-    </p>
-    <p>
-     Desde o início da década de 1990, a organização UNITED for
-     Intercultural Action coordena campanhas europeias nesta data,
-     em memória das vítimas do fascismo e do Holocausto.
-    </p>
-   </div>
-   <p class="small">
-    A proposta é transformar a lembrança histórica em conscientização
-    e mobilização contra o racismo, o antissemitismo e a xenofobia.
-   </p>
-  </div>
-  <figure class="image">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/United_States_Holocaust_Memorial_Museum_interior.JPG/800px-United_States_Holocaust_Memorial_Museum_interior.JPG" alt="Interior do Museu Memorial do Holocausto">
-   <figcaption>Museu Memorial do Holocausto dos Estados Unidos, Washington.</figcaption>
-  </figure>
- </div>
-</section>
-
-<!-- 03 - CONCEITOS -->
-<section class="slide">
- <div>
-  <div class="kicker">02 / Conceitos fundamentais</div>
-  <h2>O que significam essas ideologias?</h2>
- </div>
- <div class="two-col">
-  <article class="definition">
-   <h3>Fascismo</h3>
-   <p>
-    Movimento político autoritário e ultranacionalista que surgiu
-    na Europa no século XX. Historicamente, caracteriza-se pelo
-    culto ao líder, pela concentração de poder, pela repressão
-    da oposição, pela exaltação da violência e pela rejeição
-    do pluralismo democrático.
-   </p>
-  </article>
-  <article class="definition">
-   <h3>Antissemitismo</h3>
-   <p>
-    Preconceito, hostilidade ou discriminação contra pessoas judias
-    por serem judias. Pode aparecer em estereótipos, teorias
-    conspiratórias, exclusão social, ataques a comunidades e
-    instituições judaicas e violência.
-   </p>
-  </article>
-  <div class="panel" style="grid-column:1/-1">
-   <p>
-    <strong>Uma distinção importante:</strong> fascismo e antissemitismo
-    não são sinônimos. O antissemitismo existe há séculos e também
-    aparece fora de movimentos fascistas. Entretanto, no nazismo,
-    tornou-se parte central da ideologia e da política de Estado.
-   </p>
-  </div>
- </div>
-</section>
-
-<!-- 04 - ASCENSAO -->
-<section class="slide">
- <div>
-  <div class="kicker">03 / Contexto histórico</div>
-  <h2>A ascensão do nazismo</h2>
- </div>
- <div class="layout">
-  <div class="stack">
-   <p>
-    Depois da Primeira Guerra Mundial, a Alemanha enfrentou
-    instabilidade política, dificuldades econômicas e profundas
-    tensões sociais.
-   </p>
-   <p>
-    O Partido Nazista explorou o ressentimento, o medo e o
-    nacionalismo extremo. Sua propaganda prometia restaurar
-    a grandeza alemã e apontava grupos inteiros como responsáveis
-    pelos problemas do país.
-   </p>
-   <p>
-    Em <strong>30 de janeiro de 1933</strong>, Adolf Hitler foi
-    nomeado chanceler. Nos meses seguintes, os nazistas destruíram
-    as instituições democráticas e estabeleceram uma ditadura.
-   </p>
-   <div class="callout">
-    A perseguição não surgiu de repente: foi construída por meio
-    de propaganda, exclusão social, leis discriminatórias e violência.
-   </div>
-  </div>
-  <figure class="image">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Bundesarchiv_Bild_102-14468%2C_Berlin%2C_Boykott_j%C3%BCdischer_Gesch%C3%A4fte.jpg" alt="Boicote a estabelecimentos judaicos em Berlim">
-   <figcaption>Boicote nazista a estabelecimentos judaicos, Berlim, 1933.</figcaption>
-  </figure>
- </div>
-</section>
-
-<!-- 05 - LEIS -->
-<section class="slide">
- <div>
-  <div class="kicker">04 / Discriminação institucional</div>
-  <h2>Quando o preconceito vira lei</h2>
- </div>
- <div class="layout reverse">
-  <figure class="image">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Bundesarchiv_Bild_183-R99621%2C_N%C3%BCrnberger_Gesetze%2C_Schaubild.jpg" alt="Diagrama das Leis de Nuremberg">
-   <figcaption>Material relacionado às Leis de Nuremberg, de 1935.</figcaption>
-  </figure>
-  <div class="stack">
-   <p>
-    Em setembro de 1935, o regime nazista aprovou as
-    <strong>Leis de Nuremberg</strong>, que retiraram dos judeus
-    a cidadania plena do Reich.
-   </p>
-   <p>
-    Também proibiram casamentos e relações entre judeus e pessoas
-    classificadas como de sangue alemão.
-   </p>
-   <p>
-    A legislação utilizava classificações raciais inventadas
-    para determinar quem poderia pertencer à comunidade nacional.
-   </p>
-   <p>
-    Nos anos seguintes, novas medidas restringiram o acesso
-    dos judeus ao trabalho, à educação, à propriedade e à vida pública.
-   </p>
-   <div class="panel">
-    <p>
-     A discriminação deixou de ser apenas um comportamento social:
-     passou a ser organizada e imposta pelo próprio Estado.
-    </p>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- 06 - KRISTALLNACHT -->
-<section class="slide">
- <div>
-  <div class="kicker">05 / 9 e 10 de novembro de 1938</div>
-  <h2>A Noite dos Cristais</h2>
- </div>
- <div class="layout">
-  <div class="stack">
-   <p>
-    Conhecida em alemão como <strong>Kristallnacht</strong>,
-    foi um pogrom antissemita organizado pelo regime nazista
-    na Alemanha e em territórios anexados.
-   </p>
-   <p>
-    Durante a noite de 9 para 10 de novembro de 1938, sinagogas
-    foram incendiadas, estabelecimentos judaicos destruídos,
-    casas invadidas e pessoas agredidas e assassinadas.
-   </p>
-   <p>
-    A violência foi coordenada por lideranças nazistas,
-    mas apresentada publicamente como uma suposta reação
-    espontânea da população.
-   </p>
-   <p>
-    O nome faz referência aos cacos de vidro espalhados pelas
-    ruas após a destruição das vitrines das lojas judaicas.
-   </p>
-  </div>
-  <figure class="image">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Bundesarchiv_Bild_146-1970-083-42%2C_Magdeburg%2C_zerst%C3%B6rtes_j%C3%BCdisches_Gesch%C3%A4ft.jpg" alt="Estabelecimento judaico destruído em Magdeburg">
-   <figcaption>Estabelecimento judaico destruído durante o pogrom de novembro de 1938.</figcaption>
-  </figure>
- </div>
-</section>
-
-<!-- 07 - NUMEROS -->
-<section class="slide">
- <div>
-  <div class="kicker">06 / A dimensão da violência</div>
-  <h2>O que aconteceu naquela noite?</h2>
- </div>
- <div class="cards">
-  <article class="card">
-   <div class="number">1.400+</div>
-   <p>Sinagogas incendiadas ou destruídas em toda a Alemanha e nos territórios sob controle nazista.</p>
-  </article>
-  <article class="card">
-   <div class="number">26 mil</div>
-   <p>Homens judeus presos pela polícia e enviados a campos de concentração.</p>
-  </article>
-  <article class="card">
-   <div class="number">Milhares</div>
-   <p>De estabelecimentos comerciais e residências judaicas vandalizados ou saqueados.</p>
-  </article>
- </div>
- <div class="panel">
-  <p>
-   Centenas de judeus morreram durante a violência e suas consequências.
-   O número tradicional de 91 mortes, citado em registros antigos,
-   não representa o total de vítimas contabilizadas posteriormente.
-  </p>
-  <p>
-   O regime nazista ainda obrigou a comunidade judaica a pagar
-   uma indenização de <strong>1 bilhão de marcos do Reich</strong>
-   pelos danos que os próprios nazistas haviam causado.
-  </p>
- </div>
- <p class="small">Fonte: United States Holocaust Memorial Museum.</p>
-</section>
-
-<!-- 08 - HOLOCAUSTO -->
-<section class="slide">
- <div>
-  <div class="kicker">07 / A radicalização da perseguição</div>
-  <h2>Da exclusão ao Holocausto</h2>
- </div>
- <div class="layout reverse">
-  <figure class="image">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Auschwitz_I_gate_%28Arbeit_macht_frei%29.jpg" alt="Entrada do antigo campo de Auschwitz">
-   <figcaption>Antigo campo de Auschwitz I, atualmente preservado como memorial e museu.</figcaption>
-  </figure>
-  <div class="stack">
-   <p>
-    A Noite dos Cristais foi um marco na radicalização da
-    perseguição aos judeus. Entretanto, não foi o começo
-    do antissemitismo nazista.
-   </p>
-   <p>
-    Com a Segunda Guerra Mundial, iniciada na Europa em 1939,
-    milhões de judeus passaram a viver sob ocupação nazista.
-    Foram confinados em guetos, explorados em trabalhos forçados
-    e deportados.
-   </p>
-   <p>
-    A partir de 1941, o regime ampliou os assassinatos em massa
-    e organizou centros de extermínio.
-   </p>
-   <div class="panel">
-    <p>
-     <strong>Holocausto (Shoah):</strong> o genocídio sistemático
-     de aproximadamente seis milhões de judeus europeus,
-     promovido pela Alemanha nazista e seus colaboradores
-     entre 1933 e 1945.
-    </p>
-   </div>
-  </div>
- </div>
-</section>
-
-<!-- 09 - LINHA DO TEMPO -->
-<section class="slide">
- <div>
-  <div class="kicker">08 / Cronologia</div>
-  <h2>Uma linha do tempo do horror</h2>
- </div>
- <div class="timeline">
-  <article class="time">
-   <b>1933</b>
-   <p>Hitler é nomeado chanceler. Começa a consolidação da ditadura nazista.</p>
-  </article>
-  <article class="time">
-   <b>1935</b>
-   <p>Leis de Nuremberg institucionalizam a discriminação racial contra judeus.</p>
-  </article>
-  <article class="time">
-   <b>1938</b>
-   <p>Noite dos Cristais: pogrom em larga escala organizado pelo regime.</p>
-  </article>
-  <article class="time">
-   <b>1939</b>
-   <p>A Alemanha invade a Polônia em 1º de setembro. Começa a Segunda Guerra Mundial na Europa.</p>
-  </article>
-  <article class="time">
-   <b>1941</b>
-   <p>O assassinato sistemático de judeus se expande com execuções em massa.</p>
-  </article>
-  <article class="time">
-   <b>1945</b>
-   <p>Derrota da Alemanha nazista. A Europa começa a enfrentar as consequências do genocídio.</p>
-  </article>
- </div>
-</section>
-
-<!-- 10 - LIPA -->
-<section class="slide">
- <div>
-  <div class="kicker">09 / Outro episódio da violência fascista</div>
-  <h2>O massacre de Lipa</h2>
- </div>
- <div class="layout">
-  <div class="stack">
-   <p>
-    Em <strong>30 de abril de 1944</strong>, durante a Segunda
-    Guerra Mundial, forças nazistas e fascistas cometeram
-    um massacre contra a população civil da aldeia de Lipa,
-    na atual Croácia.
-   </p>
-   <p>
-    Em poucas horas, <strong>269 habitantes</strong> foram mortos,
-    principalmente idosos, mulheres e crianças.
-   </p>
-   <p>
-    Depois dos assassinatos, as casas e outras construções
-    foram saqueadas e incendiadas. Os sobreviventes precisaram
-    reconstruir a comunidade após a guerra.
-   </p>
-   <div class="panel">
-    <p>
-     O Memorial Centre <strong>Lipa Remembers</strong>, inaugurado
-     em 2015, preserva a memória das vítimas e conta a história
-     da comunidade.
-    </p>
-   </div>
-  </div>
-  <figure class="image">
-   <img src="https://ppmhp.hr/wp-content/uploads/2020/04/lipa-pamti.jpg" alt="Memorial Centre Lipa Remembers">
-   <figcaption>Memorial Centre Lipa Remembers, na Croácia.</figcaption>
-  </figure>
- </div>
-</section>
-
-<!-- 11 - MEMORIA -->
-<section class="slide">
- <div>
-  <div class="kicker">10 / Memória e resistência</div>
-  <h2>Por que lembrar?</h2>
- </div>
- <div class="layout">
-  <div class="stack">
-   <p>
-    Lembrar não significa apenas estudar acontecimentos antigos.
-    Significa compreender como a intolerância pode crescer
-    quando é normalizada e quando instituições deixam de
-    proteger os direitos das pessoas.
-   </p>
-   <div class="panel">
-    <h3>Educação</h3>
-    <p>Conhecer os acontecimentos históricos e combater a desinformação.</p>
-   </div>
-   <div class="panel">
-    <h3>Responsabilidade</h3>
-    <p>Reconhecer preconceitos e não tratar a discriminação como algo normal.</p>
-   </div>
-   <div class="panel">
-    <h3>Memória</h3>
-    <p>Preservar testemunhos, documentos e histórias das vítimas.</p>
-   </div>
-  </div>
-  <div class="stack">
-   <p class="quote">
-    A memória histórica não é apenas uma lembrança.
-    É um compromisso com a <span class="gold">dignidade humana.</span>
-   </p>
-   <div class="rule"></div>
-   <p>
-    A história não se repete de maneira exatamente igual.
-    Entretanto, conhecer seus mecanismos ajuda a reconhecer
-    sinais de autoritarismo, intolerância e desumanização.
-   </p>
-  </div>
- </div>
-</section>
-
-<!-- 12 - PRESENTE -->
-<section class="slide">
- <div>
-  <div class="kicker">11 / O presente</div>
-  <h2>Como combater o ódio hoje?</h2>
- </div>
- <div class="two-col">
-  <div class="panel">
-   <h3>Informação</h3>
-   <p>Pesquisar em fontes confiáveis, verificar dados e não compartilhar informações falsas.</p>
-  </div>
-  <div class="panel">
-   <h3>Respeito</h3>
-   <p>Rejeitar estereótipos e tratar todas as pessoas com dignidade.</p>
-  </div>
-  <div class="panel">
-   <h3>Denúncia</h3>
-   <p>Não normalizar manifestações de racismo, antissemitismo e xenofobia.</p>
-  </div>
-  <div class="panel">
-   <h3>Democracia</h3>
-   <p>Defender direitos fundamentais, liberdade, pluralismo e participação cidadã.</p>
-  </div>
- </div>
- <div class="callout">
-  Combater o antissemitismo significa rejeitar o preconceito contra
-  judeus, as teorias conspiratórias e a culpabilização coletiva.
-  O respeito aos direitos humanos deve ser universal.
- </div>
-</section>
-
-<!-- 13 - CONCLUSAO -->
-<section class="slide">
- <div class="hero">
-  <div class="kicker">Conclusão</div>
-  <h1 style="font-size:clamp(4rem,9vw,8rem)">
-   Nunca<br><span class="gold">mais.</span>
-  </h1>
-  <p class="hero-text">
-   Que a memória da Noite dos Cristais, de Lipa e de todas
-   as vítimas do fascismo e do nazismo nos impulsione a
-   construir uma sociedade em que a dignidade humana,
-   a liberdade e os direitos fundamentais sejam respeitados.
-  </p>
-  <div class="rule"></div>
-  <p class="hero-date">9 DE NOVEMBRO</p>
-  <p class="small">MEMÓRIA • RESISTÊNCIA • DIREITOS HUMANOS</p>
- </div>
- <div class="hero-mark">✳</div>
-</section>
-
-<!-- 14 - FONTES -->
-<section class="slide">
- <div>
-  <div class="kicker">Pesquisa e aprofundamento</div>
-  <h2>Fontes e referências</h2>
-  <p class="hero-text">
-   A história exige pesquisa, documentação e responsabilidade.
-   Consulte as instituições abaixo para aprofundar os temas
-   apresentados.
-  </p>
- </div>
- <div class="sources">
-  <a href="https://encyclopedia.ushmm.org/content/en/article/kristallnacht" target="_blank">USHMM — Kristallnacht</a>
-  <a href="https://encyclopedia.ushmm.org/content/en/article/introduction-to-the-holocaust" target="_blank">USHMM — Introdução ao Holocausto</a>
-  <a href="https://encyclopedia.ushmm.org/content/pt-br/article/the-holocaust-and-world-war-ii-key-dates" target="_blank">USHMM — Datas importantes do Holocausto</a>
-  <a href="https://ppmhp.hr/en/lipa/about-the-centre/" target="_blank">Memorial Centre Lipa — Sobre o memorial</a>
-  <a href="https://ppmhp.hr/en/lipa/the-tragedy-of-lipa/" target="_blank">Memorial Centre Lipa — A tragédia</a>
-  <a href="https://unitedfia.org/campaigns/international-day-against-fascism-and-antisemitism-9-november/" target="_blank">UNITED — Dia Internacional contra o Fascismo e o Antissemitismo</a>
- </div>
- <p class="small">
-  Imagens externas: Wikimedia Commons e instituições históricas.
-  É necessária conexão à internet para carregá-las.
-  Os créditos e direitos de reutilização devem ser conferidos
-  nos arquivos originais.
- </p>
-</section>
-
-<!-- NAVEGAÇÃO -->
-<div class="controls">
- <div class="counter">
-  <b id="current">01</b> / <span id="total">14</span>
- </div>
- <div style="display:flex;align-items:center">
-  <div class="utility">
-   <button id="fullscreen" title="Tela cheia">⛶</button>
-   <button id="help" title="Atalhos">?</button>
-  </div>
-  <div class="nav">
-   <button id="prev" aria-label="Slide anterior" disabled>←</button>
-   <button id="next" aria-label="Próximo slide">→</button>
-  </div>
- </div>
+<div class="top-line">
+  <div class="progress" id="progress"></div>
 </div>
 
-<div class="hint">← → para navegar • F para tela cheia</div>
+<!-- 01 CAPA -->
+<section class="slide active cover">
+  <div class="hero-copy">
+    <div class="eyebrow">História · Memória · Direitos humanos</div>
+    <div class="rule"></div>
+    <div class="date">9 DE NOVEMBRO</div>
+    <h1>Contra o<br>fascismo.<br><span class="gold">Contra o<br>antissemitismo.</span></h1>
+    <div class="rule"></div>
+    <p class="subtitle">
+      Uma data para recordar as vítimas da intolerância,
+      compreender os perigos do autoritarismo e defender
+      a dignidade humana.
+    </p>
+  </div>
+  <div class="cover-mark">9</div>
+</section>
+
+<!-- 02 A DATA -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">01 / A data</span></div>
+  <h2>Por que 9 de novembro?</h2>
+  <div class="split">
+    <div class="text-column">
+      <p>
+        A data é associada à memória da <strong>Noite dos Cristais</strong>,
+        o pogrom antissemita ocorrido na Alemanha nazista em 1938.
+      </p>
+      <p>
+        A noite de 9 para 10 de novembro marcou uma escalada
+        pública e organizada da violência contra a população judaica.
+      </p>
+      <div class="panel">
+        <div class="mini-label">O significado da lembrança</div>
+        <p>
+          Recordar as vítimas do fascismo e do antissemitismo
+          é também reconhecer os sinais de intolerância no presente.
+        </p>
+      </div>
+      <p class="small">
+        A data é utilizada em campanhas internacionais de memória
+        e conscientização desde a década de 1990.
+      </p>
+    </div>
+    <figure class="photo">
+      <div class="photo-fallback"><span class="symbol">✳</span><span>Memória histórica</span></div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Memorial_to_the_Murdered_Jews_of_Europe%2C_Berlin.jpg/960px-Memorial_to_the_Murdered_Jews_of_Europe%2C_Berlin.jpg" alt="Memorial aos Judeus Assassinados da Europa, em Berlim" onerror="this.parentElement.classList.add('broken')">
+      <figcaption class="photo-caption">Memorial aos Judeus Assassinados da Europa, Berlim.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 03 CONCEITOS -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">02 / Conceitos fundamentais</span></div>
+  <h2>Dois conceitos, uma luta por dignidade</h2>
+  <div class="content">
+    <div class="two">
+      <article class="definition">
+        <div class="mini-label">Ideologia política</div>
+        <h3>Fascismo</h3>
+        <p>
+          Movimento autoritário e ultranacionalista que rejeita
+          o pluralismo democrático, concentra o poder, cultua
+          lideranças e reprime opositores.
+        </p>
+      </article>
+      <article class="definition">
+        <div class="mini-label">Forma de preconceito</div>
+        <h3>Antissemitismo</h3>
+        <p>
+          Hostilidade, preconceito ou discriminação contra
+          pessoas judias, manifestada em estereótipos,
+          teorias conspiratórias e violência.
+        </p>
+      </article>
+    </div>
+    <div class="callout">
+      <strong>Importante:</strong> os conceitos não são sinônimos.
+      O antissemitismo é muito anterior ao fascismo, mas foi
+      transformado em política de Estado pelo regime nazista.
+    </div>
+  </div>
+</section>
+
+<!-- 04 ASCENSÃO -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">03 / Contexto histórico</span></div>
+  <h2>A ascensão do nazismo</h2>
+  <div class="split">
+    <div class="text-column">
+      <p>
+        Após a Primeira Guerra Mundial, a Alemanha enfrentou
+        instabilidade política, crise econômica e tensões sociais.
+      </p>
+      <p>
+        Os nazistas exploraram o ressentimento e o medo,
+        usando propaganda, nacionalismo extremo e a criação
+        de inimigos para conquistar apoio.
+      </p>
+      <div class="panel">
+        <div class="mini-label">30 de janeiro de 1933</div>
+        <h3>Hitler chega ao poder</h3>
+        <p>
+          Nomeado chanceler, Hitler e o Partido Nazista
+          destruíram gradualmente as instituições democráticas
+          e estabeleceram uma ditadura.
+        </p>
+      </div>
+    </div>
+    <div class="text-column">
+      <div class="mini-label">Como o regime se consolidou</div>
+      <div class="panel">
+        <h3>Propaganda</h3>
+        <p>Manipulação da informação e construção de inimigos políticos e sociais.</p>
+      </div>
+      <div class="panel">
+        <h3>Repressão</h3>
+        <p>Perseguição de opositores, censura e enfraquecimento das liberdades.</p>
+      </div>
+      <div class="panel">
+        <h3>Exclusão</h3>
+        <p>Transformação do preconceito em leis e políticas discriminatórias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 LEIS -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">04 / Discriminação institucional</span></div>
+  <h2>Quando o preconceito vira lei</h2>
+  <div class="content">
+    <p>
+      Em 1935, o regime nazista aprovou as
+      <strong>Leis de Nuremberg</strong>, que institucionalizaram
+      a discriminação contra os judeus.
+    </p>
+    <div class="cards">
+      <article class="card">
+        <div class="card-number">01</div>
+        <h3>Cidadania</h3>
+        <p>Judeus perderam a cidadania plena e direitos políticos no Reich.</p>
+      </article>
+      <article class="card">
+        <div class="card-number">02</div>
+        <h3>Família</h3>
+        <p>Casamentos e relações entre judeus e pessoas consideradas de sangue alemão foram proibidos.</p>
+      </article>
+      <article class="card">
+        <div class="card-number">03</div>
+        <h3>Exclusão</h3>
+        <p>Outras medidas restringiram o acesso à educação, ao trabalho e à vida pública.</p>
+      </article>
+    </div>
+    <div class="callout">
+      O Estado passou a utilizar classificações raciais pseudocientíficas
+      para determinar quem poderia pertencer à comunidade nacional.
+    </div>
+  </div>
+</section>
+
+<!-- 06 NOITE DOS CRISTAIS -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">05 / 9 e 10 de novembro de 1938</span></div>
+  <h2>A Noite dos Cristais</h2>
+  <div class="split photo-left">
+    <figure class="photo">
+      <div class="photo-fallback"><span class="symbol">1938</span><span>Registro histórico do pogrom</span></div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Bundesarchiv_Bild_146-1970-083-44%2C_Magdeburg%2C_zerst%C3%B6rtes_j%C3%BCdisches_Gesch%C3%A4ft.jpg?width=1200" alt="Loja judaica destruída em Magdeburg após a Noite dos Cristais" onerror="this.parentElement.classList.add('broken')">
+      <figcaption class="photo-caption">Estabelecimento judaico destruído em Magdeburg, novembro de 1938.</figcaption>
+    </figure>
+    <div class="text-column">
+      <p>
+        Na noite de 9 para 10 de novembro, forças nazistas
+        e grupos mobilizados pelo regime atacaram comunidades judaicas
+        na Alemanha e em territórios anexados.
+      </p>
+      <p>
+        Sinagogas foram incendiadas, lojas destruídas, casas invadidas
+        e milhares de pessoas perseguidas.
+      </p>
+      <p>
+        O nome <strong>Kristallnacht</strong> faz referência aos
+        cacos de vidro espalhados pelas ruas após a destruição
+        das vitrines de estabelecimentos judaicos.
+      </p>
+      <div class="panel">
+        <p>
+          O pogrom não foi uma reação espontânea: a violência
+          foi incentivada e organizada por lideranças nazistas.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 NÚMEROS -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">06 / A dimensão da violência</span></div>
+  <h2>O que aconteceu naquela noite?</h2>
+  <div class="content">
+    <div class="cards">
+      <article class="card">
+        <div class="card-number">1.400+</div>
+        <h3>Sinagogas</h3>
+        <p>Incendiadas ou destruídas durante o pogrom.</p>
+      </article>
+      <article class="card">
+        <div class="card-number">26 mil</div>
+        <h3>Prisioneiros</h3>
+        <p>Homens judeus presos e enviados a campos de concentração.</p>
+      </article>
+      <article class="card">
+        <div class="card-number">Milhares</div>
+        <h3>Comércios</h3>
+        <p>Estabelecimentos e residências judaicas saqueados ou vandalizados.</p>
+      </article>
+    </div>
+    <div class="callout">
+      Centenas de judeus morreram durante a violência e suas consequências.
+      O número tradicional de 91 mortes, citado em registros antigos,
+      não representa o total contabilizado posteriormente.
+    </div>
+    <p class="small">Fonte de referência: United States Holocaust Memorial Museum.</p>
+  </div>
+</section>
+
+<!-- 08 HOLOCAUSTO -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">07 / A radicalização da perseguição</span></div>
+  <h2>Da exclusão ao Holocausto</h2>
+  <div class="split">
+    <div class="text-column">
+      <p>
+        Durante a Segunda Guerra Mundial, a perseguição nazista
+        aos judeus foi ampliada para os territórios ocupados.
+      </p>
+      <p>
+        Pessoas foram confinadas em guetos, deportadas,
+        submetidas a trabalhos forçados e assassinadas em massa.
+      </p>
+      <div class="panel">
+        <div class="card-number">6 milhões</div>
+        <h3>Judeus assassinados</h3>
+        <p>
+          O Holocausto foi o genocídio sistemático de aproximadamente
+          seis milhões de judeus europeus pela Alemanha nazista
+          e seus colaboradores.
+        </p>
+      </div>
+      <p class="small">
+        A perseguição nazista também atingiu outros grupos,
+        incluindo pessoas romani, pessoas com deficiência,
+        prisioneiros de guerra soviéticos e opositores políticos.
+      </p>
+    </div>
+    <figure class="photo">
+      <div class="photo-fallback"><span class="symbol">MEMÓRIA</span><span>Preservar a história é reconhecer as vítimas</span></div>
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_the_entrance_to_the_main_camp_of_Auschwitz_%28Auschwitz_I%29.jpg?width=1200" alt="Entrada do antigo campo de Auschwitz I" onerror="this.parentElement.classList.add('broken')">
+      <figcaption class="photo-caption">Entrada do antigo campo de Auschwitz I, hoje preservado como memorial.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 09 CRONOLOGIA -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">08 / Cronologia</span></div>
+  <h2>Uma linha do tempo</h2>
+  <div class="content">
+    <div class="timeline">
+      <article class="timeline-item">
+        <b>1933</b>
+        <p>Hitler é nomeado chanceler e começa a consolidação da ditadura.</p>
+      </article>
+      <article class="timeline-item">
+        <b>1935</b>
+        <p>As Leis de Nuremberg institucionalizam a discriminação.</p>
+      </article>
+      <article class="timeline-item">
+        <b>1938</b>
+        <p>A Noite dos Cristais marca a escalada da violência antissemita.</p>
+      </article>
+      <article class="timeline-item">
+        <b>1939</b>
+        <p>A Alemanha invade a Polônia em 1º de setembro. Começa a guerra na Europa.</p>
+      </article>
+      <article class="timeline-item">
+        <b>1941</b>
+        <p>O assassinato sistemático de judeus se expande com execuções em massa.</p>
+      </article>
+      <article class="timeline-item">
+        <b>1945</b>
+        <p>Derrota da Alemanha nazista e fim da guerra na Europa.</p>
+      </article>
+    </div>
+    <div class="callout">
+      A perseguição foi construída ao longo de anos: da propaganda
+      e exclusão legal até a deportação e o genocídio.
+    </div>
+  </div>
+</section>
+
+<!-- 10 LIPA -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">09 / Outro episódio da violência fascista</span></div>
+  <h2>O massacre de Lipa</h2>
+  <div class="split">
+    <div class="text-column">
+      <p>
+        Em <strong>30 de abril de 1944</strong>, forças nazistas
+        e fascistas cometeram um massacre contra a população
+        civil da aldeia de Lipa, na atual Croácia.
+      </p>
+      <div class="panel">
+        <div class="card-number">269</div>
+        <h3>Habitantes assassinados</h3>
+        <p>
+          Entre as vítimas estavam 96 crianças.
+          A comunidade foi devastada e suas construções foram incendiadas.
+        </p>
+      </div>
+      <p>
+        Hoje, o memorial <strong>Lipa Remembers</strong> preserva
+        a história da comunidade e homenageia as vítimas.
+      </p>
+    </div>
+    <div class="text-column">
+      <div class="mini-label">Memória e reconstrução</div>
+      <div class="photo" style="height:100%;min-height:270px">
+        <div class="photo-fallback"><span class="symbol">LIPA</span><span>Uma comunidade que preserva sua memória</span></div>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lipa_Memorial_Centre.jpg?width=1200" alt="Centro memorial de Lipa" onerror="this.parentElement.classList.add('broken')">
+        <figcaption class="photo-caption">Memória das vítimas do massacre de Lipa.</figcaption>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 POR QUE LEMBRAR -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">10 / Memória e responsabilidade</span></div>
+  <h2>Por que lembrar?</h2>
+  <div class="content">
+    <div class="cards">
+      <article class="card">
+        <div class="mini-label">01</div>
+        <h3>Educação</h3>
+        <p>Conhecer a história e reconhecer como o preconceito pode ser manipulado.</p>
+      </article>
+      <article class="card">
+        <div class="mini-label">02</div>
+        <h3>Consciência</h3>
+        <p>Identificar discursos de ódio, desumanização e intolerância.</p>
+      </article>
+      <article class="card">
+        <div class="mini-label">03</div>
+        <h3>Responsabilidade</h3>
+        <p>Defender a dignidade humana e os direitos fundamentais.</p>
+      </article>
+    </div>
+    <div class="rule"></div>
+    <p class="big-quote">
+      A memória histórica não é apenas uma lembrança.
+      É um compromisso com a <span class="gold">dignidade humana.</span>
+    </p>
+  </div>
+</section>
+
+<!-- 12 PRESENTE -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">11 / O presente</span></div>
+  <h2>Como combater o ódio hoje?</h2>
+  <div class="content">
+    <div class="two">
+      <article class="panel">
+        <h3>Informação</h3>
+        <p>Verificar fontes, estudar história e não compartilhar desinformação.</p>
+      </article>
+      <article class="panel">
+        <h3>Respeito</h3>
+        <p>Rejeitar estereótipos e tratar todas as pessoas com dignidade.</p>
+      </article>
+      <article class="panel">
+        <h3>Responsabilidade</h3>
+        <p>Não normalizar o antissemitismo, o racismo ou a xenofobia.</p>
+      </article>
+      <article class="panel">
+        <h3>Democracia</h3>
+        <p>Defender direitos fundamentais, liberdade e pluralismo.</p>
+      </article>
+    </div>
+    <div class="callout">
+      Combater o antissemitismo é rejeitar o preconceito contra judeus,
+      as teorias conspiratórias e a culpabilização coletiva.
+      O respeito aos direitos humanos deve ser universal.
+    </div>
+  </div>
+</section>
+
+<!-- 13 CONCLUSÃO -->
+<section class="slide cover">
+  <div class="hero-copy">
+    <div class="eyebrow">Conclusão</div>
+    <div class="rule"></div>
+    <h1>Nunca<br><span class="gold">mais.</span></h1>
+    <div class="rule"></div>
+    <p class="subtitle">
+      Que a memória das vítimas do fascismo e do nazismo
+      nos ajude a construir uma sociedade em que a liberdade,
+      a igualdade e a dignidade humana sejam respeitadas.
+    </p>
+    <div class="date" style="margin-top:28px">9 DE NOVEMBRO</div>
+    <p class="mini-label">MEMÓRIA · RESISTÊNCIA · DIREITOS HUMANOS</p>
+  </div>
+  <div class="cover-mark">✳</div>
+</section>
+
+<!-- 14 FONTES -->
+<section class="slide">
+  <div class="header"><span class="eyebrow">Pesquisa e aprofundamento</span></div>
+  <h2>Fontes e referências</h2>
+  <div class="content">
+    <p>
+      A história exige pesquisa, documentação e responsabilidade.
+      Consulte as instituições abaixo para aprofundar os temas.
+    </p>
+    <div class="source-grid">
+      <a href="https://encyclopedia.ushmm.org/content/en/article/kristallnacht" target="_blank" rel="noopener">USHMM — Kristallnacht</a>
+      <a href="https://encyclopedia.ushmm.org/content/en/article/introduction-to-the-holocaust" target="_blank" rel="noopener">USHMM — Introdução ao Holocausto</a>
+      <a href="https://encyclopedia.ushmm.org/content/pt-br/article/the-holocaust-and-world-war-ii-key-dates" target="_blank" rel="noopener">USHMM — Datas importantes</a>
+      <a href="https://ppmhp.hr/en/lipa/" target="_blank" rel="noopener">Memorial Centre Lipa</a>
+      <a href="https://unitedfia.org/" target="_blank" rel="noopener">UNITED — Campanhas de memória</a>
+      <a href="https://www.yadvashem.org/" target="_blank" rel="noopener">Yad Vashem — Centro Mundial de Memória do Holocausto</a>
+    </div>
+    <div class="callout">
+      Imagens históricas: Wikimedia Commons. Os arquivos originais
+      possuem informações próprias de autoria e licença.
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="counter"><b id="current">01</b> <span style="color:#8f7c87">/</span> <span id="total">14</span></div>
+  <div class="controls">
+    <button class="utility-button" id="help" aria-label="Ver atalhos">ATALHOS</button>
+    <button class="utility-button" id="full" aria-label="Tela cheia">⛶</button>
+    <button class="nav-button" id="prev" aria-label="Slide anterior" disabled>←</button>
+    <button class="nav-button" id="next" aria-label="Próximo slide">→</button>
+  </div>
+</footer>
+
+<div class="key-hint">← → NAVEGAR &nbsp; · &nbsp; F TELA CHEIA</div>
 </main>
 
 <script>
 (() => {
- const slides = [...document.querySelectorAll('.slide')];
- const current = document.getElementById('current');
- const total = document.getElementById('total');
- const progress = document.getElementById('progress');
- const prev = document.getElementById('prev');
- const next = document.getElementById('next');
- let index = 0;
+  const slides = [...document.querySelectorAll(".slide")];
+  const current = document.getElementById("current");
+  const total = document.getElementById("total");
+  const progress = document.getElementById("progress");
+  const prev = document.getElementById("prev");
+  const next = document.getElementById("next");
+  const deck = document.getElementById("deck");
+  let index = 0;
 
- total.textContent = String(slides.length).padStart(2,'0');
+  total.textContent = String(slides.length).padStart(2,"0");
 
- function showSlide(n) {
-  index = Math.max(0,Math.min(slides.length-1,n));
+  function show(n){
+    index = Math.max(0,Math.min(slides.length-1,n));
 
-  slides.forEach((slide,i) => {
-   slide.classList.toggle('active',i===index);
-   slide.setAttribute('aria-hidden',i===index?'false':'true');
+    slides.forEach((slide,i)=>{
+      slide.classList.toggle("active",i===index);
+      slide.setAttribute("aria-hidden",i===index ? "false" : "true");
+    });
+
+    current.textContent = String(index+1).padStart(2,"0");
+    progress.style.width = ((index+1)/slides.length*100)+"%";
+    prev.disabled = index===0;
+    next.disabled = index===slides.length-1;
+  }
+
+  prev.addEventListener("click",()=>show(index-1));
+  next.addEventListener("click",()=>show(index+1));
+
+  function fullscreen(){
+    if(!document.fullscreenElement){
+      deck.requestFullscreen?.();
+    }else{
+      document.exitFullscreen?.();
+    }
+  }
+
+  document.getElementById("full").addEventListener("click",fullscreen);
+
+  document.getElementById("help").addEventListener("click",()=>{
+    alert(
+      "ATALHOS DA APRESENTAÇÃO\n\n"+
+      "→ Próximo slide\n"+
+      "← Slide anterior\n"+
+      "Home Primeiro slide\n"+
+      "End Último slide\n"+
+      "F Tela cheia\n"+
+      "Celular: deslize para os lados."
+    );
   });
 
-  current.textContent = String(index+1).padStart(2,'0');
-  progress.style.width = ((index+1)/slides.length*100)+'%';
+  document.addEventListener("keydown",e=>{
+    if(["ArrowRight","PageDown"," "].includes(e.key)){
+      e.preventDefault();show(index+1);
+    }
+    if(["ArrowLeft","PageUp"].includes(e.key)){
+      e.preventDefault();show(index-1);
+    }
+    if(e.key==="Home")show(0);
+    if(e.key==="End")show(slides.length-1);
+    if(e.key.toLowerCase()==="f")fullscreen();
+  });
 
-  prev.disabled = index===0;
-  next.disabled = index===slides.length-1;
+  let startX=null;
 
-  slides[index].scrollTop = 0;
- }
+  deck.addEventListener("touchstart",e=>{
+    startX=e.changedTouches[0].screenX;
+  },{passive:true});
 
- prev.addEventListener('click',()=>showSlide(index-1));
- next.addEventListener('click',()=>showSlide(index+1));
+  deck.addEventListener("touchend",e=>{
+    if(startX===null)return;
+    const delta=e.changedTouches[0].screenX-startX;
+    if(Math.abs(delta)>60)show(index+(delta<0?1:-1));
+    startX=null;
+  },{passive:true});
 
- document.addEventListener('keydown',e=>{
-  if(['ArrowRight','PageDown',' '].includes(e.key)){
-   e.preventDefault();
-   showSlide(index+1);
-  }
-  if(['ArrowLeft','PageUp'].includes(e.key)){
-   e.preventDefault();
-   showSlide(index-1);
-  }
-  if(e.key==='Home')showSlide(0);
-  if(e.key==='End')showSlide(slides.length-1);
-  if(e.key.toLowerCase()==='f')toggleFullscreen();
- });
-
- async function toggleFullscreen(){
-  try{
-   if(!document.fullscreenElement){
-    await document.querySelector('.deck').requestFullscreen();
-   }else{
-    await document.exitFullscreen();
-   }
-  }catch(error){}
- }
-
- document.getElementById('fullscreen')
-  .addEventListener('click',toggleFullscreen);
-
- document.getElementById('help').addEventListener('click',()=>{
-  alert(
-   'ATALHOS DA APRESENTAÇÃO\n\n'+
-   '→ ou Espaço: próximo slide\n'+
-   '←: slide anterior\n'+
-   'Home: primeiro slide\n'+
-   'End: último slide\n'+
-   'F: tela cheia\n'+
-   'Celular: deslize para os lados.'
-  );
- });
-
- let startX = null;
-
- document.querySelector('.deck').addEventListener('touchstart',e=>{
-  startX=e.changedTouches[0].screenX;
- },{passive:true});
-
- document.querySelector('.deck').addEventListener('touchend',e=>{
-  if(startX===null)return;
-  const dx=e.changedTouches[0].screenX-startX;
-  if(Math.abs(dx)>65)showSlide(index+(dx<0?1:-1));
-  startX=null;
- },{passive:true});
-
- showSlide(0);
+  show(0);
 })();
 </script>
 </body>
