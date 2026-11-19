@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#481923">
+<title>Equidade Étnico-Racial e de Gênero | Sociologia 2ºA</title>
+<style>
+:root{--wine:#481923;--wine2:#682a35;--red:#9d493e;--rust:#bd6a4c;--gold:#d7ad70;--cream:#f4eee4;--paper:#fffaf2;--ink:#241d1c;--muted:#746763;--line:rgba(72,25,35,.16);--shadow:0 24px 70px rgba(24,10,12,.22)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#211316;color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}.deck{height:100dvh;width:100%;position:relative;display:grid;place-items:center;background:radial-gradient(ellipse at 80% 15%,rgba(189,106,76,.2),transparent 34%),#211316;padding:clamp(8px,2vw,28px)}
+.slide{position:absolute;width:min( min(100%, calc((100dvh - 56px)*16/9)), 1440px);aspect-ratio:16/9;max-height:calc(100dvh - 56px);background:var(--cream);box-shadow:var(--shadow);overflow:hidden;padding:clamp(24px,5.2vw,76px);display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(36px) scale(.985);transition:opacity .48s ease,transform .58s cubic-bezier(.2,.75,.2,1),visibility .48s;isolation:isolate}
+.slide::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 100% 100%,rgba(215,173,112,.13),transparent 32%)}
+.slide.active{opacity:1;visibility:visible;transform:translateX(0) scale(1)}.slide.exit-left{transform:translateX(-36px) scale(.985)}
+.cover,.dark{background:var(--wine);color:var(--cream)}.cover::after{content:"";position:absolute;width:55%;aspect-ratio:1;right:-10%;bottom:-42%;border:1px solid rgba(215,173,112,.45);border-radius:50%;box-shadow:0 0 0 28px rgba(215,173,112,.045),0 0 0 58px rgba(215,173,112,.04),0 0 0 90px rgba(215,173,112,.035);z-index:-1}
+.kicker{font-size:clamp(9px,.9vw,13px);font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin:0 0 16px}.dark .kicker,.cover .kicker{color:var(--gold)}
+h1,h2,h3,p{margin-top:0}h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(36px,6.2vw,88px);line-height:.99;letter-spacing:-.045em;max-width:900px;margin-bottom:24px}h2{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(30px,4.1vw,58px);line-height:1.04;letter-spacing:-.035em;margin-bottom:22px;max-width:1000px}h3{font-size:clamp(15px,1.55vw,22px);line-height:1.15;margin-bottom:9px;color:var(--wine)}.dark h3{color:var(--gold)}p,li{font-size:clamp(12px,1.35vw,18px);line-height:1.5;color:var(--muted)}.dark p,.cover p{color:rgba(244,238,228,.78)}.lead{font-size:clamp(17px,2vw,27px);line-height:1.38;max-width:850px;color:var(--wine)}.dark .lead{color:var(--cream)}.rule{height:2px;width:70px;background:var(--rust);margin:8px 0 24px}.cover .rule{background:var(--gold);width:96px;height:3px}.cover h1{max-width:850px}.cover .subtitle{font-size:clamp(16px,1.7vw,24px);letter-spacing:.02em;color:var(--gold);margin-bottom:28px}.byline{margin-top:auto;display:flex;align-items:end;justify-content:space-between;gap:20px;border-top:1px solid rgba(244,238,228,.24);padding-top:18px}.byline strong{font-size:clamp(12px,1.1vw,15px);letter-spacing:.04em}.byline span{font-size:12px;color:rgba(244,238,228,.6)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.3vw,32px);align-items:stretch}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,22px)}.card{background:var(--paper);border:1px solid var(--line);padding:clamp(14px,2vw,26px);min-width:0}.card.accent{background:var(--wine);color:var(--cream);border:0}.card.accent p{color:rgba(244,238,228,.78)}.card .number{font-family:Georgia,serif;color:var(--rust);font-size:clamp(28px,3.2vw,44px);line-height:1;margin-bottom:14px}.card.accent .number{color:var(--gold)}.tag{display:inline-block;border:1px solid rgba(189,106,76,.5);color:var(--wine);padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}.dark .tag{color:var(--gold);border-color:rgba(215,173,112,.5)}
+.bigquote{font-family:Georgia,serif;font-size:clamp(25px,3.4vw,48px);line-height:1.16;color:var(--wine);max-width:950px}.dark .bigquote{color:var(--cream)}.quote-mark{font-family:Georgia,serif;font-size:clamp(60px,8vw,110px);line-height:.6;color:var(--rust);opacity:.8}.stat{font-family:Georgia,serif;font-size:clamp(38px,5vw,68px);line-height:1;color:var(--wine);letter-spacing:-.04em}.stat-label{font-size:clamp(11px,1.15vw,15px);line-height:1.35;color:var(--muted);margin-top:10px}.bar-group{display:grid;gap:16px;margin-top:18px}.bar-row{display:grid;grid-template-columns:minmax(100px, .8fr) 2fr auto;gap:12px;align-items:center;font-size:clamp(10px,1.1vw,14px);color:var(--muted)}.track{height:13px;background:#e4d9cc;border-radius:30px;overflow:hidden}.fill{height:100%;background:var(--rust);border-radius:30px}.fill.wine{background:var(--wine)}.bar-value{font-weight:800;color:var(--wine);font-variant-numeric:tabular-nums}.note{font-size:clamp(9px,.95vw,12px);line-height:1.4;color:var(--muted);margin-top:12px}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pill{border-radius:30px;padding:7px 11px;background:#eadfd2;color:var(--wine);font-size:clamp(10px,1vw,13px);font-weight:700}.steps{display:grid;gap:12px}.step{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}.step b{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--wine);color:var(--cream);font-family:Georgia,serif;font-size:17px}.step p{margin:3px 0 0}.source-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px}.source{border-top:1px solid var(--line);padding-top:10px}.source a{color:var(--wine);font-weight:750;text-decoration-thickness:1px;text-underline-offset:3px;font-size:clamp(10px,1.05vw,14px)}.source small{display:block;color:var(--muted);font-size:clamp(9px,.9vw,12px);line-height:1.35;margin-top:4px}
+.footer{position:absolute;bottom:clamp(12px,2vw,26px);left:clamp(24px,5.2vw,76px);right:clamp(24px,5.2vw,76px);display:flex;justify-content:space-between;align-items:center;color:rgba(72,25,35,.48);font-size:10px;letter-spacing:.12em;text-transform:uppercase}.dark .footer,.cover .footer{color:rgba(244,238,228,.5)}.ornament{position:absolute;right:6%;top:10%;width:19%;aspect-ratio:1;border:1px solid rgba(157,73,62,.28);border-radius:50%;z-index:-1}.ornament::before,.ornament::after{content:"";position:absolute;inset:13%;border:1px solid rgba(157,73,62,.25);border-radius:50%}.ornament::after{inset:28%}
+.controls{position:fixed;z-index:10;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.14);border-radius:50px;background:rgba(25,12,15,.78);backdrop-filter:blur(14px);color:white}.controls button{border:0;background:transparent;color:white;width:34px;height:30px;border-radius:50%;cursor:pointer;font-size:18px}.controls button:hover{background:rgba(255,255,255,.14)}.controls button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.counter{font-size:11px;min-width:48px;text-align:center;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.75)}.progress{position:fixed;z-index:11;top:0;left:0;height:3px;background:var(--gold);width:0;transition:width .35s ease}.hint{position:fixed;right:22px;bottom:22px;color:rgba(255,255,255,.45);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:700px){.deck{padding:0}.slide{width:100%;height:100dvh;max-height:none;aspect-ratio:auto;padding:30px 24px 62px;overflow-y:auto;justify-content:flex-start}.slide h1{font-size:clamp(42px,12vw,68px)}.slide h2{font-size:clamp(34px,9vw,48px)}.grid3{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.card{padding:15px}.footer{left:24px;right:24px;bottom:20px}.source-list{grid-template-columns:1fr}.byline{margin-top:35px}.ornament{width:30%;top:4%;right:0}.hint{display:none}.controls{bottom:8px}.bar-row{grid-template-columns:90px 1fr auto}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+@media print{html,body{overflow:visible;background:white;height:auto}.deck{display:block;height:auto;padding:0;background:white}.slide{position:relative;display:flex;opacity:1;visibility:visible;transform:none;width:100%;height:100vh;max-height:none;aspect-ratio:16/9;box-shadow:none;page-break-after:always;break-after:page}.controls,.progress,.hint{display:none!important}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<main class="deck" id="deck" aria-label="Apresentação de Sociologia">
+<section class="slide cover active" aria-label="Slide 1">
+ <p class="kicker">Sociologia · Ensino Médio · 2ºA</p>
+ <div class="rule"></div>
+ <h1>Por uma política de equidade étnico-racial e de gênero</h1>
+ <p class="subtitle">Direitos, oportunidades e transformação social</p>
+ <div class="byline"><div><strong>LUIS · SAIMON · PEDRO</strong><br><span>Trabalho de Sociologia — 2ºA</span></div><span>Brasil · 2026</span></div>
+ <div class="footer"><span>Equidade & justiça social</span><span>01 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 2">
+ <div class="ornament"></div><p class="kicker">01 · Ponto de partida</p>
+ <h2>Uma sociedade pode tratar todos da mesma forma e ainda ser desigual?</h2>
+ <div class="rule"></div>
+ <p class="lead">Sim. Quando as pessoas partem de condições muito diferentes, oferecer exatamente os mesmos recursos pode não ser suficiente para garantir oportunidades reais.</p>
+ <div class="grid2" style="margin-top:auto">
+  <div class="card"><span class="tag">A questão</span><h3>Igualdade formal</h3><p>Todos possuem os mesmos direitos perante a lei. É um princípio indispensável, mas não elimina automaticamente as desigualdades existentes na sociedade.</p></div>
+  <div class="card accent"><span class="tag">O desafio</span><h3>Igualdade na prática</h3><p>É preciso identificar barreiras históricas e sociais e criar condições para que os direitos possam ser exercidos por todas as pessoas.</p></div>
+ </div><div class="footer"><span>Da igualdade de direitos à igualdade de oportunidades</span><span>02 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 3">
+ <p class="kicker">02 · Conceitos fundamentais</p><h2>Igualdade e equidade: qual é a diferença?</h2><div class="rule"></div>
+ <div class="grid2" style="margin-top:4px">
+  <div class="card"><div class="number">01</div><h3>Igualdade</h3><p>Reconhece que todas as pessoas devem ter os mesmos direitos, dignidade e proteção, sem discriminação.</p><p><strong>Princípio:</strong> ninguém deve valer menos perante a lei.</p></div>
+  <div class="card accent"><div class="number">02</div><h3>Equidade</h3><p>Considera que existem desigualdades de partida e busca respostas adequadas para remover barreiras e ampliar oportunidades.</p><p><strong>Princípio:</strong> justiça também exige enfrentar desvantagens concretas.</p></div>
+ </div>
+ <p class="note" style="margin-top:auto">Equidade não significa conceder privilégios sem critério: significa reconhecer obstáculos reais e formular medidas para superá-los.</p>
+ <div class="footer"><span>Conceitos</span><span>03 / 12</span></div>
+</section>
+<section class="slide dark" aria-label="Slide 4">
+ <p class="kicker">03 · Leitura sociológica</p><h2>O racismo não aparece apenas em atitudes individuais.</h2><div class="rule"></div>
+ <p class="lead">Ele também pode estar presente no funcionamento das instituições, nas relações sociais e nas oportunidades distribuídas pela sociedade.</p>
+ <div class="grid3" style="margin-top:auto">
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>Individual</h3><p>Ofensas, estereótipos, discriminação e tratamento desigual entre pessoas.</p></div>
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>Institucional</h3><p>Regras, práticas ou omissões de instituições que produzem ou mantêm desigualdades.</p></div>
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>Estrutural</h3><p>Desigualdades reproduzidas historicamente e incorporadas à organização da vida social.</p></div>
+ </div>
+ <div class="footer"><span>O problema é social — e exige respostas coletivas</span><span>04 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 5">
+ <p class="kicker">04 · Gênero e raça</p><h2>As desigualdades podem se cruzar.</h2><div class="rule"></div>
+ <p class="lead">A experiência de uma pessoa não é definida por apenas uma característica. Raça, gênero e condição social podem se combinar e produzir barreiras específicas.</p>
+ <div class="grid2" style="margin-top:18px;align-items:center">
+  <div class="steps">
+   <div class="step"><b>1</b><div><h3>Raça e etnia</h3><p>Podem influenciar o acesso a oportunidades e a exposição à discriminação.</p></div></div>
+   <div class="step"><b>2</b><div><h3>Gênero</h3><p>Expectativas sociais e desigualdades podem afetar a participação, a segurança e o trabalho.</p></div></div>
+   <div class="step"><b>3</b><div><h3>Interseccionalidade</h3><p>Ajuda a compreender como diferentes relações de desigualdade atuam ao mesmo tempo.</p></div></div>
+  </div>
+  <div class="card accent"><span class="tag">Exemplo</span><p class="bigquote" style="font-size:clamp(22px,2.8vw,38px);color:var(--cream)">Uma mulher negra pode enfrentar barreiras que não são explicadas apenas pelo racismo ou apenas pelo sexismo.</p><p class="note" style="color:rgba(244,238,228,.65)">O conceito não reduz pessoas a categorias: amplia a análise das desigualdades.</p></div>
+ </div><div class="footer"><span>Interseccionalidade</span><span>05 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 6">
+ <p class="kicker">05 · O retrato em números</p><h2>As diferenças aparecem também na renda.</h2><div class="rule"></div>
+ <p class="lead">Segundo o IBGE, em 2024, persistiam diferenças no rendimento médio real de todos os trabalhos no Brasil.</p>
+ <div class="grid2" style="margin-top:12px">
+  <div class="card"><span class="tag">Por cor ou raça</span><div class="stat">65,9%</div><p class="stat-label">A mais: rendimento médio de pessoas brancas em comparação com pessoas pretas ou pardas.</p>
+   <div class="bar-group"><div class="bar-row"><span>Branca</span><div class="track"><div class="fill wine" style="width:100%"></div></div><span class="bar-value">R$ 4.119</span></div><div class="bar-row"><span>Preta/parda</span><div class="track"><div class="fill" style="width:60.3%"></div></div><span class="bar-value">R$ 2.484</span></div></div>
+  </div>
+  <div class="card"><span class="tag">Por sexo</span><div class="stat">27,2%</div><p class="stat-label">A mais: rendimento médio dos homens em comparação com o das mulheres.</p>
+   <div class="bar-group"><div class="bar-row"><span>Homens</span><div class="track"><div class="fill wine" style="width:100%"></div></div><span class="bar-value">R$ 3.533</span></div><div class="bar-row"><span>Mulheres</span><div class="track"><div class="fill" style="width:78.6%"></div></div><span class="bar-value">R$ 2.778</span></div></div>
+  </div>
+ </div>
+ <p class="note">Valores em reais médios de 2024. Rendimento médio real de todos os trabalhos das pessoas ocupadas. Fonte: IBGE, PNAD Contínua, 2012–2024. As comparações são médias de grupos, não previsões sobre indivíduos.</p>
+ <div class="footer"><span>Dados nacionais · IBGE</span><span>06 / 12</span></div>
+</section>
+<section class="slide dark" aria-label="Slide 7">
+ <p class="kicker">06 · Políticas públicas</p><h2>O que uma política de equidade pode fazer?</h2><div class="rule"></div>
+ <div class="grid2" style="margin-top:5px">
+  <div class="steps">
+   <div class="step"><b>1</b><div><h3>Reconhecer</h3><p>Produzir dados e ouvir grupos afetados para identificar desigualdades.</p></div></div>
+   <div class="step"><b>2</b><div><h3>Corrigir barreiras</h3><p>Rever práticas discriminatórias e ampliar o acesso a direitos e serviços.</p></div></div>
+   <div class="step"><b>3</b><div><h3>Garantir oportunidades</h3><p>Promover inclusão na educação, no trabalho e nos espaços de decisão.</p></div></div>
+   <div class="step"><b>4</b><div><h3>Acompanhar resultados</h3><p>Avaliar se as medidas funcionam e ajustar o que for necessário.</p></div></div>
+  </div>
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.16);display:flex;flex-direction:column;justify-content:center"><span class="tag">Ideia central</span><p class="bigquote" style="color:var(--cream)">Não basta proibir a discriminação. Também é necessário transformar as condições que permitem que ela continue.</p></div>
+ </div><div class="footer"><span>Da lei à realidade</span><span>07 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 8">
+ <p class="kicker">07 · Direitos e legislação</p><h2>O Brasil possui instrumentos legais para enfrentar essas desigualdades.</h2><div class="rule"></div>
+ <div class="grid3" style="margin-top:6px">
+  <div class="card"><div class="number">1988</div><h3>Constituição Federal</h3><p>O artigo 5º estabelece a igualdade perante a lei. O artigo 3º inclui entre os objetivos da República combater preconceitos e outras formas de discriminação.</p></div>
+  <div class="card"><div class="number">2010</div><h3>Estatuto da Igualdade Racial</h3><p>Lei nº 12.288: busca garantir igualdade de oportunidades, proteger direitos étnicos e combater a discriminação e a intolerância étnica.</p></div>
+  <div class="card"><div class="number">2023</div><h3>Igualdade salarial</h3><p>Lei nº 14.611: dispõe sobre igualdade salarial e de critérios remuneratórios entre mulheres e homens.</p></div>
+ </div>
+ <p class="note" style="margin-top:auto">A existência de leis é fundamental, mas sua efetividade depende de aplicação, fiscalização, acesso à justiça e mudança das práticas sociais.</p>
+ <div class="footer"><span>Marco legal brasileiro</span><span>08 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 9">
+ <p class="kicker">08 · Onde agir?</p><h2>Equidade também se constrói no cotidiano.</h2><div class="rule"></div>
+ <div class="grid2" style="margin-top:4px">
+  <div class="card"><h3>Na escola</h3><ul><li>Combater apelidos, ofensas e estereótipos.</li><li>Valorizar a história e a cultura afro-brasileira, africana e indígena.</li><li>Garantir participação e respeito nas atividades.</li><li>Levar denúncias a sério e acolher quem sofre discriminação.</li></ul></div>
+  <div class="card"><h3>No trabalho e na sociedade</h3><ul><li>Adotar critérios transparentes de contratação e remuneração.</li><li>Ampliar acesso à formação e a oportunidades.</li><li>Prevenir assédio e discriminação.</li><li>Incentivar diversidade na liderança e na tomada de decisões.</li></ul></div>
+ </div>
+ <p class="lead" style="margin-top:auto;font-size:clamp(15px,1.7vw,22px)">Respeito não é apenas uma atitude individual: também precisa estar presente nas regras e nas instituições.</p>
+ <div class="footer"><span>Práticas concretas</span><span>09 / 12</span></div>
+</section>
+<section class="slide dark" aria-label="Slide 10">
+ <p class="kicker">09 · Reflexão</p><h2>Uma pergunta para a turma</h2><div class="rule"></div>
+ <p class="bigquote">Se todos têm os mesmos direitos no papel, por que ainda existem diferenças tão grandes nas oportunidades?</p>
+ <div class="grid3" style="margin-top:auto">
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>História</h3><p>Que desigualdades foram construídas ao longo do tempo?</p></div>
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>Instituições</h3><p>Quais práticas podem manter essas desigualdades?</p></div>
+  <div class="card" style="background:rgba(255,250,242,.08);border-color:rgba(255,255,255,.15)"><h3>Transformação</h3><p>Que mudanças podem tornar os direitos efetivos?</p></div>
+ </div><div class="footer"><span>Debate sociológico</span><span>10 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 11">
+ <p class="kicker">10 · Síntese</p><h2>Equidade é transformar direitos em oportunidades reais.</h2><div class="rule"></div>
+ <div class="quote-mark">“</div><p class="bigquote">Uma sociedade mais justa não ignora as diferenças de condições: reconhece as desigualdades, enfrenta a discriminação e amplia a participação de todos.</p>
+ <div class="pillrow" style="margin-top:24px"><span class="pill">Reconhecimento</span><span class="pill">Direitos</span><span class="pill">Oportunidades</span><span class="pill">Participação</span><span class="pill">Justiça social</span></div>
+ <p class="lead" style="margin-top:auto">Combater o racismo e o sexismo é uma responsabilidade coletiva — das instituições e de cada pessoa.</p>
+ <div class="footer"><span>Conclusão</span><span>11 / 12</span></div>
+</section>
+<section class="slide" aria-label="Slide 12">
+ <p class="kicker">11 · Fontes e referências</p><h2>Para aprofundar e conferir os dados.</h2><div class="rule"></div>
+ <div class="source-list">
+  <div class="source"><a href="https://www.ibge.gov.br/estatisticas/sociais/populacao/25844-desigualdades-sociais-por-cor-ou" target="_blank" rel="noopener">IBGE — Desigualdades Sociais por Cor ou Raça no Brasil</a><small>Indicadores sobre trabalho, renda, educação, moradia, violência e participação.</small></div>
+  <div class="source"><a href="https://agenciadenoticias.ibge.gov.br/media/com_mediaibge/arquivos/71016b2eb0a5feb8f7685271b1233db7.pdf" target="_blank" rel="noopener">IBGE — Rendimento por sexo e cor ou raça (2012–2024)</a><small>Gráfico e tabela de rendimento médio real; PNAD Contínua.</small></div>
+  <div class="source"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank" rel="noopener">Brasil — Constituição Federal de 1988</a><small>Artigos 3º e 5º: objetivos fundamentais e igualdade perante a lei.</small></div>
+  <div class="source"><a href="https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12288.htm" target="_blank" rel="noopener">Brasil — Lei nº 12.288/2010</a><small>Estatuto da Igualdade Racial.</small></div>
+  <div class="source"><a href="https://legislacao.presidencia.gov.br/atos/?ano=2023&ato=39bo3a610MZpWTa87&data=03%2F07%2F2023&numero=14611&tipo=LEI" target="_blank" rel="noopener">Brasil — Lei nº 14.611/2023</a><small>Igualdade salarial e de critérios remuneratórios entre mulheres e homens.</small></div>
+  <div class="source"><a href="https://radis.ensp.fiocruz.br/" target="_blank" rel="noopener">Radis — Comunicação e Saúde</a><small>Referência temática indicada no material apresentado em sala: “Por uma Política de Equidade Étnico-Racial e de Gênero”.</small></div>
+ </div>
+ <div class="byline" style="margin-top:auto;border-color:var(--line)"><div><strong style="color:var(--wine)">LUIS · SAIMON · PEDRO</strong><br><span style="color:var(--muted)">Sociologia — 2ºA</span></div><strong style="color:var(--wine)">Obrigado!</strong></div>
+ <div class="footer"><span>Referências consultadas</span><span>12 / 12</span></div>
+</section>
+</main>
+<nav class="controls" aria-label="Controles da apresentação">
+ <button id="prev" aria-label="Slide anterior" title="Anterior (←)">‹</button><span class="counter" id="counter">01 / 12</span><button id="next" aria-label="Próximo slide" title="Próximo (→ ou espaço)">›</button><button id="full" aria-label="Tela cheia" title="Tela cheia (F)">⛶</button>
+</nav><div class="hint">Use ← → para navegar</div>
+<script>
+(()=>{
+ const slides=[...document.querySelectorAll('.slide')],counter=document.getElementById('counter'),progress=document.getElementById('progress');let index=0,busy=false;
+ function show(n){n=Math.max(0,Math.min(slides.length-1,n));if(n===index)return;const old=slides[index],next=slides[n];old.classList.remove('active');old.classList.toggle('exit-left',n>index);next.classList.remove('exit-left');next.classList.add('active');index=n;counter.textContent=String(index+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');progress.style.width=((index+1)/slides.length*100)+'%';}
+ document.getElementById('prev').addEventListener('click',()=>show(index-1));document.getElementById('next').addEventListener('click',()=>show(index+1));
+ document.getElementById('full').addEventListener('click',()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()});
+ document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(index+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(index-1)}else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1);else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}});
+ let startX=null;document.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX},{passive:true});document.addEventListener('touchend',e=>{if(startX===null)return;const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>55)show(index+(dx<0?1:-1));startX=null},{passive:true});
+ progress.style.width=(1/slides.length*100)+'%';
+})();
+</script>
+</body>
+</html>
