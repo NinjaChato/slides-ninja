@@ -71,6 +71,54 @@ h2{line-height:1.08}
 @media(hover:hover){.card{transition:transform .22s ease,box-shadow .22s ease}.card:hover{transform:translateY(-3px) rotate(-.3deg);box-shadow:0 10px 0 rgba(101,29,50,.08),0 18px 28px rgba(67,28,37,.11)}}
 @media(max-width:700px){.slide{border-radius:0}.slide:after{width:110px;height:110px;right:-45px;top:-45px}.card:before{display:none}}
 
+
+/* Revisão de contraste, hierarquia e encaixe dos conteúdos */
+.card.accent h3{color:var(--gold)}
+.card.accent .tag{color:var(--wine);background:#ffe8c9;border-color:rgba(240,198,110,.55)}
+.dark .card:not(.accent){color:var(--cream)}
+.dark .card:not(.accent) h3{color:var(--gold)}
+.dark .card:not(.accent) p{color:rgba(255,241,220,.88)}
+.dark .card:not(.accent) .tag{color:var(--gold);background:rgba(240,198,110,.14);border-color:rgba(240,198,110,.42)}
+.dark .card:not(.accent) li{color:rgba(255,241,220,.88)}
+
+/* Slide 2: títulos dos cartões com contraste adequado e melhor respiro */
+.slide[aria-label="Slide 2"] .grid2{margin-top:24px!important}
+.slide[aria-label="Slide 2"] .card{padding:20px}
+.slide[aria-label="Slide 2"] .card p{font-size:clamp(12px,1.2vw,16px);line-height:1.42}
+
+/* Slide 5: reorganização para que os três conceitos caibam sem cortes */
+.slide[aria-label="Slide 5"] h2{font-size:clamp(30px,3.7vw,50px);margin-bottom:14px}
+.slide[aria-label="Slide 5"] .lead{font-size:clamp(15px,1.55vw,21px);line-height:1.32}
+.slide[aria-label="Slide 5"] .grid2{margin-top:8px!important;gap:22px}
+.slide[aria-label="Slide 5"] .steps{gap:8px}
+.slide[aria-label="Slide 5"] .step h3{font-size:clamp(14px,1.35vw,18px);margin-bottom:5px}
+.slide[aria-label="Slide 5"] .step p{font-size:clamp(11px,1.08vw,14px);line-height:1.32}
+.slide[aria-label="Slide 5"] .card{padding:18px}
+.slide[aria-label="Slide 5"] .card .bigquote{font-size:clamp(20px,2.25vw,31px)!important;line-height:1.15}
+.slide[aria-label="Slide 5"] .card .note{font-size:10px}
+
+/* Slide 6: nota de fonte separada do rodapé */
+.slide[aria-label="Slide 6"] .card{padding:18px}
+.slide[aria-label="Slide 6"] .stat-label{margin-top:6px}
+.slide[aria-label="Slide 6"] .bar-group{gap:12px;margin-top:12px}
+.slide[aria-label="Slide 6"] .note{font-size:10px;line-height:1.25;margin-top:8px;margin-bottom:12px}
+
+/* Slide 11: síntese mais compacta, sem encostar no rodapé */
+.slide[aria-label="Slide 11"] h2{font-size:clamp(32px,3.7vw,50px);margin-bottom:12px}
+.slide[aria-label="Slide 11"] .rule{margin-bottom:12px}
+.slide[aria-label="Slide 11"] .quote-mark{font-size:70px;line-height:.48}
+.slide[aria-label="Slide 11"] .bigquote{font-size:clamp(27px,2.9vw,40px);line-height:1.12}
+.slide[aria-label="Slide 11"] .pillrow{margin-top:16px!important;gap:7px}
+.slide[aria-label="Slide 11"] .lead{font-size:clamp(14px,1.35vw,18px);line-height:1.3;margin-top:18px!important}
+
+@media(max-width:700px){
+ .slide{overflow-x:hidden}
+ .slide[aria-label="Slide 5"] .grid2{gap:12px}
+ .slide[aria-label="Slide 5"] .lead{font-size:16px}
+ .slide[aria-label="Slide 11"] .bigquote{font-size:28px}
+ .slide[aria-label="Slide 11"] .lead{margin-top:14px!important}
+}
+
 </style>
 </head>
 <body>
